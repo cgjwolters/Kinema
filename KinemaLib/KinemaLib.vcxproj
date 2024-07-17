@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_Multithread|x64">
+      <Configuration>Debug_Multithread</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Multithread|x64">
+      <Configuration>Release_Multithread</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{A2D03F35-6291-4AAD-A072-E2A02E607BF4}</ProjectGuid>
+    <RootNamespace>KinemaLib</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Multithread|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Multithread|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Multithread|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Multithread|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>17.0.34804.30</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Multithread|x64'">
+    <IncludePath>..\..\InoforLibs\inc\1.0;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)lib\1.0\</OutDir>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Multithread|x64'">
+    <OutDir>$(SolutionDir)lib\1.0\</OutDir>
+    <TargetName>$(ProjectName)-d</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Multithread|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>inc;..\..\InoforLibs\inc\1.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeaderFile />
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Basics-d.lib;Matrix-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)\lib\1.0\KinemaLib-d.lib</OutputFile>
+      <AdditionalLibraryDirectories>C:\Users\Clemens\Documents\Projects\InoforLibs\lib\1.0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>..\..\InoforLibs\lib\1.0\Basics-d.lib;..\..\InoforLibs\lib\1.0\cppstd-d.lib;..\..\InoforLibs\lib\1.0\Matrix-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Multithread|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>inc;..\..\InoforLibs\inc\1.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PrecompiledHeaderFile />
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Basics.lib;Matrix.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)\lib\1.0\KinemaLib.lib</OutputFile>
+      <AdditionalLibraryDirectories>C:\Users\Clemens\Documents\Projects\InoforLibs\lib\1.0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>..\..\InoforLibs\lib\1.0\Basics.lib;..\..\InoforLibs\lib\1.0\cppstd.lib;..\..\InoforLibs\lib\1.0\Matrix.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\KinAbstractJoint.cpp" />
+    <ClCompile Include="src\KinAbstractTrack.cpp" />
+    <ClCompile Include="src\KinArcLinTrack.cpp" />
+    <ClCompile Include="src\KinBody.cpp" />
+    <ClCompile Include="src\KinFunction.cpp" />
+    <ClCompile Include="src\KinGrip.cpp" />
+    <ClCompile Include="src\KinJntBall.cpp" />
+    <ClCompile Include="src\KinJntBall2Slide.cpp" />
+    <ClCompile Include="src\KinJntBallSlide.cpp" />
+    <ClCompile Include="src\KinJntCross.cpp" />
+    <ClCompile Include="src\KinJntRev.cpp" />
+    <ClCompile Include="src\KinJntRevSlide.cpp" />
+    <ClCompile Include="src\KinJntSlide.cpp" />
+    <ClCompile Include="src\KinJntTrack.cpp" />
+    <ClCompile Include="src\KinModel.cpp" />
+    <ClCompile Include="src\KinObject.cpp" />
+    <ClCompile Include="src\KinProbe.cpp" />
+    <ClCompile Include="src\KinSequence.cpp" />
+    <ClCompile Include="src\KinSplineTrack.cpp" />
+    <ClCompile Include="src\KinState.cpp" />
+    <ClCompile Include="src\KinTableArc.cpp" />
+    <ClCompile Include="src\KinTableFunction.cpp" />
+    <ClCompile Include="src\KinTableLinear.cpp" />
+    <ClCompile Include="src\KinTopology.cpp" />
+    <ClCompile Include="src\Spline3D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\KinAbstractJoint.h" />
+    <ClInclude Include="inc\KinAbstractTrack.h" />
+    <ClInclude Include="inc\KinArcLinTrack.h" />
+    <ClInclude Include="inc\KinBody.h" />
+    <ClInclude Include="inc\KinFunction.h" />
+    <ClInclude Include="inc\KinGrip.h" />
+    <ClInclude Include="inc\KinJntAll.h" />
+    <ClInclude Include="inc\KinJntBall.h" />
+    <ClInclude Include="inc\KinJntBall2Slide.h" />
+    <ClInclude Include="inc\KinJntBallSlide.h" />
+    <ClInclude Include="inc\KinJntCross.h" />
+    <ClInclude Include="inc\KinJntRev.h" />
+    <ClInclude Include="inc\KinJntRevSlide.h" />
+    <ClInclude Include="inc\KinJntSlide.h" />
+    <ClInclude Include="inc\KinJntTrack.h" />
+    <ClInclude Include="inc\KinModel.h" />
+    <ClInclude Include="inc\KinObject.h" />
+    <ClInclude Include="inc\KinObjList.h" />
+    <ClInclude Include="inc\KinProbe.h" />
+    <ClInclude Include="inc\KinSequence.h" />
+    <ClInclude Include="inc\KinSplineTrack.h" />
+    <ClInclude Include="inc\KinState.h" />
+    <ClInclude Include="inc\KinTableArc.h" />
+    <ClInclude Include="inc\KinTableFunction.h" />
+    <ClInclude Include="inc\KinTableLinear.h" />
+    <ClInclude Include="inc\KinTopology.h" />
+    <ClInclude Include="inc\Spline3D.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

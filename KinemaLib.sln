@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KinemaLib", "KinemaLib\KinemaLib.vcxproj", "{A2D03F35-6291-4AAD-A072-E2A02E607BF4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KinemaCInterface", "KinemaCInterface\KinemaCInterface.vcxproj", "{E99729D1-D6DF-447A-9755-2FD3FE8961E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_Multithread|x64 = Debug_Multithread|x64
+		Debug_Multithread|x86 = Debug_Multithread|x86
+		Release_Multithread|x64 = Release_Multithread|x64
+		Release_Multithread|x86 = Release_Multithread|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Debug_Multithread|x64.ActiveCfg = Debug_Multithread|x64
+		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Debug_Multithread|x64.Build.0 = Debug_Multithread|x64
+		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Debug_Multithread|x86.ActiveCfg = Debug_Multithread|x64
+		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Debug_Multithread|x86.Build.0 = Debug_Multithread|x64
+		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Release_Multithread|x64.ActiveCfg = Release_Multithread|x64
+		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Release_Multithread|x64.Build.0 = Release_Multithread|x64
+		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Release_Multithread|x86.ActiveCfg = Release_Multithread|x64
+		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Release_Multithread|x86.Build.0 = Release_Multithread|x64
+		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug_Multithread|x64.ActiveCfg = Debug_Multithread|x64
+		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug_Multithread|x64.Build.0 = Debug_Multithread|x64
+		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug_Multithread|x86.ActiveCfg = Debug_Multithread|Win32
+		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug_Multithread|x86.Build.0 = Debug_Multithread|Win32
+		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release_Multithread|x64.ActiveCfg = Release_Multithread|x64
+		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release_Multithread|x64.Build.0 = Release_Multithread|x64
+		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release_Multithread|x86.ActiveCfg = Release_Multithread|Win32
+		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release_Multithread|x86.Build.0 = Release_Multithread|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DD70ABE-E5C4-42AC-82E8-7F96F930DB32}
+	EndGlobalSection
+EndGlobal
