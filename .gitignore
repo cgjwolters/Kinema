@@ -1,7 +1,8 @@
-Release/
-Debug/
+Kinema/
+Release*/
+Debug*/
+AcadServices/
 KinemaLib.vcproj.INOFOR2-VM.Clemens.user
-KinemaLib.lib
 *.obj
 *.idb
 *.ncb
