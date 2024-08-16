@@ -1,7 +1,7 @@
 #include "KinInterface.h"
 
 
-Model* newModel(const wchar_t* name)
+InoKin::Model* newModel(const wchar_t* name)
 {
-  return new Model(name);
+  return new InoKin::Model(name);
 }

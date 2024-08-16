@@ -4,4 +4,4 @@
 
 using namespace InoKin;
 
-extern Model *newModel(const wchar_t* name = nullptr);
+extern InoKin::Model *newModel(const wchar_t* name = nullptr);
