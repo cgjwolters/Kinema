@@ -58,7 +58,7 @@ public:
   static void version(unsigned char& major, unsigned char& minor,
                                                unsigned char& release);
 
-  explicit Model(const wchar_t *name=NULL);
+  explicit Model(const wchar_t *name=nullptr);
   explicit Model(const Model& cp, bool withSequences=false);
   virtual ~Model();
 

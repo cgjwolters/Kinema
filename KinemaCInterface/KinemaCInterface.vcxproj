@@ -112,12 +112,13 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>inc;..\..\InoforLibs\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>inc;..\..\InoforLibs\inc\1.0;..\KinemaLib\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalLibraryDirectories>C:\Users\Clemens\Documents\Projects\Kinema\KinemaLib\x64\Debug_Multithread;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Multithread|x64'">
@@ -130,7 +131,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>inc;..\..\InoforLibs\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>inc;..\..\InoforLibs\inc\1.0;..\KinemaLib\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,12 +142,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="KinInterface.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\KinInterface.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\framework.h" />
+    <ClInclude Include="inc\KinInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
