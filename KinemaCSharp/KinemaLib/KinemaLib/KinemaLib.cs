@@ -5,10 +5,19 @@ namespace KinemaLib
 {
   public class Model
   {
-    [DllImport("KinInterface.dll")] public static extern IntPtr newModel();
-    Model(System.String name)
-    {
+    [DllImport("C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\x64\\Debug_Multithread\\KinemaCInterface.dll")] public static extern IntPtr NewModel();
 
+    private readonly IntPtr cppModel;
+    Model(string name)
+    {
+      cppModel = NewModel();
+    }
+
+    public static void Main()
+    {
+      Model mdl = new("Clemens");
+
+      Console.WriteLine("Have new model");
     }
   }
 }

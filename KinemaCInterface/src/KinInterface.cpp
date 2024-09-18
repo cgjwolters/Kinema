@@ -1,7 +1,10 @@
 #include "KinInterface.h"
+#include "KinModel.h"
 
+using namespace InoKin;
 
-InoKin::Model* newModel(const wchar_t* name)
+//void* newModel(const wchar_t* name)
+void* NewModel()
 {
-  return new InoKin::Model(name);
+  return (void*)new InoKin::Model();
 }
