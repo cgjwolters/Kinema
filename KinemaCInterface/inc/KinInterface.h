@@ -1,3 +1,3 @@
 #pragma once
 
-__declspec(dllexport) void* __cdecl NewModel();
+extern "C" __declspec(dllexport) void* NewModel(const wchar_t *name);

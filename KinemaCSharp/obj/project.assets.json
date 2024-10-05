@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLib\\KinemaLib\\KinemaLib.csproj",
-      "projectName": "KinemaLib",
-      "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLib\\KinemaLib\\KinemaLib.csproj",
+      "projectUniqueName": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj",
+      "projectName": "KinemaLibCs",
+      "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj",
       "packagesPath": "C:\\Users\\Clemens\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLib\\KinemaLib\\obj\\",
+      "outputPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

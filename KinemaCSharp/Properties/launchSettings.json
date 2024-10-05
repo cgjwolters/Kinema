@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "KinemaLibCs": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
