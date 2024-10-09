@@ -13,13 +13,15 @@
 #ifndef INOKIN_ABSTRACTOBJ_INC
 #define INOKIN_ABSTRACTOBJ_INC
 
+#include "Array.h"
+
 namespace InoKin {
 
 //---------------------------------------------------------------------------
 
 class Model;
 
-class Object
+class Object : public Ino::ArrayElem
 {
   wchar_t *nam;
   mutable int id;

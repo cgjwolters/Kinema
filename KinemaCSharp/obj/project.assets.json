@@ -1,11 +1,29 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {}
+    "net8.0-windows7.0": {
+      "KinemaCInterface/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/KinemaCInterface.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/KinemaCInterface.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "KinemaCInterface/1.0.0": {
+      "type": "project",
+      "path": "../KinemaCInterface/KinemaCInterface.vcxproj",
+      "msbuildProject": "../KinemaCInterface/KinemaCInterface.vcxproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": []
+    "net8.0-windows7.0": [
+      "KinemaCInterface >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Clemens\\.nuget\\packages\\": {},
@@ -38,7 +56,11 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCInterface\\KinemaCInterface.vcxproj": {
+              "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCInterface\\KinemaCInterface.vcxproj"
+            }
+          }
         }
       },
       "warningProperties": {

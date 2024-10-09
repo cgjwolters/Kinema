@@ -4,6 +4,21 @@
     "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj": {}
   },
   "projects": {
+    "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCInterface\\KinemaCInterface.vcxproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCInterface\\KinemaCInterface.vcxproj",
+        "projectName": "KinemaCInterface",
+        "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCInterface\\KinemaCInterface.vcxproj",
+        "frameworks": {
+          "native": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
     "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -31,7 +46,11 @@
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCInterface\\KinemaCInterface.vcxproj": {
+                "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCInterface\\KinemaCInterface.vcxproj"
+              }
+            }
           }
         },
         "warningProperties": {

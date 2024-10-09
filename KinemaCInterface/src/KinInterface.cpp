@@ -10,5 +10,7 @@ void* NewModel(const wchar_t* name)
   fprintf(stdout,"Cpp name: %ls\n", name);
   fflush(stdout);
 
-  return (void*)new InoKin::Model(name);
+  InoKin::Model *mdl = new InoKin::Model(name);
+
+  return mdl;
 }
