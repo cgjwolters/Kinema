@@ -2,7 +2,7 @@
 using System.Runtime;
 using System.Runtime.InteropServices;
 
-namespace KinemaLibCs
+namespace KinemaLib
 {
   public class Model
   {
