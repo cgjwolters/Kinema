@@ -37,7 +37,7 @@ int TableFunction::find(double x) const
 //---------------------------------------------------------------------------
 
 TableFunction::TableFunction()
-: xLst(10), yLst(10), closed(false), xLength(0.0)
+: xLst(true,10), yLst(true,10), closed(false), xLength(0.0)
 {
 }
 

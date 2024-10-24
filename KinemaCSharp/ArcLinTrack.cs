@@ -8,8 +8,7 @@ namespace KinemaLibCs
   {
     private readonly IntPtr track;
 
-    [DllImport("KinemaCInterface.dll", CharSet = CharSet.Unicode)]
-    // extern public static IntPtr NewArcLinTrack(bool trkClosed = false, double trackPipeDiameter = 0.0);
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern public static IntPtr NewArcLinTrack(bool trkClosed = false, double trackPipeDiameter = 0.0);
 
     public ArcLinTrack(bool trkClosed = false, double trackPipeDiameter = 0.0) {

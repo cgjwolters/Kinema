@@ -5,15 +5,7 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KinemaLib", "KinemaLib\KinemaLib.vcxproj", "{A2D03F35-6291-4AAD-A072-E2A02E607BF4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KinemaCInterface", "KinemaCInterface\KinemaCInterface.vcxproj", "{E99729D1-D6DF-447A-9755-2FD3FE8961E3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A2D03F35-6291-4AAD-A072-E2A02E607BF4} = {A2D03F35-6291-4AAD-A072-E2A02E607BF4}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KinemaLibCs", "KinemaCSharp\KinemaLibCs.csproj", "{0D6263C2-7305-4E5A-A888-C23890F964CF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3} = {E99729D1-D6DF-447A-9755-2FD3FE8961E3}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,18 +29,6 @@ Global
 		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Release|x64.Build.0 = Release|x64
 		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Release|x86.ActiveCfg = Release|x64
 		{A2D03F35-6291-4AAD-A072-E2A02E607BF4}.Release|x86.Build.0 = Release|x64
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug|Any CPU.Build.0 = Debug|x64
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug|x64.ActiveCfg = Debug|x64
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug|x64.Build.0 = Debug|x64
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug|x86.ActiveCfg = Debug|Win32
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Debug|x86.Build.0 = Debug|Win32
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release|Any CPU.ActiveCfg = Release|x64
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release|Any CPU.Build.0 = Release|x64
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release|x64.ActiveCfg = Release|x64
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release|x64.Build.0 = Release|x64
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release|x86.ActiveCfg = Release|Win32
-		{E99729D1-D6DF-447A-9755-2FD3FE8961E3}.Release|x86.Build.0 = Release|Win32
 		{0D6263C2-7305-4E5A-A888-C23890F964CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D6263C2-7305-4E5A-A888-C23890F964CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D6263C2-7305-4E5A-A888-C23890F964CF}.Debug|x64.ActiveCfg = Debug|x64

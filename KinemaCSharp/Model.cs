@@ -1,13 +1,12 @@
 ﻿using System.Data;
 using System.Runtime;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
 
 namespace KinemaLibCs
 {
   public class Model
   {
-    [DllImport("KinemaCInterface.dll", CharSet = CharSet.Unicode)]
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern static IntPtr NewModel(string name);
 
     private readonly IntPtr cppModel;
@@ -40,7 +39,8 @@ namespace KinemaLibCs
     }
     public static void Main()
     {
-      var dllDirectory = @"C:\Users\Clemens\Documents\Projects\KinemaLibCs\bin\x64";
+      // var dllDirectory = @"C:\Users\Clemens\Documents\Projects\KinemaLibCs\bin\x64";
+      var dllDirectory = @"C:\Users\Clemens\Documents\Projects\Kinema\lib\1.0";
       Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
 
       ArcLinTrack leftTrk = new ArcLinTrack(true, 0.1413);

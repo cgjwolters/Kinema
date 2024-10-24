@@ -320,4 +320,10 @@ void Body::getAbsGripPos(const wchar_t *name, Trf3& trf) const
 
 } // namespace
 
+void* NewBody(InoKin::Model& model, const wchar_t* name) {
+  InoKin::Body* body = new InoKin::Body(model, name);
+
+  return body;
+}
+
 //---------------------------------------------------------------------------

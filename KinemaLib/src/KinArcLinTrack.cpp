@@ -274,7 +274,7 @@ ArcLinTrack::ArcLinTrack(bool trkClosed, double trackPipeDiameter)
 //---------------------------------------------------------------------------
 
 ArcLinTrack::ArcLinTrack(const ArcLinTrack& cp)
-: AbstractTrack(cp), trk(), closed(cp.closed),
+: AbstractTrack(cp), trk(cp.trk.isObjectOwner()), closed(cp.closed),
   trackPipeRadius(cp.trackPipeRadius), length(cp.length)
 {
   int sz = cp.trk.size();
@@ -983,5 +983,11 @@ double ArcLinTrack::findPoint(const Vec3& p, double minS, double maxS,
 }
 
 } // namespace
+
+void* NewArcLinTrack(bool trkClosed, double trackPipeDiameter) {
+  InoKin::ArcLinTrack* trk = new InoKin::ArcLinTrack(trkClosed, trackPipeDiameter);
+
+  return trk;
+}
 
 //---------------------------------------------------------------------------

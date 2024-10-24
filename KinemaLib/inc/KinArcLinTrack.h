@@ -23,7 +23,7 @@ namespace InoKin {
 
 //---------------------------------------------------------------------------
 
-class ArcLinTrackPt : public Ino::Vec3
+class ArcLinTrackPt : public Ino::Vec3, public Ino::ArrayElem
 {
     ArcLinTrackPt *prv, *nxt;
     bool isArc;
@@ -131,6 +131,9 @@ public:
 };
 
 } // namespace
+
+extern "C" __declspec(dllexport) void* NewArcLinTrack(bool trkClosed = false, double trackPipeDiameter = 0.0);
+
 
 //---------------------------------------------------------------------------
 #endif

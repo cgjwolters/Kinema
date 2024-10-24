@@ -1,11 +1,29 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {}
+    "net8.0-windows7.0": {
+      "KinemaLib/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/KinemaLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/KinemaLib.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "KinemaLib/1.0.0": {
+      "type": "project",
+      "path": "../KinemaLib/KinemaLib.vcxproj",
+      "msbuildProject": "../KinemaLib/KinemaLib.vcxproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": []
+    "net8.0-windows7.0": [
+      "KinemaLib >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Clemens\\.nuget\\packages\\": {},
@@ -38,7 +56,11 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj": {
+              "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj"
+            }
+          }
         }
       },
       "warningProperties": {

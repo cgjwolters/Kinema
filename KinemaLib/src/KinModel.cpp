@@ -18,6 +18,8 @@
 #include "Trf.h"
 #include "Exceptions.h"
 
+//---------------------------------------------------------------------------
+
 using namespace Ino;
 
 namespace InoKin {
@@ -302,5 +304,16 @@ bool Model::buildTopology()
 }
 
 } // namespace
+
+//---------------------------------------------------------------------------
+
+void* NewModel(const wchar_t* name) {
+  //fprintf(stdout, "Cpp name: %ls\n", name);
+  //fflush(stdout);
+
+  InoKin::Model* mdl = new InoKin::Model(name);
+
+  return mdl;
+}
 
 //---------------------------------------------------------------------------
