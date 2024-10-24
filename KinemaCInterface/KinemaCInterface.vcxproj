@@ -124,6 +124,7 @@
       <AdditionalLibraryDirectories>C:\Users\Clemens\Documents\Projects\Kinema\\lib\1.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>KinemaLib-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <OutputFile>..\..\KinemaLibCs\bin\x64\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

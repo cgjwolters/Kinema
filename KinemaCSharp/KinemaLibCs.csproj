@@ -17,8 +17,4 @@
     <Optimize>False</Optimize>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\KinemaCInterface\KinemaCInterface.vcxproj" />
-  </ItemGroup>
-
 </Project>
