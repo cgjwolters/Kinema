@@ -1,6 +1,6 @@
 ﻿public struct Trf3
 {
-  double[,] m = new double [3,4];
+  internal double[,] m = new double [3,4];
 
   public bool isDerivative;
 
