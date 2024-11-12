@@ -1,22 +1,30 @@
 ﻿using System;
+using System.Reflection.Metadata.Ecma335;
 
 namespace KinemaLibCs
 {
   public struct Vec3
   {
     public double x, y, z;
-    bool isDerivative;
+    public bool isDerivative = false;
 
-    const double IdentDist = 1.0E-04;
-    const double IdentDir = 1.0E-03;
+    public const double IdentDist = 1.0E-04;
+    public const double IdentDir = 1.0E-03;
 
-    const double Pi = 3.141592653589793238462643383279502884197169;
-    const double Pi2 = 2.0 * Pi;
+    public const double Pi = 3.141592653589793238462643383279502884197169;
+    public const double Pi2 = 2.0 * Pi;
+    
+    public static double Sqr(double v) { return v * v; }
 
     public Vec3(double x, double y, double z)
     {
       this.x = x; this.y = y; this.z = z;
       isDerivative = false;
+    }
+
+    public Vec3(Vec3 cp)
+    {
+      this = cp;
     }
 
     public double UnitLen3()        // Make unitlength, return old length
@@ -45,39 +53,39 @@ namespace KinemaLibCs
       return oldLen;
     }
 
-    readonly double DistTo3(Vec3 v)
+    public readonly double DistTo3(Vec3 v)
     {
       Vec3 lv = new(v.x - x, v.y - y, v.z - z);
 
       return lv.Len3();
     }
-    readonly double SqDistTo3(Vec3 v) // Square of distance
+    public readonly double SqDistTo3(Vec3 v) // Square of distance
     {
       Vec3 lv = new(v.x - x, v.y - y, v.z - z);
 
       return lv.x * lv.x + lv.y * lv.y + lv.z * lv.z; ;
     }
 
-    readonly double AngleTo3(Vec3 v)
+    public readonly double AngleTo3(Vec3 v)
     {
-      Vec3 out = outer(v);
+      Vec3 lvout = Outer(v);
 
-      double lsq1 = sqr(x) + sqr(y) + sqr(z);
-      double lsq2 = sqr(v.x) + sqr(v.y) + sqr(v.z);
+      double lsq1 = Sqr(x) + Sqr(y) + Sqr(z);
+      double lsq2 = Sqr(v.x) + Sqr(v.y) + Sqr(v.z);
 
       double lp = lsq1 * lsq2;
-      double lo = sqr(out.x) + sqr(out.y) + sqr(out.z);
+      double lo = Sqr(lvout.x) + Sqr(lvout.y) + Sqr(lvout.z);
 
       if (lp < 1e-30 || lo < 1e-30 * lp) {
-        if (operator*(v) >= 0.0) return 0.0;
-    else return Vec2::Pi;
+        if (this * v >= 0.0) return 0.0;
+        else return Pi;
       }
-      else if (lo >= lp) return Vec2::Pi / 2.0;
+      else if (lo >= lp) return Pi / 2.0;
       else {
-        double a = asin(sqrt(lo / lp));
-        if (operator*(v) < 0.0) a = Vec2::Pi - a;
-        if (a > Vec2::Pi) a -= Vec2::Pi;
-        if (a < 0.0) a += Vec2::Pi;
+        double a = Math.Asin(Math.Sqrt(lo / lp));
+        if (this * v < 0.0) a = Pi - a;
+        if (a > Pi) a -= Pi;
+        if (a < 0.0) a += Pi;
 
         return a;
       }
@@ -88,7 +96,7 @@ namespace KinemaLibCs
       return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
 
-    public readonly Vec3 outer(Vec3 b)
+    public readonly Vec3 Outer(Vec3 b)
     {
       return new(y * b.z - z * b.y, z * b.x - x * b.z, x * b.y - y * b.x);
     } // Outer product (*this x b)
@@ -120,8 +128,12 @@ namespace KinemaLibCs
       return new(v1.x - v2.x, v1.y - v2.y, v1.z - v2.y);
     }
 
-    public override bool Equals(Object obj) { return true; }
-    public override int GetHashCode() { return 0; }
+    public override readonly bool Equals(Object? obj)
+    {
+      return DistTo3((Vec3)obj) <= IdentDist;
+    }
+
+    public override readonly int GetHashCode() { return 0; }
 
     public static bool operator ==(Vec3 v1, Vec3 v2)
     {
@@ -133,7 +145,7 @@ namespace KinemaLibCs
       return v1.DistTo3(v2) > IdentDist;
     }
 
-    void transform3(Trf3 trf)
+    void Transform3(Trf3 trf)
     {
       double nx = trf.m[0,0] * x + trf.m[0,1] * y + trf.m[0,2] * z;
       double ny = trf.m[1,0] * x + trf.m[1,1] * y + trf.m[1,2] * z;

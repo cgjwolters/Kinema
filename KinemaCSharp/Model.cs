@@ -43,7 +43,7 @@ namespace KinemaLibCs
       var dllDirectory = @"C:\Users\Clemens\Documents\Projects\Kinema\lib\1.0";
       Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
 
-      ArcLinTrack leftTrk = new ArcLinTrack(true, 0.1413);
+      ArcLinTrack leftTrk = new (true, 0.1413);
 
       bool ok = leftTrk.LoadTrackData("3d_rail_left_a1");
 
@@ -51,7 +51,7 @@ namespace KinemaLibCs
           
       }
 
-      ArcLinTrack rightTrk = new ArcLinTrack(true, 0.1413);
+      ArcLinTrack rightTrk = new (true, 0.1413);
       ok = rightTrk.LoadTrackData("3d_rail_right_a1");
 
       if (!ok) {
@@ -61,7 +61,7 @@ namespace KinemaLibCs
       leftTrk.SetCoTrack(rightTrk, true, 3.0);
       rightTrk.SetCoTrack(leftTrk, true, 3.0);
 
-      Model carrierModel = new Model("Clemens");
+      Model carrierModel = new ("Clemens");
 
       if (!carrierModel.DefineModel(leftTrk, rightTrk)) return;
     }
