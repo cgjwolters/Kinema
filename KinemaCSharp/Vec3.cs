@@ -13,7 +13,10 @@ namespace KinemaLibCs
 
     public const double Pi = 3.141592653589793238462643383279502884197169;
     public const double Pi2 = 2.0 * Pi;
-    
+
+    public const double NumAccuracy = 1.0e-16;
+    public const double InchInMm = 25.4;
+
     public static double Sqr(double v) { return v * v; }
 
     public Vec3(double x, double y, double z)
@@ -130,6 +133,7 @@ namespace KinemaLibCs
 
     public override readonly bool Equals(Object? obj)
     {
+      if (obj is null) return false;
       return DistTo3((Vec3)obj) <= IdentDist;
     }
 
@@ -145,7 +149,7 @@ namespace KinemaLibCs
       return v1.DistTo3(v2) > IdentDist;
     }
 
-    void Transform3(Trf3 trf)
+    public void Transform3(Trf3 trf)
     {
       double nx = trf.m[0,0] * x + trf.m[0,1] * y + trf.m[0,2] * z;
       double ny = trf.m[1,0] * x + trf.m[1,1] * y + trf.m[1,2] * z;

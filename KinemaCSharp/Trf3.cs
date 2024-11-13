@@ -86,12 +86,12 @@
 
     public readonly bool Mirrors() { return Determinant() < 0.0; } // Does it mirror?
 
-    private static void swap_3(double [,]mt, int i1, int i2)
+    private static void Swap_3(double [,]mt, int i1, int i2)
     {
       if (i1 == i2) return;
 
       for (int j = 0; j < 4; j++) {
-        double h = mt[i1,j]; mt[i1,j] = mt[i2,j]; mt[i2,j] = h;
+        (mt[i2, j],mt[i1, j]) = (mt[i1, j],mt[i2, j]);
       }
     }
 
@@ -114,11 +114,56 @@
       isDerivative = false;
     }
 
-    public bool Invert() { return InvertInto(this); } // Invert transform
+    public readonly bool Invert() { return InvertInto(this); } // Invert transform
 
     public readonly bool InvertInto(Trf3 invMat) // Invert transform
     {
-      return false;
+      if (isDerivative) throw new InvalidOperationException("");
+
+      int ir, i, j;
+      double [,]lmt = new double[3, 4]; double [,]rmt = new double[3,4];
+
+      for (i = 0; i < 3; i++) {
+        for (j = 0; j < 4; j++) {
+          lmt[i,j] = m[i,j];
+          if (i == j) rmt[i,j] = 1.0;
+          else rmt[i,j] = 0.0;
+        }
+      }
+
+      for (ir = 0; ir < 3; ir++) {
+        // Find max value
+        int maxi = ir; double maxval = Math.Abs(lmt[ir,ir]);
+        for (i = ir + 1; i < 3; i++) {
+          if (Math.Abs(lmt[i,ir]) > maxval) {
+            maxi = i; maxval = Math.Abs(lmt[i,ir]);
+          }
+        }
+
+        // Swap rows
+        Swap_3(lmt, ir, maxi); Swap_3(rmt, ir, maxi);
+
+        // Clean column ir
+        for (i = 0; i < 3; i++) {
+          if (i == ir) continue;
+          if (Math.Abs(lmt[ir,ir]) <= Vec3.NumAccuracy * Math.Abs(lmt[i,ir])) return false;
+
+          double pivot = lmt[i,ir] / lmt[ir,ir];
+
+          for (j = ir + 1; j < 4; j++) lmt[i,j] -= (lmt[ir,j] * pivot);
+          for (j = 0; j < 4; j++) rmt[i,j] -= (rmt[ir,j] * pivot);
+        }
+      }
+
+      // Clean last column, multiply and copy to result.
+      for (i = 0; i < 3; i++) {
+        rmt[i,3] -= lmt[i,3];
+        for (j = 0; j < 4; j++) {
+          invMat.m[i,j] = rmt[i,j] / lmt[i,i];
+        }
+      }
+
+      return true;
     }
 
     public static Trf3 operator *(Trf3 trf, double fact)            // Scaling
@@ -206,9 +251,13 @@
 
     }
 
-    indexer
-    //double operator()(int ix, int iy);   // Return matrix element
-    //double& operator() (int ix, int iy);         // Return matrix el. ref.
-
+    public readonly ref double this[int ix, int iy]   // Return matrix element
+    {
+      get
+      {
+        if (ix < 0 || ix > 2 || iy < 0 || iy > 3) throw new IndexOutOfRangeException();
+        return ref m[ix, iy];
+      }
+    }
   }
 }
