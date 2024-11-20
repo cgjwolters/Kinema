@@ -132,7 +132,7 @@ public:
 
 } // namespace
 
-extern "C" __declspec(dllexport) void* NewArcLinTrack(bool trkClosed = false, double trackPipeDiameter = 0.0);
+extern "C" __declspec(dllexport) void* ArcLinTrackNew(bool trkClosed = false, double trackPipeDiameter = 0.0);
 
 
 //---------------------------------------------------------------------------

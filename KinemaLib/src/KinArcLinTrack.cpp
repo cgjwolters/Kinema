@@ -984,7 +984,7 @@ double ArcLinTrack::findPoint(const Vec3& p, double minS, double maxS,
 
 } // namespace
 
-void* NewArcLinTrack(bool trkClosed, double trackPipeDiameter) {
+void* ArcLinTrackNew(bool trkClosed, double trackPipeDiameter) {
   InoKin::ArcLinTrack* trk = new InoKin::ArcLinTrack(trkClosed, trackPipeDiameter);
 
   return trk;
