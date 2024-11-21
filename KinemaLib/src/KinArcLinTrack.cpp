@@ -984,10 +984,118 @@ double ArcLinTrack::findPoint(const Vec3& p, double minS, double maxS,
 
 } // namespace
 
+// Interface Section
+
 void* ArcLinTrackNew(bool trkClosed, double trackPipeDiameter) {
   InoKin::ArcLinTrack* trk = new InoKin::ArcLinTrack(trkClosed, trackPipeDiameter);
 
   return trk;
 }
+
+void ArcLinTrackSetCoTrack(void* track, void* coTrack, bool reverseDir, double maxSDiff)   {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+  InoKin::ArcLinTrack* coTrk = (InoKin::ArcLinTrack*)coTrack;
+
+  trk->setCoTrack(*coTrk, reverseDir, maxSDiff);
+}
+
+int ArcLinTrackGetSize(void* track) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  return trk->size();
+}
+
+double ArcLinTrackGetMaxS(void* track)   {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  return trk->getMaxS();
+}
+
+void ArcLinTrackClear(void* track) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+ 
+  trk->clear();
+}
+
+bool ArcLinTrackIsClosed(void* track)   {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  return trk->isClosed();
+}
+
+void ArcLinTrackSetClosed(void* track, bool closed)   {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->setClosed(closed);
+}
+
+double ArcLinTrackGetPipeRadius(void* track) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  return trk->getPipeRadius();
+}
+
+void ArcLinTrackSetPipeRadius(void* track, double r) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->setPipeRadius(r);
+}
+
+void ArcLinTrackGetPoint(void* track, int idx, Vec3& v) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->getPoint(idx, v);
+}
+
+void ArcLinTrackCalcCentroid(void* track, Vec3& centroid) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->calcCentroid();
+}
+
+void ArcLinTrackTranslate(void* track, Vec3 offset) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->translate(offset);
+}
+
+double ArcLinTrackGetLength(void* track) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  return trk->getLength();
+}
+
+void ArcLinTrackGetPointAndDir(void* track, double at_s, Vec3& pnt, Vec3& dir) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->getPointAndDir(at_s, pnt, dir);
+}
+
+void ArcLinTrackGetAccAndJerk(void* track, double at_s, Vec3& acc, Vec3& jerk) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->getAcc(at_s, acc);
+  trk->getJerk(at_s, jerk);
+}
+
+void ArcLinTrackGetXDir(void* track, double at_s, Vec3& x, Vec3& xDir) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->getXDir(at_s, x, xDir);
+}
+
+double ArcLinTrackFindPoint(void* track, Vec3 p, Vec3& trkPt) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  return trk->findPoint(p, trkPt);
+}
+
+double ArcLinTrackFindPoint2(void* track, Vec3 p, double minS, double maxS, Vec3& trkPt) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  return trk->findPoint(p, minS, maxS, trkPt);
+}
+
+// End Interface Section
 
 //---------------------------------------------------------------------------

@@ -5,13 +5,9 @@ using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
-  public partial class ArcLinTrack
+  public partial class ArcLinTrack(bool trkClosed = false, double trackPipeDiameter = 0.0)
   {
-    private readonly IntPtr track;
-
-    public ArcLinTrack(bool trkClosed = false, double trackPipeDiameter = 0.0) {
-      track = (IntPtr)ArcLinTrackNew(trkClosed, trackPipeDiameter);
-    }
+    private readonly IntPtr track = (IntPtr)ArcLinTrackNew(trkClosed, trackPipeDiameter);
 
     public bool LoadTrackData(string trackFile)
     {
@@ -66,12 +62,6 @@ namespace KinemaLibCs
     {
       if (idx < 0 || idx >= Size) throw new IndexOutOfRangeException();
       Vec3 v; ArcLinTrackGetPoint(track, idx, out v); return v;
-    }
-
-    public void GetPoint(int idx, Vec3 v)
-    {
-      if (idx < 0 || idx >= Size) throw new IndexOutOfRangeException();
-      ArcLinTrackSetPoint(track, idx, v);
     }
 
     public Vec3 CalcCentroid()
@@ -158,7 +148,7 @@ namespace KinemaLibCs
     public double FindPoint(Vec3 p, double minS, double maxS,
                                               out Vec3 trkPt)
     {
-      return ArcLinTrackFindPoint(track, p, minS, maxS, out trkPt);
+      return ArcLinTrackFindPoint2(track, p, minS, maxS, out trkPt);
     }
 
     // Import Section
@@ -194,9 +184,6 @@ namespace KinemaLibCs
     extern private static void ArcLinTrackGetPoint(IntPtr track, int idx, out Vec3 v);
 
     [DllImport("KinemaLib.dll")]
-    extern private static void ArcLinTrackSetPoint(IntPtr track, int idx, Vec3 v);
-
-    [DllImport("KinemaLib.dll")]
     extern private static void ArcLinTrackCalcCentroid(IntPtr track, out Vec3 centroid);
 
     [DllImport("KinemaLib.dll")]
@@ -218,7 +205,7 @@ namespace KinemaLibCs
     extern private static double ArcLinTrackFindPoint(IntPtr trrack, Vec3 p, out Vec3 trkPt);
 
     [DllImport("KinemaLib.dll")]
-    extern private static double ArcLinTrackFindPoint(IntPtr trrack, Vec3 p, double minS, double maxS, out Vec3 trkPt);
+    extern private static double ArcLinTrackFindPoint2(IntPtr trrack, Vec3 p, double minS, double maxS, out Vec3 trkPt);
 
     // End Import Section
   }

@@ -132,8 +132,45 @@ public:
 
 } // namespace
 
+// Import Section
+
 extern "C" __declspec(dllexport) void* ArcLinTrackNew(bool trkClosed = false, double trackPipeDiameter = 0.0);
 
+extern "C" __declspec(dllexport) void ArcLinTrackSetCoTrack(void *track, void *coTrack, bool reverseDir, double maxSDiff);
+
+extern "C" __declspec(dllexport)  int ArcLinTrackGetSize(void *track);
+
+extern "C" __declspec(dllexport)  double ArcLinTrackGetMaxS(void *track);
+
+extern "C" __declspec(dllexport)  void ArcLinTrackClear(void *track);
+
+extern "C" __declspec(dllexport)  bool ArcLinTrackIsClosed(void *track);
+
+extern "C" __declspec(dllexport)  void ArcLinTrackSetClosed(void *track, bool closed);
+
+extern "C" __declspec(dllexport)  double ArcLinTrackGetPipeRadius(void *track);
+
+extern "C" __declspec(dllexport)  void ArcLinTrackSetPipeRadius(void *track, double r);
+
+extern "C" __declspec(dllexport)  void ArcLinTrackGetPoint(void *track, int idx, Ino::Vec3& v);
+
+extern "C" __declspec(dllexport)  void ArcLinTrackCalcCentroid(void *track, Ino::Vec3& centroid);
+
+extern "C" __declspec(dllexport)  void ArcLinTrackTranslate(void *track, Ino::Vec3 offset);
+
+extern "C" __declspec(dllexport)  double ArcLinTrackGetLength(void *track);
+
+extern "C" __declspec(dllexport)  void ArcLinTrackGetPointAndDir(void *track, double at_s, Ino::Vec3& pnt, Ino::Vec3& dir);
+
+extern "C" __declspec(dllexport)  void ArcLinTrackGetAccAndJerk(void *track, double at_s, Ino::Vec3& acc, Ino::Vec3& jerk);
+
+extern "C" __declspec(dllexport)  void ArcLinTrackGetXDir(void *track, double at_s, Ino::Vec3& x, Ino::Vec3& xDir);
+
+extern "C" __declspec(dllexport)  double ArcLinTrackFindPoint(void *track, Ino::Vec3 p, Ino::Vec3& trkPt);
+
+extern "C" __declspec(dllexport)  double ArcLinTrackFindPoint2(void *track, Ino::Vec3 p, double minS, double maxS, Ino::Vec3& trkPt);
+
+// End Import Section
 
 //---------------------------------------------------------------------------
 #endif
