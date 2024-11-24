@@ -94,7 +94,22 @@ public:
 
 } // namespace
 
-extern "C" __declspec(dllexport) void* NewModel(const wchar_t* name);
+// Import Section
+
+extern "C" __declspec(dllexport) void* ModelNew(const wchar_t* name);
+
+extern "C" __declspec(dllexport) void Clear(void* model);
+
+extern "C" __declspec(dllexport) const wchar_t* GetName(void* model);
+extern "C" __declspec(dllexport) void SetName(void* model, const wchar_t* newName);
+
+extern "C" __declspec(dllexport) void SetTopoModified(void* model);
+extern "C" __declspec(dllexport) void SetModified(void* model, bool mod = true);
+
+extern "C" __declspec(dllexport) bool IsModified(void* model);
+
+
+// End Import Section
 
 //---------------------------------------------------------------------------
 #endif

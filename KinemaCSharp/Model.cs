@@ -6,14 +6,11 @@ namespace KinemaLibCs
 {
   public class Model
   {
-    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-    extern static IntPtr NewModel(string name);
-
     private readonly IntPtr cppModel;
     Model(string name)
     {
       try {
-        cppModel = NewModel(name);
+        cppModel = ModelNew(name);
       }
       catch (Exception e) {
         Console.WriteLine(e.Message);
@@ -58,12 +55,20 @@ namespace KinemaLibCs
 
       }
 
-      leftTrk.SetCoTrack(rightTrk, true, 3.0);
-      rightTrk.SetCoTrack(leftTrk, true, 3.0);
+      leftTrk.SetCoTrack(ref rightTrk, true, 3.0);
+      rightTrk.SetCoTrack(ref leftTrk, true, 3.0);
 
       Model carrierModel = new ("Clemens");
 
       if (!carrierModel.DefineModel(leftTrk, rightTrk)) return;
     }
-  }
+        // Import section
+
+        [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+        extern private static IntPtr ModelNew(string name);
+
+        // End Import section
+    }
 }
+
+

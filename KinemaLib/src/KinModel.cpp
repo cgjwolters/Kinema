@@ -305,9 +305,11 @@ bool Model::buildTopology()
 
 } // namespace
 
-//---------------------------------------------------------------------------
+    //---------------------------------------------------------------------------
+// Import Section
 
-void* NewModel(const wchar_t* name) {
+void* ModelNew(const wchar_t* name)
+{
   //fprintf(stdout, "Cpp name: %ls\n", name);
   //fflush(stdout);
 
@@ -316,4 +318,47 @@ void* NewModel(const wchar_t* name) {
   return mdl;
 }
 
+void Clear(void* model)
+{
+  InoKin::Model* mdl = (InoKin::Model *)model;
+  mdl->clear();
+}
+
+const wchar_t* GetName(void* model)
+{
+  InoKin::Model* mdl = (InoKin::Model*)model;
+
+  return mdl->getName();
+}
+
+void SetName(void* model, const wchar_t* newName)
+{
+  InoKin::Model* mdl = (InoKin::Model*)model;
+
+  mdl->setName(newName);
+}
+
+void SetTopoModified(void* model)
+{
+  InoKin::Model* mdl = (InoKin::Model*)model;
+
+  mdl->setTopoModified();
+}
+
+void SetModified(void* model, bool mod)
+{
+  InoKin::Model* mdl = (InoKin::Model*)model;
+
+  mdl->setModified(mod);
+
+}
+
+bool IsModified(void* model)
+{
+  InoKin::Model* mdl = (InoKin::Model*)model;
+
+  return mdl->isModified();
+}
+
+// End Import Section
 //---------------------------------------------------------------------------

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj": {}
+    "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj": {
+    "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj",
+        "projectUniqueName": "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj",
         "projectName": "KinemaLibCs",
-        "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj",
-        "packagesPath": "C:\\Users\\Clemens\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\obj\\",
+        "projectPath": "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\KinemaLibCs.csproj",
+        "packagesPath": "C:\\Users\\clemens\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaCSharp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Clemens\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\clemens\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj": {
-                "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj"
+              "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj": {
+                "projectPath": "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj"
               }
             }
           }
@@ -68,15 +69,15 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj": {
+    "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj",
+        "projectUniqueName": "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj",
         "projectName": "KinemaLib",
-        "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj",
+        "projectPath": "C:\\Users\\clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj",
         "frameworks": {
           "native": {
             "projectReferences": {}
