@@ -114,7 +114,11 @@ class BodyList: public ObjList<Body>
 
 } // namespace
 
-extern "C" __declspec(dllexport) void* NewBody(InoKin::Model& model, const wchar_t* name);
+// Interface Section
+
+extern "C" __declspec(dllexport) void* BodyNew(InoKin::Model& model, const wchar_t* name);
+
+// End Interface Section
 
 //---------------------------------------------------------------------------
 #endif

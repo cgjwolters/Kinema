@@ -202,10 +202,10 @@ namespace KinemaLibCs
     extern private static void ArcLinTrackGetXDir(IntPtr track, double at_s, out Vec3 x, out Vec3 xDir);
 
     [DllImport("KinemaLib.dll")]
-    extern private static double ArcLinTrackFindPoint(IntPtr trrack, Vec3 p, out Vec3 trkPt);
+    extern private static double ArcLinTrackFindPoint(IntPtr track, Vec3 p, out Vec3 trkPt);
 
     [DllImport("KinemaLib.dll")]
-    extern private static double ArcLinTrackFindPoint2(IntPtr trrack, Vec3 p, double minS, double maxS, out Vec3 trkPt);
+    extern private static double ArcLinTrackFindPoint2(IntPtr track, Vec3 p, double minS, double maxS, out Vec3 trkPt);
 
     // End Import Section
   }
