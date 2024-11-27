@@ -1,13 +1,10 @@
-﻿using KinemaLibCs;
-using System.Reflection;
-using System.Runtime;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
   internal class Grip
   {
-    private Model model;
+    private readonly Model model;
     private readonly IntPtr cppGrip;
 
     public Grip(Model mdl, string name,
@@ -18,64 +15,68 @@ namespace KinemaLibCs
       cppGrip = GripNew(model, name, body1, pos1, body2, pos2);
     }
 
-    Body GetBody1()
+    public Body GetBody1()
     {
       GetBody1Grip(cppGrip,out Body body);
       return body;
     }
 
-    Body GetBody2()
+    public Body GetBody2()
     {
       GetBody2Grip(cppGrip, out Body body);
       return body;
     }
 
-    Body GetOtherBody()
+    public Body GetOtherBody()
     {
       GetOtherBodyGrip(cppGrip, out Body body);
       return body;
     }
 
-    // AbstractJoint* getJoint() const { return joint; }
+    public AbstractJoint GetJoint()
+    {
+      GetJointGrip(cppGrip, out AbstractJoint joint);
+      return joint;
+    }
 
-    bool IsParentRel()
+    public bool IsParentRel()
     {
       return IsParentRelGrip(cppGrip);
     }
 
-    int GetLoopCnt()
+    public int GetLoopCnt()
     {
       return GetLoopCntGrip(cppGrip);
     }
 
-    Trf3 GetPos1()
+    public Trf3 GetPos1()
     {
       GetPos1Grip(cppGrip,out Trf3 pos);
       return pos;
     }
 
-    Trf3 GetInvPos1()
+    public Trf3 GetInvPos1()
     {
       GetInvPos1Grip(cppGrip, out Trf3 pos);
       return pos;
     }
 
-    void SetPos1(Trf3 pos)
+    public void SetPos1(Trf3 pos)
     {
       SetPos1Grip(cppGrip, pos);
     }
 
-    Trf3 GetPos2()
+    public Trf3 GetPos2()
     {
       GetPos2Grip(cppGrip, out Trf3 pos);
       return pos;
     }
-    Trf3 GetInvPos2()
+    public Trf3 GetInvPos2()
     {
       GetInvPos2Grip(cppGrip, out Trf3 pos);
       return pos;
     }
-    void setPos2(Trf3 pos)
+    public void SetPos2(Trf3 pos)
     {
       SetPos2Grip(cppGrip, pos);
     }
@@ -95,6 +96,9 @@ namespace KinemaLibCs
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern static private void GetOtherBodyGrip(IntPtr cppGrip, out Body body);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern static private void GetJointGrip(IntPtr cppGrip, out AbstractJoint joint);
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern static private bool IsParentRelGrip(IntPtr cppGrip);

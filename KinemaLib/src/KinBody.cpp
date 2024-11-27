@@ -328,6 +328,131 @@ void* BodyNew(InoKin::Model& model, const wchar_t* name) {
   return body;
 }
 
+InoKin::Body* GetParentBody(void* cppBody) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  return body->getParent();
+}
+
+InoKin::Grip* GetParentGripBody(void* cppBody) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  return body->getParentGrip();
+}
+
+int GetTreeLevelBody(void *cppBody) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  return body->getTreeLevel();
+}
+
+InoKin::Grip* GripToBody(void* cppBody, InoKin::Body* otherBody) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  return body->gripTo(*otherBody);
+}
+
+const Ino::Trf3& GetPosBody(void* cppBody) {
+  const InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  return body->getPos();
+}
+
+void SetPosBody(void* cppBody, Trf3& newPos)   {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->setPos(newPos);
+}
+
+void GetInvPosBody(void* cppBody, Trf3& invPos) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->getInvPos(invPos);
+}
+
+void GetSpeedBody(void* cppBody, Trf3& trf) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  trf = body->getSpeed();
+}
+
+void SetSpeedBody(void* cppBody, Trf3 newSpeed) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->setSpeed(newSpeed);
+}
+
+void GetInvSpeedBody(void* cppBody, Trf3& invSpeed) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->getInvSpeed(invSpeed);
+}
+
+void GetAccelBody(void* cppBody, Trf3& accel) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+  accel = body->getAccel();
+}
+
+void SetAccelBody(void* cppBody, Trf3 newAccel) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->setAccel(newAccel);
+}
+
+void GetInvAccelBody(void* cppBody, Trf3& invAccel) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->getInvAccel(invAccel);
+}
+
+void GetJerkBody(void* cppBody, Trf3& trf) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  trf = body->getJerk();
+}
+
+void SetJerkBody(void* cppBody, Trf3 newJerk) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->setJerk(newJerk);
+}
+
+void GetInvJerkBody(void* cppBody, Trf3& invJerk) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  invJerk = body->getJerk();
+}
+
+void GetAbsPosBody(void* cppBody, Vec3& pos) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->getAbsPos(pos);
+}
+
+void GetAbsPosBody2(void* cppBody, Trf3& trf) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->getAbsPos(trf);
+}
+
+void GetAbsSpeedBody(void* cppBody, Vec3& speed) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->getAbsSpeed(speed);
+}
+
+void TranslateBody(void* cppBody, Vec3 offset) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->translate(offset);
+}
+
+void TransformBody(void* cppBody, Trf3 trf) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  body->transform(trf);
+}
+
 // End Interface Section
 
 //---------------------------------------------------------------------------

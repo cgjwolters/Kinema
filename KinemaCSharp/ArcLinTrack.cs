@@ -1,7 +1,4 @@
-﻿using KinemaLibCs;
-using System;
-using System.IO;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
@@ -61,12 +58,14 @@ namespace KinemaLibCs
     public Vec3 GetPoint(int idx)
     {
       if (idx < 0 || idx >= Size) throw new IndexOutOfRangeException();
-      Vec3 v; ArcLinTrackGetPoint(track, idx, out v); return v;
+      ArcLinTrackGetPoint(track, idx, out Vec3 v);
+      
+      return v;
     }
 
     public Vec3 CalcCentroid()
     {
-      Vec3 c; ArcLinTrackCalcCentroid(track, out c);
+      ArcLinTrackCalcCentroid(track, out Vec3 c);
 
       return c;
     }
@@ -86,10 +85,7 @@ namespace KinemaLibCs
 
     public Vec3 GetPoint(double at_s)
     {
-      Vec3 pnt;
-      Vec3 dir;
-
-      ArcLinTrackGetPointAndDir(track, at_s, out pnt, out dir);
+      ArcLinTrackGetPointAndDir(track, at_s, out Vec3 pnt, out Vec3 _);
 
       return pnt;
     }
@@ -101,43 +97,33 @@ namespace KinemaLibCs
 
     public Vec3 GetDir(double at_s)
     {
-      Vec3 pnt;
-      Vec3 dir;
-
-      ArcLinTrackGetPointAndDir(track, at_s, out pnt, out dir);
+      ArcLinTrackGetPointAndDir(track, at_s, out Vec3 _, out Vec3 dir);
 
       return dir;
     }
 
     public Vec3 GetAcc(double at_s)
     {
-      Vec3 acc;
-      Vec3 jerk;
-
-      ArcLinTrackGetAccAndJerk(track, at_s, out acc, out jerk);
+      ArcLinTrackGetAccAndJerk(track, at_s, out Vec3 acc, out Vec3 _);
 
       return acc;
     }
 
     public Vec3 GetJerk(double at_s)
     {
-      Vec3 acc;
-      Vec3 jerk;
-
-      ArcLinTrackGetAccAndJerk(track, at_s, out acc, out jerk);
+      ArcLinTrackGetAccAndJerk(track, at_s, out Vec3 _, out Vec3 jerk);
 
       return jerk;
     }
 
-    public void getXDir(double at_s, out Vec3 x, out Vec3 xDer)
+    public void GetXDir(double at_s, out Vec3 x, out Vec3 xDer)
     {
       ArcLinTrackGetXDir(track, at_s, out x, out xDer);
     }
 
     public double FindPoint(Vec3 p)
     {
-      Vec3 trkPt;
-      return ArcLinTrackFindPoint(track, p,out trkPt);
+      return ArcLinTrackFindPoint(track, p, out Vec3 _);
     }
 
     public double FindPoint(Vec3 p, out Vec3 trkPt)

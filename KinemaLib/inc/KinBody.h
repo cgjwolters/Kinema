@@ -105,7 +105,7 @@ public:
 
 class BodyList: public ObjList<Body>
 {
-  BodyList& operator=(const BodyList& src); // No assignment
+  BodyList& operator=(const BodyList& src) = delete; // No assignment
 
   public:
     BodyList() : ObjList<Body>(false) {}
@@ -117,6 +117,50 @@ class BodyList: public ObjList<Body>
 // Interface Section
 
 extern "C" __declspec(dllexport) void* BodyNew(InoKin::Model& model, const wchar_t* name);
+
+extern "C" __declspec(dllexport) void* BodyNew(InoKin::Model& model, const wchar_t* name);
+
+extern "C" __declspec(dllexport) InoKin::Body* GetParentBody(void* cppBody);
+
+extern "C" __declspec(dllexport) InoKin::Grip* GetParentGripBody(void* cppBody);
+
+extern "C" __declspec(dllexport) int GetTreeLevelBody(void* cppBody);
+
+extern "C" __declspec(dllexport) InoKin::Grip* GripToBody(void* cppBody, InoKin::Body* otherBody);
+
+extern "C" __declspec(dllexport) const Ino::Trf3& GetPosBody(void* cppBody);
+
+extern "C" __declspec(dllexport) void SetPosBody(void* cppBody, Trf3& newPos);
+
+extern "C" __declspec(dllexport) void GetInvPosBody(void* cppBody, Trf3& invPos);
+
+extern "C" __declspec(dllexport) void GetSpeedBody(void* cppBody, Trf3& trf);
+
+extern "C" __declspec(dllexport) void SetSpeedBody(void* cppBody, Trf3 newSpeed);
+
+extern "C" __declspec(dllexport) void GetInvSpeedBody(void* cppBody, Trf3& invSpeed);
+
+extern "C" __declspec(dllexport) void GetAccelBody(void* cppBody, Trf3& accel);
+
+extern "C" __declspec(dllexport) void SetAccelBody(void* cppBody, Trf3 newAccel);
+
+extern "C" __declspec(dllexport) void GetInvAccelBody(void* cppBody, Trf3& invAccel);
+
+extern "C" __declspec(dllexport) void GetJerkBody(void* cppBody, Trf3& trf);
+
+extern "C" __declspec(dllexport) void SetJerkBody(void* cppBody, Trf3 newJerk);
+
+extern "C" __declspec(dllexport) void GetInvJerkBody(void* cppBody, Trf3& invJerk);
+
+extern "C" __declspec(dllexport) void GetAbsPosBody(void* cppBody, Vec3& pos);
+
+extern "C" __declspec(dllexport) void GetAbsPosBody2(void* cppBody, Trf3& trf);
+
+extern "C" __declspec(dllexport) void GetAbsSpeedBody(void* cppBody, Vec3& speed);
+
+extern "C" __declspec(dllexport) void TranslateBody(void* cppBody, Vec3 offset);
+
+extern "C" __declspec(dllexport) void TransformBody(void* cppBody, Trf3 trf);
 
 // End Interface Section
 

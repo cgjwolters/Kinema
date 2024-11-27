@@ -132,7 +132,7 @@ public:
 
 } // namespace
 
-// Import Section
+// Interface Section
 
 extern "C" __declspec(dllexport) void* ArcLinTrackNew(bool trkClosed = false, double trackPipeDiameter = 0.0);
 
@@ -170,7 +170,7 @@ extern "C" __declspec(dllexport)  double ArcLinTrackFindPoint(void *track, Ino::
 
 extern "C" __declspec(dllexport)  double ArcLinTrackFindPoint2(void *track, Ino::Vec3 p, double minS, double maxS, Ino::Vec3& trkPt);
 
-// End Import Section
+// End Interface Section
 
 //---------------------------------------------------------------------------
 #endif

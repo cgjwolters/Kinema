@@ -1,17 +1,15 @@
-﻿using KinemaLibCs;
-using System.Runtime;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
   internal class Body
   {
-    private Model model;
+    private readonly Model model;
     private readonly IntPtr cppBody;
 
     public Body(Model mdl, string name) {
       model = mdl;
-      cppBody = BodyNew(mdl, name);
+      cppBody = BodyNew(model, name);
     }
 
     public Body GetParent()
@@ -20,10 +18,21 @@ namespace KinemaLibCs
       return parent;
     }
 
-//    Grip* getParentGrip() const;
-//    int getTreeLevel() const { return treeLvl; }
+    public Grip GetParentGrip()
+    {
+      GetParentGripBody(cppBody, out Grip parentGrip);
+      return parentGrip;
+    }
+    public int GetTreeLevel()
+    {
+      return GetTreeLevelBody(cppBody);
+    }
 
-//    Grip* gripTo(const Body& otherBody) const;
+    public Grip GripTo(Body otherBody)
+    {
+      GripToBody(cppBody, otherBody, out Grip grip);
+      return grip;
+    }
 
     public Trf3 GetPos()
     {
@@ -133,6 +142,15 @@ namespace KinemaLibCs
 
     [DllImport("KinemaLib.dll")]
     extern private static IntPtr GetParentBody(IntPtr cppBody, out Body parent);
+
+    [DllImport("KinemaLib.dll")]
+    extern private static IntPtr GetParentGripBody(IntPtr cppBody, out Grip parentGrip);
+
+    [DllImport("KinemaLib.dll")]
+    extern private static int GetTreeLevelBody(IntPtr cppBody);
+
+    [DllImport("KinemaLib.dll")]
+    extern private static void GripToBody(IntPtr cppBody, Body otherBody, out Grip grip);
 
     [DllImport("KinemaLib.dll")]
     extern private static void GetPosBody(IntPtr cppBody, out Trf3 trf);
