@@ -453,6 +453,20 @@ void TransformBody(void* cppBody, Trf3 trf) {
   body->transform(trf);
 }
 
+int GetGripCountBody(void* cppBody) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  return body->getGripList().size();
+}
+
+InoKin::Grip* GetGripBody(void* cppBody, int idx) {
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+
+  if (idx < 0 || idx >= body->getGripList().size()) return nullptr;
+
+  return body->getGripList()[idx];
+}
+
 // End Interface Section
 
 //---------------------------------------------------------------------------

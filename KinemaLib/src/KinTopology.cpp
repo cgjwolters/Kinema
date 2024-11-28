@@ -431,8 +431,8 @@ void Topology::assignVarIndices(LoopList& loopLst)
     upbIdx = new int[varSz];
   }
   else {
-    lwbIdx = (int *)alloca(varSz*sizeof(int));
-    upbIdx = (int *)alloca(varSz*sizeof(int));
+    lwbIdx = (int *)_malloca(varSz*sizeof(int));
+    upbIdx = (int *)_malloca(varSz*sizeof(int));
   }
 
   memset(lwbIdx,-1,varSz*sizeof(int));
@@ -586,7 +586,7 @@ bool Topology::composePosMatrixRow(const GripList& grpLst,
   int *idxLst;
  
   if (varSz > MaxAllocaSz) idxLst = new int[varSz];
-  else idxLst = (int *)alloca(varSz*sizeof(int));
+  else idxLst = (int *)_malloca(varSz*sizeof(int));
 
   for (int i=0; i<varSz; ++i) idxLst[i] = -1;
 
@@ -931,7 +931,7 @@ bool Topology::composeSpeedMatrixRow(const GripList& grpLst)
   int *idxLst;
  
   if (varSz > MaxAllocaSz) idxLst = new int[varSz];
-  else idxLst = (int *)alloca(varSz*sizeof(int));
+  else idxLst = (int *)_malloca(varSz*sizeof(int));
 
   for (int i=0; i<varSz; ++i) idxLst[i] = -1;
 
@@ -1258,7 +1258,7 @@ bool Topology::composeAccelMatrixRow(const GripList& grpLst)
   int *idxLst;
  
   if (varSz > MaxAllocaSz) idxLst = new int[varSz];
-  else idxLst = (int *)alloca(varSz*sizeof(int));
+  else idxLst = (int *)_malloca(varSz*sizeof(int));
 
   for (int i=0; i<varSz; ++i) idxLst[i] = -1;
 
@@ -1576,7 +1576,7 @@ bool Topology::composeJerkMatrixRow(const GripList& grpLst)
   int *idxLst;
  
   if (varSz > MaxAllocaSz) idxLst = new int[varSz];
-  else idxLst = (int *)alloca(varSz*sizeof(int));
+  else idxLst = (int *)_malloca(varSz*sizeof(int));
 
   for (int i=0; i<varSz; ++i) idxLst[i] = -1;
 

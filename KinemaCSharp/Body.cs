@@ -130,7 +130,10 @@ namespace KinemaLibCs
       TransformBody(cppBody, trf);
     }
 
-    //const GripList& getGripList() const { return gripLst; }
+    public Grip GetGrip(int idx)
+    {
+      return GetGripBody(cppBody, idx);
+    }
 
     //  void getAbsGripPos(int idx, Ino::Trf3& trf) const;
     //void getAbsGripPos(const wchar_t* name, Ino::Trf3& trf) const;
@@ -202,6 +205,12 @@ namespace KinemaLibCs
 
     [DllImport("KinemaLib.dll")]
     extern private static void TransformBody(IntPtr cppBody, Trf3 trf);
+
+    [DllImport("KinemaLib.dll")]
+    extern private static int GetGripCountBody(IntPtr cppBody);
+
+    [DllImport("KinemaLib.dll")]
+    extern private static Grip GetGripBody(IntPtr cppBody, int idx);
 
     // End Import Section
   }

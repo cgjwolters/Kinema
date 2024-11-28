@@ -162,6 +162,9 @@ extern "C" __declspec(dllexport) void TranslateBody(void* cppBody, Vec3 offset);
 
 extern "C" __declspec(dllexport) void TransformBody(void* cppBody, Trf3 trf);
 
+extern "C" __declspec(dllexport) int GetGripCountBody(void* cppBody);
+extern "C" __declspec(dllexport) InoKin::Grip *GetGripBody(void *cppBody, int idx);
+
 // End Interface Section
 
 //---------------------------------------------------------------------------
