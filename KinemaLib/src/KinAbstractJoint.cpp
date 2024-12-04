@@ -276,12 +276,12 @@ AbstractJoint::~AbstractJoint()
 
 //-------------------------------------------------------------------------------
 
-int AbstractJoint::getVarCnt(bool fixed) const
+int AbstractJoint::getVarCnt(bool fixd) const
 {
   int fc = 0;
 
   for (int i=0; i<varCnt; i++) {
-    if (fixedPos[i] == fixed) fc++;
+    if (fixedPos[i] == fixd) fc++;
   }
 
   return fc;
@@ -1191,9 +1191,276 @@ void AbstractJoint::copyStateFrom(const AbstractJoint *jnt)
     varJerk[i]   = jnt->varJerk[i];
     isAngular[i] = jnt->isAngular[i];
   }
+}
+} // namespace
 
+// Interface Section
+
+void GetPosAbstractJoint(void* cppJoint, Ino::Trf3& pos)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  pos = jnt->getPos();
 }
 
-} // namespace
+void GetInvPosAbstractJoint(void* cppJoint, Ino::Trf3& invPos)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  invPos = jnt->getInvPos();
+}
+
+void GetDerAbstractJoint(void* cppJoint, Ino::Trf3& der)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  der = jnt->getDer();
+}
+
+void GetInvDerAbstractJoint(void* cppJoint, Ino::Trf3& invDer)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  invDer = jnt->getInvDer();
+}
+
+void GetAccAbstractJoint(void* cppJoint, Ino::Trf3& acc)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  acc = jnt->getAcc();
+}
+
+void GetInvAccAbstractJoint(void* cppJoint, Ino::Trf3& invAcc)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  invAcc = jnt->getInvAcc();
+}
+
+void GetJerkAbstractJoint(void* cppJoint, Ino::Trf3& jerk)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jerk = jnt->getJerk();
+}
+
+void GetInvJerkAbstractJoint(void* cppJoint, Ino::Trf3& invJerk)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  invJerk = jnt->getInvJerk();
+}
+
+int GetVarCntAbstractJoint(void* cppJoint)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getVarCnt();
+}
+
+int GetVarCntAbstractJoint2(void* cppJoint, bool fixd)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getVarCnt(fixd);
+}
+
+bool GetFixedAbstractJoint(void* cppJoint, int locIdx)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getFixed(locIdx);
+}
+
+void SetFixedAbstractJoint(void* cppJoint, int locIdx, bool isFixed)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->setFixed(locIdx, isFixed);
+}
+
+void SetFixedAllAbstractJoint(void* cppJoint, bool isFixed)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->setFixedAll(isFixed);
+}
+
+bool GetIsAngularAbstractJoint(void* cppJoint, int locIdx)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getIsAngular(locIdx);
+}
+
+void InitVarsFromPosAbstractJoint(void* cppJoint, bool fixedAlso)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->initVarsFromPos(fixedAlso);
+}
+
+void ClearVarIndicesAbstractJoint(void* cppJoint)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->clearVarIndices();
+}
+
+int GetVarIdxAbstractJoint(void* cppJoint, int locIdx)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getVarIdx(locIdx);
+}
+
+void SetVarIdxAbstractJoint(void* cppJoint, int locIdx, int varIdx)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->setVarIdx(locIdx, varIdx);
+}
+
+int GetLocIdxAbstractJoint(void* cppJoint, int vIdx)
+{ 
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getLocIdx(vIdx);
+}
+
+double GetValAbstractJoint(void* cppJoint, int locIdx)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getVal(locIdx);
+}
+
+void SetValAbstractJoint(void* cppJoint, int locIdx, double newVal)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->setVal(locIdx, newVal);
+}
+
+double GetSpeedAbstractJoint(void* cppJoint, int locIdx)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getSpeed(locIdx);
+}
+
+void SetSpeedAbstractJoint(void* cppJoint, int locIdx, double newSpeed)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->setSpeed(locIdx, newSpeed);
+}
+
+void ClearTrfCachesAbstractJoint(void* cppJoint)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->clearTrfCaches();
+}
+
+void GetDerivativeAbstractJoint(void* cppJoint, int locIdx, Ino::Trf3& derTrf)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  derTrf = jnt->getDerivative(locIdx);
+}
+
+void GetInvDerivativeAbstractJoint(void* cppJoint, int locIdx, Ino::Trf3& invDerTrf) 
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  invDerTrf = jnt->getInvDerivative(locIdx);
+}
+
+double GetAccelAbstractJoint(void* cppJoint, int locIdx)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getAccel(locIdx);
+}
+
+void SetAccelAbstractJoint(void* cppJoint, int locIdx, double newAccel)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->setAccel(locIdx, newAccel);
+}
+
+void GetSecDerivativeAbstractJoint(void* cppJoint, int locIdx, Ino::Trf3 accTrf)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->getSecDerivative(locIdx, accTrf);
+}
+
+void GetInvSecDerivativeAbstractJoint(void* cppJoint, int locIdx, Ino::Trf3 accTrf)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->getInvSecDerivative(locIdx, accTrf);
+}
+
+void GetAccMixedAbstractJoint(void* cppJoint, Ino::Trf3& mixTrf)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->getAccMixed(mixTrf);
+}
+
+void GetInvAccMixedAbstractJoint(void* cppJoint, Ino::Trf3& invMixTrf)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->getInvAccMixed(invMixTrf);
+}
+
+void GetJerkMixedAbstractJoint(void* cppJoint, Ino::Trf3& mixTrf)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->getJerkMixed(mixTrf);
+}
+
+void GetInvJerkMixedAbstractJoint(void* cppJoint, Ino::Trf3& invMixTrf)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->getInvJerkMixed(invMixTrf);
+}
+
+double GetJerkAbstractJoint2(void* cppJoint, int locIdx)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  return jnt->getJerk(locIdx);
+}
+
+void SetJerkAbstractJoint(void* cppJoint, int locIdx, double newJerk) {
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->setJerk(locIdx, newJerk);
+}
+
+void GetThirdDerivativeAbstractJoint(void* cppJoint, int locIdx, Ino::Trf3& jerkTrf)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->getThirdDerivative(locIdx, jerkTrf);
+}
+
+void GetInvThirdDerivativeAbstractJoint(void* cppJoint, int locIdx, Ino::Trf3& jerkTrf)
+{
+  InoKin::AbstractJoint* jnt = (InoKin::AbstractJoint*)cppJoint;
+
+  jnt->getInvThirdDerivative(locIdx, jerkTrf);
+}
+
+// End Interface Section
 
 //-------------------------------------------------------------------------------

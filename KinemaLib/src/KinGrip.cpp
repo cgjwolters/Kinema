@@ -331,4 +331,89 @@ bool GripListCompare::operator()(const GripList *lst1, const GripList *lst2) con
 
 } // namespace
 
+// Interface Section
+
+void* GripNew(void* cppGrip, InoKin::Model& mdl, const wchar_t* name,
+  InoKin::Body& body1, Trf3& pos1,
+  InoKin::Body& body2, Trf3& pos2) {
+
+  InoKin::Grip* grip = new InoKin::Grip(mdl, name, body1, pos1, body2 ,pos2);
+
+  return grip;
+}
+
+void setPos1Grip(void* cppGrip, Trf3& pos) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  grip->setPos1(pos);
+}
+
+void setPos2Grip(void* cppGrip, Trf3& pos) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  grip->setPos2(pos);
+}
+
+InoKin::Body* getBody1Grip(void* cppGrip) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  return grip->getBody1();
+}
+
+InoKin::Body* getBody2Grip(void* cppGrip) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  return grip->getBody2();
+}
+
+InoKin::Body* getOtherBodyGrip(void* cppGrip, const InoKin::Body& body) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  return grip->getOtherBody(body);
+}
+
+InoKin::AbstractJoint* getJointGrip(void* cppGrip) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  return grip->getJoint();
+}
+
+bool isParentRelGrip(void* cppGrip) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  return grip->isParentRel();
+}
+
+int getLoopCntGrip(void* cppGrip) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  return grip->getLoopCnt();
+}
+
+void getPos1Grip(void* cppGrip, Trf3& trf) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  trf = grip->getPos1();
+}
+
+void getInvPos1Grip(void* cppGrip, Trf3& trf) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  trf = grip->getInvPos1();
+}
+
+void getPos2Grip(void* cppGrip, Trf3& trf) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  trf = grip->getPos2();
+}
+
+void getInvPos2Grip(void* cppGrip, Trf3& trf) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  trf = grip->getInvPos2();
+}
+
+// End Interface Section
+
 //-------------------------------------------------------------------------------

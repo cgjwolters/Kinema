@@ -178,5 +178,47 @@ public:
 
 } // namespace
 
+// Interface Section
+
+extern "C" __declspec(dllexport) void GetPosAbstractJoint(void * cppJoint, Ino::Trf3& pos);
+extern "C" __declspec(dllexport) void GetInvPosAbstractJoint(void * cppJoint, Ino::Trf3& invPos);
+extern "C" __declspec(dllexport) void GetDerAbstractJoint(void * cppJoint, Ino::Trf3& der);
+extern "C" __declspec(dllexport) void GetInvDerAbstractJoint(void * cppJoint, Ino::Trf3& invDer);
+extern "C" __declspec(dllexport) void GetAccAbstractJoint(void * cppJoint, Ino::Trf3& acc);
+extern "C" __declspec(dllexport) void GetInvAccAbstractJoint(void * cppJoint, Ino::Trf3& invAcc);
+extern "C" __declspec(dllexport) void GetJerkAbstractJoint(void * cppJoint, Ino::Trf3& jerk);
+extern "C" __declspec(dllexport) void GetInvJerkAbstractJoint(void * cppJoint, Ino::Trf3& invJerk);
+extern "C" __declspec(dllexport) int GetVarCntAbstractJoint(void * cppJoint);
+extern "C" __declspec(dllexport) int GetVarCntAbstractJoint2(void * cppJoint, bool fixd);
+extern "C" __declspec(dllexport) bool GetFixedAbstractJoint(void * cppJoint, int locIdx);
+extern "C" __declspec(dllexport) void SetFixedAbstractJoint(void * cppJoint, int locIdx, bool isFixed);
+extern "C" __declspec(dllexport) void SetFixedAllAbstractJoint(void * cppJoint, bool isFixed);
+extern "C" __declspec(dllexport) bool GetIsAngularAbstractJoint(void * cppJoint, int locIdx);
+extern "C" __declspec(dllexport) void InitVarsFromPosAbstractJoint(void * cppJoint, bool fixedAlso);
+extern "C" __declspec(dllexport) void ClearVarIndicesAbstractJoint(void * cppJoint);
+extern "C" __declspec(dllexport) int GetVarIdxAbstractJoint(void * cppJoint, int locIdx);
+extern "C" __declspec(dllexport) void SetVarIdxAbstractJoint(void * cppJoint, int locIdx, int varIdx);
+extern "C" __declspec(dllexport) int GetLocIdxAbstractJoint(void * cppJoint, int vIdx);
+extern "C" __declspec(dllexport) double GetValAbstractJoint(void * cppJoint, int locIdx);
+extern "C" __declspec(dllexport) void SetValAbstractJoint(void * cppJoint, int locIdx, double newVal);
+extern "C" __declspec(dllexport) double GetSpeedAbstractJoint(void * cppJoint, int locIdx);
+extern "C" __declspec(dllexport) void SetSpeedAbstractJoint(void * cppJoint, int locIdx, double newSpeed);
+extern "C" __declspec(dllexport) void ClearTrfCachesAbstractJoint(void * cppJoint);
+extern "C" __declspec(dllexport) void GetDerivativeAbstractJoint(void * cppJoint, int locIdx, Ino::Trf3& derTrf);
+extern "C" __declspec(dllexport) void GetInvDerivativeAbstractJoint(void * cppJoint, int locIdx, Ino::Trf3& invDerTrf);
+extern "C" __declspec(dllexport) double GetAccelAbstractJoint(void * cppJoint, int locIdx);
+extern "C" __declspec(dllexport) void SetAccelAbstractJoint(void * cppJoint, int locIdx, double newAccel);
+extern "C" __declspec(dllexport) void GetSecDerivativeAbstractJoint(void * cppJoint, int locIdx, Ino::Trf3 accTrf);
+extern "C" __declspec(dllexport) void GetInvSecDerivativeAbstractJoint(void * cppJoint, int locIdx, Ino::Trf3 accTrf);
+extern "C" __declspec(dllexport) void GetAccMixedAbstractJoint(void * cppJoint, Ino::Trf3& mixTrf);
+extern "C" __declspec(dllexport) void GetInvAccMixedAbstractJoint(void * cppJoint, Ino::Trf3& invMixTrf);
+extern "C" __declspec(dllexport) void GetJerkMixedAbstractJoint(void * cppJoint, Ino::Trf3& mixTrf);
+extern "C" __declspec(dllexport) void GetInvJerkMixedAbstractJoint(void * cppJoint, Ino::Trf3& invMixTrf);
+extern "C" __declspec(dllexport) double GetJerkAbstractJoint2(void * cppJoint, int locIdx);
+extern "C" __declspec(dllexport) void SetJerkAbstractJoint(void * cppJoint, int locIdx, double newJerk);
+extern "C" __declspec(dllexport) void GetThirdDerivativeAbstractJoint(void * cppJoint, int locIdx, Ino::Trf3& jerkTrf);
+extern "C" __declspec(dllexport) void GetInvThirdDerivativeAbstractJoint(void * cppJoint, int locIdx, Ino::Trf3& jerkTrf);
+
+
 //-------------------------------------------------------------------------------
 #endif

@@ -2,7 +2,7 @@
 
 namespace KinemaLibCs
 {
-  internal class Body
+  public class Body
   {
     private readonly Model model;
     private readonly IntPtr cppBody;

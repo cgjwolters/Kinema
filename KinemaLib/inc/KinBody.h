@@ -118,8 +118,6 @@ class BodyList: public ObjList<Body>
 
 extern "C" __declspec(dllexport) void* BodyNew(InoKin::Model& model, const wchar_t* name);
 
-extern "C" __declspec(dllexport) void* BodyNew(InoKin::Model& model, const wchar_t* name);
-
 extern "C" __declspec(dllexport) InoKin::Body* GetParentBody(void* cppBody);
 
 extern "C" __declspec(dllexport) InoKin::Grip* GetParentGripBody(void* cppBody);

@@ -121,4 +121,14 @@ void JntRev::initVarsFromPos(bool fixedAlso)
 
 } // namespace
 
+// Interface Section
+
+void* JointRevNew(void* cppGrip, const wchar_t* name) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  InoKin::JntRev* jnt = new InoKin::JntRev(*grip, name);
+
+  return jnt;
+}
+
 //---------------------------------------------------------------------------

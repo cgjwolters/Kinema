@@ -126,5 +126,30 @@ typedef Ino::Array<GripList *> LoopList;
 
 } // namespace
 
+// Interface Section
+
+extern "C" __declspec(dllexport) void* GripNew(void* cppGrip, InoKin::Model& mdl, const wchar_t* name,
+                                               InoKin::Body& body_1, Ino::Trf3& pos_1,
+                                               InoKin::Body& body_2, Ino::Trf3& pos_2);
+extern "C" __declspec(dllexport) void setPos1Grip(void* cppGrip, Ino::Trf3& pos);
+extern "C" __declspec(dllexport) void setPos2Grip(void* cppGrip, Ino::Trf3& pos);
+
+extern "C" __declspec(dllexport) InoKin::Body* getBody1Grip(void* cppGrip);
+extern "C" __declspec(dllexport) InoKin::Body* getBody2Grip(void* cppGrip);
+
+extern "C" __declspec(dllexport) InoKin::Body* getOtherBodyGrip(void* cppGrip, const InoKin::Body& body);
+extern "C" __declspec(dllexport) InoKin::AbstractJoint* getJointGrip(void* cppGrip);
+
+extern "C" __declspec(dllexport) bool isParentRelGrip(void* cppGrip);
+extern "C" __declspec(dllexport) int getLoopCntGrip(void* cppGrip);
+
+extern "C" __declspec(dllexport) void getPos1Grip(void* cppGrip, const Ino::Trf3& trf);
+extern "C" __declspec(dllexport) void getInvPos1Grip(void* cppGrip, const Ino::Trf3& trf);
+
+extern "C" __declspec(dllexport) void getPos2Grip(void* cppGrip, const Ino::Trf3& trf);
+extern "C" __declspec(dllexport) void getInvPos2Grip(void* cppGrip, const Ino::Trf3& trf);
+
+// End Interface Section
+
 //---------------------------------------------------------------------------
 #endif

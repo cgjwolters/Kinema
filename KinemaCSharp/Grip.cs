@@ -2,7 +2,7 @@
 
 namespace KinemaLibCs
 {
-  internal class Grip
+  public class Grip
   {
     private readonly Model model;
     private readonly IntPtr cppGrip;
@@ -100,7 +100,7 @@ namespace KinemaLibCs
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern static private void GetJointGrip(IntPtr cppGrip, out AbstractJoint joint);
 
-    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    [DllImport("KinemaLib.dll")]
     extern static private bool IsParentRelGrip(IntPtr cppGrip);
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
@@ -123,8 +123,6 @@ namespace KinemaLibCs
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern static private void SetPos2Grip(IntPtr cppGrip, Trf3 pos);
-
-  // AbstractJoint* getJoint() const { return joint; }
 
     // End Import Section
   }
