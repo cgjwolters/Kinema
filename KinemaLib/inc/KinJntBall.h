@@ -47,5 +47,9 @@ public:
 
 } // namespace
 
+// Interface Section
+
+extern "C" __declspec(dllexport) void* JointBallNew(void* cppGrip, const wchar_t* name);
+
 //---------------------------------------------------------------------------
 #endif

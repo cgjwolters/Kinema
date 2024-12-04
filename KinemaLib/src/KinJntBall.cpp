@@ -204,4 +204,14 @@ void JntBall::initVarsFromPos(bool fixedAlso)
 
 } // namespace
 
+// Interface Section
+
+void* JointBallNew(void* cppGrip, const wchar_t* name) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  InoKin::JntBall* jnt = new InoKin::JntBall(*grip, name);
+
+  return jnt;
+}
+
 //-------------------------------------------------------------------------------
