@@ -162,4 +162,15 @@ void JntCross::initVarsFromPos(bool fixedAlso)
 
 } // namespace
 
+// Interface Section
+
+void* JointCrossNew(void* cppGrip, const wchar_t* name) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  InoKin::JntCross* jnt = new InoKin::JntCross(*grip, name);
+
+  return jnt;
+}
+
+
 //-------------------------------------------------------------------------------

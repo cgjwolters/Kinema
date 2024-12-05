@@ -4,7 +4,7 @@ namespace KinemaLibCs
 {
   public partial class ArcLinTrack(bool trkClosed = false, double trackPipeDiameter = 0.0)
   {
-    private readonly IntPtr track = (IntPtr)ArcLinTrackNew(trkClosed, trackPipeDiameter);
+    internal readonly IntPtr track = (IntPtr)ArcLinTrackNew(trkClosed, trackPipeDiameter);
 
     public bool LoadTrackData(string trackFile)
     {

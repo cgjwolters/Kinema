@@ -44,5 +44,10 @@ public:
 
 } // namespace
 
+// Interface Section
+
+extern "C" __declspec(dllexport) void* JointCrossNew(void* cppGrip, const wchar_t* name);
+
+
 //---------------------------------------------------------------------------
 #endif

@@ -261,4 +261,12 @@ void JntBallSlide::initVarsFromPos(bool fixedAlso)
 
 } // namespace
 
+void* JointBallSlideNew(void* cppGrip, const wchar_t* name) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  InoKin::JntBallSlide* jnt = new InoKin::JntBallSlide(*grip, name);
+
+  return jnt;
+}
+
 //-------------------------------------------------------------------------------

@@ -29,34 +29,34 @@ namespace InoKin {
 // Z-Axis = wheel rotation axis
 // Y-Axis = travel direction
 
-class JntTrack : public AbstractJoint
-{
-  double rad;
+  class JntTrack : public AbstractJoint
+  {
+    double rad;
 
-  const AbstractTrack *trk;
+    const AbstractTrack* trk;
 
-  JntTrack(const JntTrack& cp) = delete;           // No copying
-  JntTrack& operator=(const JntTrack& src) = delete; // No assignment
+    JntTrack(const JntTrack& cp) = delete;           // No copying
+    JntTrack& operator=(const JntTrack& src) = delete; // No assignment
 
-protected:
-  virtual AbstractJoint *clone(Grip& newGrip) const;
+  protected:
+    virtual AbstractJoint* clone(Grip& newGrip) const;
 
-  virtual void getVarTrf(int idx, Ino::Trf3& trf) const;
-  virtual void getVarDerTrf(int idx, Ino::Trf3& trf) const;
-  virtual void getVarDer2Trf(int idx, Ino::Trf3& trf) const;
-  virtual void getVarDer3Trf(int idx, Ino::Trf3& trf) const;
+    virtual void getVarTrf(int idx, Ino::Trf3& trf) const;
+    virtual void getVarDerTrf(int idx, Ino::Trf3& trf) const;
+    virtual void getVarDer2Trf(int idx, Ino::Trf3& trf) const;
+    virtual void getVarDer3Trf(int idx, Ino::Trf3& trf) const;
 
-public:
+  public:
 
-  explicit JntTrack(Grip& grp, const wchar_t *name,
-              const AbstractTrack &track, double wheelRad);
-  explicit JntTrack(Grip& grp, const JntTrack& cp);
-  virtual ~JntTrack() {}
+    explicit JntTrack(Grip& grp, const wchar_t* name, const AbstractTrack& track, double wheelRad);
+    explicit JntTrack(Grip& grp, const JntTrack& cp);
+    virtual ~JntTrack() {}
 
-  virtual void initVarsFromPos(bool fixedAlso);
+    virtual void initVarsFromPos(bool fixedAlso);
 
-  double getWheelRad() const { return rad; }
-  void setWheelRad(double newRad);
+    double getWheelRad() const { return rad; }
+    void setWheelRad(double newRad) { rad = newRad; }
+  }
 
   const AbstractTrack& getTrack() const { return *trk; }
 
@@ -64,6 +64,11 @@ public:
 };
 
 } // namespace
+
+// Interface Section
+
+extern "C" __declspec(dllexport) void* JointTrackNew(void* cppGrip, const wchar_t* name,
+                                                     void* cppTrk, double wheelRad);
 
 //---------------------------------------------------------------------------
 #endif

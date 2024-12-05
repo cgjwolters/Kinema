@@ -5,7 +5,7 @@ namespace KinemaLibCs
   public class Grip
   {
     private readonly Model model;
-    private readonly IntPtr cppGrip;
+    internal readonly IntPtr cppGrip;
 
     public Grip(Model mdl, string name,
                 Body body1, Trf3 pos1,

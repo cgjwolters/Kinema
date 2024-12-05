@@ -94,4 +94,14 @@ void JntSlide::initVarsFromPos(bool fixedAlso)
 
 } //namespace
 
+// Interface Section
+
+void* JointSlideNew(void* cppGrip, const wchar_t* name) {
+  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+
+  InoKin::JntSlide* jnt = new InoKin::JntSlide(*grip, name);
+
+  return jnt;
+}
+
 //-------------------------------------------------------------------------------
