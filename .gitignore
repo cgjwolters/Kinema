@@ -1,6 +1,7 @@
 Kinema/
 Release*/
 Debug*/
+lib/*
 AcadServices/
 KinemaLib.vcproj.INOFOR2-VM.Clemens.user
 *.obj

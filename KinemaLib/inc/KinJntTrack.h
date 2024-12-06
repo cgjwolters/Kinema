@@ -56,13 +56,11 @@ namespace InoKin {
 
     double getWheelRad() const { return rad; }
     void setWheelRad(double newRad) { rad = newRad; }
-  }
 
-  const AbstractTrack& getTrack() const { return *trk; }
+    const AbstractTrack& getTrack() const { return *trk; }
 
-  void replaceTrack(const AbstractTrack& newTrk);
-};
-
+    void replaceTrack(const AbstractTrack& newTrk);
+  };
 } // namespace
 
 // Interface Section

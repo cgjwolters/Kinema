@@ -68,7 +68,7 @@ class ArcLinTrackPt : public Ino::Vec3, public Ino::ArrayElem
 
 //---------------------------------------------------------------------------
 
-class ArcLinTrack : public ::InoKin::AbstractTrack
+class ArcLinTrack : public AbstractTrack
 {
   Ino::Array<ArcLinTrackPt *> trk;
   bool closed;

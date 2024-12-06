@@ -447,13 +447,13 @@ void JntTrack::replaceTrack(const AbstractTrack &newTrk)
 
 // Interface Section
 
-void* JointTrackNew(void* cppGrip, const wchar_t* name, void *cppTrk, double wheelRad) {
-  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
-  InoKin::AbstractTrack* track = (InoKin::AbstractTrack*)cppTrk;
-
-  InoKin::JntTrack *jnt = new InoKin::JntTrack(*grip, name, *track, wheelRad);
-
-  return jnt;
-}
+//void* JointTrackNew(void* cppGrip, const wchar_t* name, void *cppTrk, double wheelRad) {
+//  InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
+//  InoKin::AbstractTrack* track = (InoKin::AbstractTrack*)cppTrk;
+//
+//  InoKin::JntTrack *jnt = new InoKin::JntTrack(*grip, name, *track, wheelRad);
+//
+//  return jnt;
+//}
 
 //---------------------------------------------------------------------------
