@@ -1,13 +1,19 @@
-﻿using System.Data;
-using System.Runtime;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
   public class Model
   {
     private readonly IntPtr cppModel;
-    Model(string name)
+
+    // Maps to keep a ref to the various objects,
+    // Prevents untimely destruction of these objects.
+    internal readonly Dictionary<string, Body> bodyMap = new Dictionary<string, Body>();
+    internal readonly Dictionary<string, Grip> gripMap = new Dictionary<string, Grip>();
+    internal readonly Dictionary<string, AbstractJoint> jointMap = new Dictionary<string, AbstractJoint>();
+    internal readonly Dictionary<string, Probe> probeMap = new Dictionary<string, Probe>();
+
+    public Model(string name)
     {
       try {
         cppModel = ModelNew(name);
@@ -21,19 +27,22 @@ namespace KinemaLibCs
     {
       get
       {
-        return "Clemens";
-      }
+        GetNameModel(cppModel, out string name);
 
-      set
-      {
-
+        return name;
       }
-    } 
- 
+    }
+
+    public void GetVersion(out char major, out char minor, out char release)
+    {
+      GetVersionModel(cppModel, out major, out minor, out release);
+    }
+
     bool DefineModel(ArcLinTrack leftTrk, ArcLinTrack rightTrk)
     {
       return false;
     }
+
     public static void Main()
     {
       // var dllDirectory = @"C:\Users\Clemens\Documents\Projects\KinemaLibCs\bin\x64";
@@ -45,7 +54,7 @@ namespace KinemaLibCs
       bool ok = leftTrk.LoadTrackData("3d_rail_left_a1");
 
       if (!ok)  {
-          
+
       }
 
       ArcLinTrack rightTrk = new (true, 0.1413);
@@ -62,13 +71,39 @@ namespace KinemaLibCs
 
       if (!carrierModel.DefineModel(leftTrk, rightTrk)) return;
     }
-        // Import section
 
-        [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-        extern private static IntPtr ModelNew(string name);
+    // Interface section
 
-        // End Import section
-    }
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static IntPtr ModelNew(string name);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void GetVersionModel(IntPtr cppModel, out char major, out char minor, out char release);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void GetNameModel(IntPtr cppModel, out string name);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void ClearModel(IntPtr cppModel);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static string GetNameModel(IntPtr cppModel);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void SetNameModel(IntPtr cppModel, string newName);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void SetTopoModifiedModel(IntPtr cppModel);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void SetModifiedModel(IntPtr cppModel, bool mod);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static bool IsModifiedModel(IntPtr cppModel);
+
+
+    // End Interface section
+  }
 }
 
 

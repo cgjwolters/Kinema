@@ -4,7 +4,7 @@ namespace KinemaLibCs
 {
   public class Grip
   {
-    private readonly Model model;
+    internal readonly Model model;
     internal readonly IntPtr cppGrip;
 
     public Grip(Model mdl, string name,
@@ -13,6 +13,7 @@ namespace KinemaLibCs
     {
       model = mdl;
       cppGrip = GripNew(model, name, body1, pos1, body2, pos2);
+      model.gripMap.Add(name, this);
     }
 
     public Body GetBody1()

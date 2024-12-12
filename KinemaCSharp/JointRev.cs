@@ -4,7 +4,7 @@ namespace KinemaLibCs
 {
   public class JointRev : AbstractJoint
   {
-    public JointRev(Grip grp, string name)
+    public JointRev(Grip grp, string name) : base(grp, name)
     {
       cppJoint = JointRevNew(ref grp, name);
     }

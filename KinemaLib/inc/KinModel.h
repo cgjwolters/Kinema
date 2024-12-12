@@ -55,8 +55,7 @@ class Model
   void cloneFrom(const Model& mdl, bool withSequences);
 
 public:
-  static void version(unsigned char& major, unsigned char& minor,
-                                               unsigned char& release);
+  static void version(char& major, char& minor, char& release);
 
   explicit Model(const wchar_t *name=nullptr);
   explicit Model(const Model& cp, bool withSequences=false);
@@ -98,15 +97,17 @@ public:
 
 extern "C" __declspec(dllexport) void* ModelNew(const wchar_t* name);
 
-extern "C" __declspec(dllexport) void Clear(void* model);
+extern "C" __declspec(dllexport) void GetVersionModel(void *cppModel, char *major, char *minor, char *release);
 
-extern "C" __declspec(dllexport) const wchar_t* GetName(void* model);
-extern "C" __declspec(dllexport) void SetName(void* model, const wchar_t* newName);
+extern "C" __declspec(dllexport) void ClearModel(void* cppModel);
 
-extern "C" __declspec(dllexport) void SetTopoModified(void* model);
-extern "C" __declspec(dllexport) void SetModified(void* model, bool mod = true);
+extern "C" __declspec(dllexport) const wchar_t* GetNameModel(void* cppModel);
+extern "C" __declspec(dllexport) void SetNameModel(void* cppModel, const wchar_t* newName);
 
-extern "C" __declspec(dllexport) bool IsModified(void* model);
+extern "C" __declspec(dllexport) void SetTopoModifiedModel(void* cppModel);
+extern "C" __declspec(dllexport) void SetModifiedModel(void* cppModel, bool mod = true);
+
+extern "C" __declspec(dllexport) bool IsModifiedModel(void* cppModel);
 
 
 // End Import Section

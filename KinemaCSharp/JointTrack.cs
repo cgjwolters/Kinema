@@ -4,7 +4,7 @@ namespace KinemaLibCs
 {
   public class JointTrack : AbstractJoint
   {
-    public JointTrack(Grip grp, string name, ArcLinTrack trk, double wheelRad)
+    public JointTrack(Grip grp, string name, ArcLinTrack trk, double wheelRad) : base(grp, name)
     {
       cppJoint = JointTrackNew(grp.cppGrip, name, trk.track, wheelRad);
     }

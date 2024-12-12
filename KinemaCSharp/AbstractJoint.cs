@@ -1,6 +1,4 @@
-﻿using KinemaLibCs;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
@@ -8,8 +6,9 @@ namespace KinemaLibCs
   {
     protected IntPtr cppJoint;
 
-    public AbstractJoint()
+    public AbstractJoint(Grip grp, string name)
     {
+      grp.model.jointMap.Add(name, this);
     }
     public void GetPos(out Trf3 pos) {
       GetPosAbstractJoint(cppJoint, out pos);

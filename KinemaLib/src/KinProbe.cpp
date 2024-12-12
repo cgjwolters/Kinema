@@ -130,4 +130,71 @@ void Probe::getAbsAccel(Vec3& absAccel) const
 
 } // namespace
 
+// Interface section
+
+void* ProbeNew(InoKin::Body& body, const wchar_t* name, Ino::Trf3& initPos)
+{
+  InoKin::Probe* probe = new InoKin::Probe(body, name, initPos);
+
+  return probe;
+}
+
+void GetAbsPosProbe(void* cppPrb, Ino::Vec3& apos)
+{
+  InoKin::Probe* probe = (InoKin::Probe*)cppPrb;
+
+  probe->getAbsPos(apos);
+}
+
+void GetAbsPosProbe2(void* cppPrb, Ino::Trf3& apos)
+{
+  InoKin::Probe* probe = (InoKin::Probe*)cppPrb;
+
+  probe->getAbsPos(apos);
+}
+
+void GetAbsSpeedProbe(void* cppPrb, Ino::Vec3& asp)
+{
+  InoKin::Probe* probe = (InoKin::Probe*)cppPrb;
+
+  probe->getAbsSpeed(asp);
+}
+
+void GetAbsSpeedProbe2(void* cppPrb, Ino::Trf3& asp)
+{
+  InoKin::Probe* probe = (InoKin::Probe*)cppPrb;
+
+  probe->getAbsSpeed(asp);
+}
+
+void GetAbsAccelProbe(void* cppPrb, Ino::Vec3& acc)
+{
+  InoKin::Probe* probe = (InoKin::Probe*)cppPrb;
+
+  probe->getAbsAccel(acc);
+}
+
+void GetAbsAccelProbe2(void* cppPrb, Ino::Trf3& acc)
+{
+  InoKin::Probe* probe = (InoKin::Probe *)cppPrb;
+
+  probe->getAbsAccel(acc);
+}
+
+void GetPosProbe(void* cppPrb, Ino::Trf3& pos)
+{
+  InoKin::Probe* probe = (InoKin::Probe*)cppPrb;
+
+  pos = probe->getPos();
+}
+
+void SetPosProbe(void* cppPrb, Ino::Trf3& newPos)
+{
+  InoKin::Probe* probe = (InoKin::Probe*)cppPrb;
+
+  probe->setPos(newPos);
+}
+
+// End Interface section
+
 //---------------------------------------------------------------------------

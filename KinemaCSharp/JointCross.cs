@@ -4,7 +4,7 @@ namespace KinemaLibCs
 {
   public class JointCross : AbstractJoint
   {
-    public JointCross(Grip grp, string name)
+    public JointCross(Grip grp, string name) : base(grp, name)
     {
       cppJoint = JointCrossNew(ref grp, name);
     }

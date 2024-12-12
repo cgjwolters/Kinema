@@ -58,5 +58,17 @@ typedef ObjList<Probe> ProbeList;
 
 } // namespace
 
+// Interface Section
+
+extern "C" __declspec(dllexport) void* ProbeNew(InoKin::Body& body, const wchar_t* name, Ino::Trf3& initPos);
+extern "C" __declspec(dllexport) void GetAbsPosProbe(void* cppPrb, Ino::Vec3& apos);
+extern "C" __declspec(dllexport) void GetAbsPosProbe2(void *cppPrb, Ino::Trf3& apos);
+extern "C" __declspec(dllexport) void GetAbsSpeedProbe(void* cppPrb, Ino::Vec3& asp);
+extern "C" __declspec(dllexport) void GetAbsSpeedProbe2(void* cppPrb, Ino::Trf3& asp);
+extern "C" __declspec(dllexport) void GetAbsAccelProbe(void* cppPrb, Ino::Vec3& acc);
+extern "C" __declspec(dllexport) void GetAbsAccelProbe2(void* cppPrb, Ino::Trf3& acc);
+extern "C" __declspec(dllexport) void GetPosProbe(void* cppPrb, Ino::Trf3& pos);
+extern "C" __declspec(dllexport) void SetPosProbe(void* cppPrb, Ino::Trf3& newPos);
+
 //---------------------------------------------------------------------------
 #endif

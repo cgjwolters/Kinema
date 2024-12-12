@@ -9,7 +9,7 @@ namespace KinemaLibCs
 {
   public class JointSlide : AbstractJoint
   {
-    public JointSlide(Grip grp, string name)
+    public JointSlide(Grip grp, string name) : base(grp, name)
     {
       cppJoint = JointSlideNew(ref grp, name);
     }

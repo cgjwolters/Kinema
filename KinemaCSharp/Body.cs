@@ -4,12 +4,13 @@ namespace KinemaLibCs
 {
   public class Body
   {
-    private readonly Model model;
+    internal readonly Model model;
     private readonly IntPtr cppBody;
 
     public Body(Model mdl, string name) {
       model = mdl;
       cppBody = BodyNew(model, name);
+      model.bodyMap.Add(name, this);
     }
 
     public Body GetParent()
@@ -138,7 +139,7 @@ namespace KinemaLibCs
     //  void getAbsGripPos(int idx, Ino::Trf3& trf) const;
     //void getAbsGripPos(const wchar_t* name, Ino::Trf3& trf) const;
 
-    // Import Section
+    // Interface Section
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern static private IntPtr BodyNew(Model mdl, string name);
@@ -180,7 +181,7 @@ namespace KinemaLibCs
     extern private static void SetAccelBody(IntPtr cppBody, Trf3 newAccel);
 
     [DllImport("KinemaLib.dll")]
-    extern private static void GetInvAccelBody(IntPtr ccppBody, out Trf3 invAccel);
+    extern private static void GetInvAccelBody(IntPtr cppBody, out Trf3 invAccel);
 
     [DllImport("KinemaLib.dll")]
     extern private static void GetJerkBody(IntPtr cppBody, out Trf3 trf);

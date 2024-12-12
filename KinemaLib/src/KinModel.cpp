@@ -26,8 +26,7 @@ namespace InoKin {
 
 //---------------------------------------------------------------------------
 
-void Model::version(unsigned char& major, unsigned char& minor,
-                                                 unsigned char& release)
+void Model::version(char& major, char& minor, char& release)
 {
   major   = 0;
   minor   = 0;
@@ -305,8 +304,8 @@ bool Model::buildTopology()
 
 } // namespace
 
-    //---------------------------------------------------------------------------
-// Import Section
+//---------------------------------------------------------------------------
+// Interface Section
 
 void* ModelNew(const wchar_t* name)
 {
@@ -318,47 +317,54 @@ void* ModelNew(const wchar_t* name)
   return mdl;
 }
 
-void Clear(void* model)
+void GetVersionModel(void *cppModel, char *major, char *minor, char *release)
 {
-  InoKin::Model* mdl = (InoKin::Model *)model;
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+
+  mdl->version(*major, *minor, *release);
+}
+
+void ClearModel(void* cppModel)
+{
+  InoKin::Model* mdl = (InoKin::Model *)cppModel;
   mdl->clear();
 }
 
-const wchar_t* GetName(void* model)
+const wchar_t* GetNameModel(void* cppModel)
 {
-  InoKin::Model* mdl = (InoKin::Model*)model;
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
 
   return mdl->getName();
 }
 
-void SetName(void* model, const wchar_t* newName)
+void SetNameModel(void* cppModel, const wchar_t* newName)
 {
-  InoKin::Model* mdl = (InoKin::Model*)model;
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
 
   mdl->setName(newName);
 }
 
-void SetTopoModified(void* model)
+void SetTopoModifiedModel(void* cppModel)
 {
-  InoKin::Model* mdl = (InoKin::Model*)model;
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
 
   mdl->setTopoModified();
 }
 
-void SetModified(void* model, bool mod)
+void SetModifiedModel(void* cppModel, bool mod)
 {
-  InoKin::Model* mdl = (InoKin::Model*)model;
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
 
   mdl->setModified(mod);
 
 }
 
-bool IsModified(void* model)
+bool IsModifiedModel(void* cppModel)
 {
-  InoKin::Model* mdl = (InoKin::Model*)model;
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
 
   return mdl->isModified();
 }
 
-// End Import Section
+// End Interface Section
 //---------------------------------------------------------------------------
