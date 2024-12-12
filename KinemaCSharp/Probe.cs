@@ -2,7 +2,7 @@
 
 namespace KinemaLibCs
 {
-  public class Probe
+  public partial class Probe
   {
     private readonly IntPtr cppProbe;
 
@@ -22,16 +22,6 @@ namespace KinemaLibCs
     {
       GetAbsPosProbe2(cppProbe, out Trf3 apos);
       return apos;
-    }
-
-    public void GetAbsPos(out Vec3 apos)
-    {
-      GetAbsPosProbe(cppProbe, out apos);
-    }
-
-    public void GetAbsPos2(out Trf3 apos)
-    {
-      GetAbsPosProbe2(cppProbe, out apos);
     }
 
     public void GetAbsSpeed(out Vec3 asp)
@@ -69,8 +59,11 @@ namespace KinemaLibCs
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static IntPtr ProbeNew(Body body, string name, Trf3 initPos);
 
-    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-    extern private static void GetAbsPosProbe(IntPtr cppPrb, out Vec3 apos);
+    [LibraryImport("KinemaLib.dll", StringMarshalling = StringMarshalling.Utf16)]
+    private static partial void GetAbsPosProbe(IntPtr cppPrb, out Vec3 apos);
+
+    //[DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    //extern private static void GetAbsPosProbe(IntPtr cppPrb, out Vec3 apos);
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static void GetAbsPosProbe2(IntPtr cppPrb, out Trf3 apos);
