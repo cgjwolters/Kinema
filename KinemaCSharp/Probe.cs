@@ -59,11 +59,8 @@ namespace KinemaLibCs
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static IntPtr ProbeNew(Body body, string name, Trf3 initPos);
 
-    [LibraryImport("KinemaLib.dll", StringMarshalling = StringMarshalling.Utf16)]
-    private static partial void GetAbsPosProbe(IntPtr cppPrb, out Vec3 apos);
-
-    //[DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-    //extern private static void GetAbsPosProbe(IntPtr cppPrb, out Vec3 apos);
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void GetAbsPosProbe(IntPtr cppPrb, out Vec3 apos);
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static void GetAbsPosProbe2(IntPtr cppPrb, out Trf3 apos);
