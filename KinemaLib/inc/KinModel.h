@@ -78,6 +78,7 @@ public:
   const FunctionList& getFunctionList() const { return funcLst; }
   const TopologyList& getTopologyList() const { return topoLst; }
 
+  const Ino::Vec3& getOffset() const { return offset; }
   void setOffset(const Ino::Vec3& modelOffset); // Remember offset to be applied
   void applyOffset();
   void transform(const Ino::Trf3& trf);
@@ -93,7 +94,7 @@ public:
 
 } // namespace
 
-// Import Section
+// Interface Section
 
 extern "C" __declspec(dllexport) void* ModelNew(const wchar_t* name);
 
@@ -109,8 +110,13 @@ extern "C" __declspec(dllexport) void SetModifiedModel(void* cppModel, bool mod 
 
 extern "C" __declspec(dllexport) bool IsModifiedModel(void* cppModel);
 
+extern "C" __declspec(dllexport) void GetOffsetModel(void* cppModel, Ino::Vec3& modelOffset);
+extern "C" __declspec(dllexport) void SetOffsetModel(void* cppModel, const Ino::Vec3& modelOffset);
+extern "C" __declspec(dllexport) void ApplyOffsetModel(void* cppModel);
+extern "C" __declspec(dllexport) void TransformModel(void* cppModel, const Ino::Trf3& trf);
+extern "C" __declspec(dllexport) bool BuildTopologyModel(void* cppModel);
 
-// End Import Section
+// End Interface Section
 
 //---------------------------------------------------------------------------
 #endif

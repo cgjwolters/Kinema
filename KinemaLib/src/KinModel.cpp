@@ -366,5 +366,40 @@ bool IsModifiedModel(void* cppModel)
   return mdl->isModified();
 }
 
+void GetOffsetModel(void* cppModel, Ino::Vec3& modelOffset)
+{
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+
+  modelOffset = mdl->getOffset();
+}
+
+void SetOffsetModel(void* cppModel, const Ino::Vec3& modelOffset)
+{
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+
+  mdl->setOffset(modelOffset);
+}
+
+void ApplyOffsetModel(void* cppModel)
+{
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+
+  mdl->applyOffset();
+}
+
+void TransformModel(void* cppModel, const Ino::Trf3& trf)
+{
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+
+  mdl->transform(trf);
+}
+
+bool BuildTopologyModel(void* cppModel)
+{
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+
+  return mdl->buildTopology();
+}
+
 // End Interface Section
 //---------------------------------------------------------------------------
