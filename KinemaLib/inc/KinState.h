@@ -44,12 +44,12 @@ class State : public Ino::ArrayElem
   State& operator=(const State& src) = delete; // No Assigment
   State(const State& cp) = delete;             // No copying
 
-  explicit State(Sequence& sequence, int index, __int64 mdlTm,
-                                                    const Topology& srcTopo);
-
   explicit State(Sequence& sequence, const State& cp);
 
 public:
+  explicit State(Sequence& sequence, int index, __int64 mdlTm,
+                 const Topology& srcTopo);
+
   Sequence& getSequence() const { return seq; }
   int getIdx() const { return seqIdx; }
 
@@ -67,6 +67,25 @@ public:
 };
 
 } // namespace
+
+extern "C" __declspec(dllexport) void* StateNew(InoKin::Sequence* seq, int index, long tm, InoKin::Topology* cppTopo);
+
+extern "C" __declspec(dllexport) void* GetSequenceState(void* cppState);
+
+extern "C" __declspec(dllexport) int GetIdxState(void *cppState);
+
+extern "C" __declspec(dllexport) __int64 GetTmState(void *cppState);
+
+extern bool GetPosState(AbstractJoint jnt, int varIdx, out double posVal);
+
+//bool getPos(const AbstractJoint& jnt, int varIdx, double& posVal) const;
+//bool getSpeed(const AbstractJoint& jnt, int varIdx, double& speedVal) const;
+//bool getAccel(const AbstractJoint& jnt, int varIdx, double& accVal) const;
+//bool getJerk(const AbstractJoint& jnt, int varIdx, double& jerkVal) const;
+//
+//// For all other info call this method and interrogate the topology:
+//bool setTopologyToThis() const;
+
 
 //---------------------------------------------------------------------------
 #endif

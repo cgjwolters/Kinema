@@ -122,4 +122,40 @@ bool State::setTopologyToThis() const
 
 } // namespace
 
+// Interface Section
+
+void* StateNew(InoKin::Sequence* seq, int index, long tm, InoKin::Topology *srcTopo)
+{
+  void* newState = new InoKin::State(*seq, index, tm, *srcTopo);
+
+  return newState;
+}
+
+void *GetSequenceState(void* cppState)
+{
+  InoKin::State* state = (InoKin::State*)cppState;
+
+  return &state->getSequence();
+}
+
+int GetIdxState(void* cppState)
+{
+  InoKin::State* state = (InoKin::State*)cppState;
+
+  return state->getIdx();
+}
+
+__int64 GetTmState(void* cppState)
+{
+  InoKin::State* state = (InoKin::State*)cppState;
+
+  return state->getTm();
+}
+
+bool GetPosState(InoKin::AbstractJoint jnt, int varIdx, out double posVal)
+{
+
+}
+
+// End Interface Section
 //---------------------------------------------------------------------------
