@@ -69,4 +69,17 @@ void Sequence::addCurrentTopoState()
 
 } // namespace
 
+// Interface Section
+
+extern "C" __declspec(dllexport) InoKin::Sequence* SequenceNew(InoKin::Topology& cppTopo);
+
+InoKin::Sequence* SequenceNew(void *cppTopo, const wchar_t *name)
+{
+  InoKin::Topology& topo = *(InoKin::Topology*) cppTopo;
+
+  return new InoKin::Sequence(topo, name);
+}
+
+// End Interface Section
+
 //---------------------------------------------------------------------------

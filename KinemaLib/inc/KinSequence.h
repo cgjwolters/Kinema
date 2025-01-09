@@ -54,5 +54,11 @@ typedef Ino::Array<Sequence *> SequenceList;
 
 } // namespace
 
+// Interface Section
+
+extern "C" __declspec(dllexport) InoKin::Sequence *SequenceNew(InoKin::Topology& cppTopo);
+
+// End Interface Section
+
 //---------------------------------------------------------------------------
 #endif

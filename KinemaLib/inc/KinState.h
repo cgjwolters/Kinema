@@ -68,7 +68,7 @@ public:
 
 } // namespace
 
-extern "C" __declspec(dllexport) void* StateNew(InoKin::Sequence* seq, int index, long tm, InoKin::Topology* cppTopo);
+extern "C" __declspec(dllexport) void* StateNew(InoKin::Sequence& seq, int index, long tm, InoKin::Topology& cppTopo);
 
 extern "C" __declspec(dllexport) void* GetSequenceState(void* cppState);
 
@@ -76,16 +76,13 @@ extern "C" __declspec(dllexport) int GetIdxState(void *cppState);
 
 extern "C" __declspec(dllexport) __int64 GetTmState(void *cppState);
 
-extern bool GetPosState(AbstractJoint jnt, int varIdx, out double posVal);
+extern "C" __declspec(dllexport) bool GetPosState(void *cppState, InoKin::AbstractJoint& jnt, int varIdx, double& posVal);
+extern "C" __declspec(dllexport) bool GetSpeedState(void* cppState, InoKin::AbstractJoint& jnt, int varIdx, double& speedVal);
+extern "C" __declspec(dllexport) bool GetAccelState(void* cppState, InoKin::AbstractJoint& jnt, int varIdx, double& accVal);
+extern "C" __declspec(dllexport) bool GetJerkState(void* cppState, InoKin::AbstractJoint& jnt, int varIdx, double& jerkVal);
 
-//bool getPos(const AbstractJoint& jnt, int varIdx, double& posVal) const;
-//bool getSpeed(const AbstractJoint& jnt, int varIdx, double& speedVal) const;
-//bool getAccel(const AbstractJoint& jnt, int varIdx, double& accVal) const;
-//bool getJerk(const AbstractJoint& jnt, int varIdx, double& jerkVal) const;
-//
-//// For all other info call this method and interrogate the topology:
-//bool setTopologyToThis() const;
-
+// For all other info call this method and interrogate the topology:
+extern "C" __declspec(dllexport) bool SetTopologyToThisState(void* cppState);
 
 //---------------------------------------------------------------------------
 #endif

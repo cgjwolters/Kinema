@@ -333,11 +333,11 @@ bool GripListCompare::operator()(const GripList *lst1, const GripList *lst2) con
 
 // Interface Section
 
-void* GripNew(void* cppGrip, InoKin::Model& mdl, const wchar_t* name,
+void* GripNew(InoKin::Model& mdl, const wchar_t* name,
   InoKin::Body& body1, Trf3& pos1,
   InoKin::Body& body2, Trf3& pos2) {
 
-  InoKin::Grip* grip = new InoKin::Grip(mdl, name, body1, pos1, body2 ,pos2);
+  InoKin::Grip* grip = new InoKin::Grip(mdl, name, body1, pos1, body2, pos2);
 
   return grip;
 }

@@ -8,6 +8,6 @@ namespace KinemaLibCs
 {
   public class Topology
   {
-    private readonly IntPtr cppTopology;
+    internal readonly IntPtr cppTopology;
   }
 }

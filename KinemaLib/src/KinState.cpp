@@ -124,9 +124,9 @@ bool State::setTopologyToThis() const
 
 // Interface Section
 
-void* StateNew(InoKin::Sequence* seq, int index, long tm, InoKin::Topology *srcTopo)
+void* StateNew(InoKin::Sequence& sequence, int index, long tm, const InoKin::Topology& srcTopo)
 {
-  void* newState = new InoKin::State(*seq, index, tm, *srcTopo);
+  void* newState = new InoKin::State(sequence, index, tm, srcTopo);
 
   return newState;
 }
@@ -152,9 +152,39 @@ __int64 GetTmState(void* cppState)
   return state->getTm();
 }
 
-bool GetPosState(InoKin::AbstractJoint jnt, int varIdx, out double posVal)
+bool GetPosState(void *cppState, InoKin::AbstractJoint& jnt, int varIdx, double& posVal)
 {
+  InoKin::State* state = (InoKin::State*)cppState;
 
+  return state->getPos(jnt, varIdx, posVal);
+}
+
+bool GetSpeedState(void* cppState, InoKin::AbstractJoint& jnt, int varIdx, double& speedVal)
+{
+  InoKin::State* state = (InoKin::State*)cppState;
+
+  return state->getSpeed(jnt, varIdx, speedVal);
+}
+
+bool GetAccelState(void* cppState, InoKin::AbstractJoint& jnt, int varIdx, double& accVal)
+{
+  InoKin::State* state = (InoKin::State*)cppState;
+
+  return state->getAccel(jnt, varIdx, accVal);
+}
+
+bool GetJerkState(void* cppState, InoKin::AbstractJoint& jnt, int varIdx, double& jerkVal)
+{
+  InoKin::State* state = (InoKin::State*)cppState;
+
+  return state->getJerk(jnt, varIdx, jerkVal);
+}
+
+bool SetTopologyToThisState(void* cppState)
+{
+  InoKin::State* state = (InoKin::State*)cppState;
+
+  return state->setTopologyToThis();
 }
 
 // End Interface Section
