@@ -4,7 +4,7 @@ namespace KinemaLibCs
 {
   public class Model
   {
-    private readonly IntPtr cppModel;
+    internal readonly IntPtr cppModel;
 
     // Maps to keep a ref to the various objects,
     // Prevents untimely destruction of these objects.
@@ -12,6 +12,8 @@ namespace KinemaLibCs
     internal readonly Dictionary<string, Grip> gripMap = [];
     internal readonly Dictionary<string, AbstractJoint> jointMap = [];
     internal readonly Dictionary<string, Probe> probeMap = [];
+
+    internal readonly List<Topology> topoList = [];
 
     public Model(string name)
     {
@@ -31,6 +33,10 @@ namespace KinemaLibCs
 
         return name;
       }
+    }
+    public List<Topology> GetTopologyList()
+    {
+      return topoList;
     }
 
     public void GetVersion(out char major, out char minor, out char release)
@@ -67,6 +73,14 @@ namespace KinemaLibCs
     public bool BuildTopology()
     {
       return BuildTopologyModel(cppModel);
+    }
+    public void Clear()
+    {
+      bodyMap.Clear();
+      gripMap.Clear();
+      jointMap.Clear();
+      probeMap.Clear();
+      topoList.Clear();
     }
 
     public static void Main()

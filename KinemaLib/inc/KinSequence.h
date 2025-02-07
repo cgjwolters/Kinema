@@ -35,10 +35,10 @@ class Sequence : public StateList
 
   Sequence& operator=(const Sequence& src) = delete; // No Assignment
 
-  explicit Sequence(Topology& topo, const wchar_t *seqName);
   explicit Sequence(Topology& topo, const Sequence& cp);
 
 public:
+  explicit Sequence(Topology& topo, const wchar_t* seqName);
   virtual ~Sequence();
 
   Topology& getTopology() const { return topology; }
@@ -56,7 +56,11 @@ typedef Ino::Array<Sequence *> SequenceList;
 
 // Interface Section
 
-extern "C" __declspec(dllexport) InoKin::Sequence *SequenceNew(InoKin::Topology& cppTopo);
+extern "C" __declspec(dllexport) void* SequenceNew(void* cppTopo, const wchar_t* name);
+
+extern "C" __declspec(dllexport) void AddCurrentTopoStateSequence(InoKin::Sequence *seq);
+
+extern "C" __declspec(dllexport) InoKin::State* GetStateSequence(void* cppSequence, int index);
 
 // End Interface Section
 

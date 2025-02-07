@@ -1970,4 +1970,15 @@ void TopologyList::transform(const Ino::Trf3& trf) const
 
 } // namespace
 
+// Interface Section
+
+InoKin::Model* GetModelTopology(void* topo)
+{
+  InoKin::Topology* topology= (InoKin::Topology*)topo;
+
+  return topology->getModel();
+}
+
+// End Interface Section
+
 //-------------------------------------------------------------------------------

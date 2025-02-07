@@ -1,6 +1,4 @@
-﻿using KinemaLibCs;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
@@ -11,6 +9,11 @@ namespace KinemaLibCs
     public State(Sequence seq, int index, long tm, Topology cppTopo)
     {
       cppState = StateNew(seq, index, tm, cppTopo);
+    }
+
+    public State(IntPtr cppState)
+    {
+      this.cppState = cppState; 
     }
 
     public Sequence GetSequence()

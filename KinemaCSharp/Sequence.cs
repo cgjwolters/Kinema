@@ -1,32 +1,80 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
   public class Sequence
   {
     private readonly IntPtr cppSequence;
+    private readonly string name;
+    public readonly Topology topology;
+
+    private List<State> stateList = [];
 
     public Sequence(Topology topo, string name)
     {
+      topology = topo;
+      this.name = name;
       cppSequence = SequenceNew(topo.cppTopology, name);
     }
+    public Topology GetTopology()
+    {
+      return topology;
+    }
 
-    //Topology& getTopology();
+    public Model GetModel()
+    {
+      return topology.GetModel();
+    }
 
-    //Model getModel();
+    public string GetName()
+    {
+      return name;
+    }
 
-    //string getName();
+    public void AddCurrentTopoState()
+    {
+      AddCurrentTopoStateSequence(cppSequence);
+    }
 
-  // Interface Section
+    public int GetStateCount()
+    {
+      return GetStateCountSequence(cppSequence);
+    }
 
-  [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-    extern static private IntPtr SequenceNew(IntPtr cppTopo, string name);
+    public State GetState(int index)
+    {
+      int cppCount = GetStateCount();
+
+      if (stateList.Count != cppCount) stateList = new(cppCount);
+
+      if (index < 0 || index >= cppCount) {
+        throw new IndexOutOfRangeException("State count");
+      }
+
+      if (stateList[index] == null) {
+        State state = new State(GetStateSequence(cppSequence, index));
+
+        stateList[index] = state;
+      }
+
+      return stateList[index];
+    }
+
+    // Interface Section
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static IntPtr SequenceNew(IntPtr top, string name);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void AddCurrentTopoStateSequence(IntPtr cppSequence);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static int GetStateCountSequence(IntPtr cppSequence);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static IntPtr GetStateSequence(IntPtr cppSeq, int index);
+
+    // End Interface Section
   }
-
-  [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-  //Topology getTopologySequence()
-  //{
-  //  // return 
-  //}
-
 }
