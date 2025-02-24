@@ -83,6 +83,25 @@ namespace KinemaLibCs
       topoList.Clear();
     }
 
+    public Body GetBody(string name)
+    {
+      return bodyMap[name];
+    }
+    public Grip GetGrip(string name)
+    {
+      return gripMap[name];
+    }
+
+    public AbstractJoint getJoint(string name)
+    {
+      return jointMap[name];
+    }
+
+    public Probe GetProbe(string name)
+    {
+      return probeMap[name];
+    }
+
     public static void Main()
     {
       // var dllDirectory = @"C:\Users\Clemens\Documents\Projects\KinemaLibCs\bin\x64";
