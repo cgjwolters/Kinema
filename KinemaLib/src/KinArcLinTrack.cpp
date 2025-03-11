@@ -283,7 +283,7 @@ ArcLinTrack::ArcLinTrack(const ArcLinTrack& cp)
   trk.setObjectOwner(cp.trk.isObjectOwner());
 
   setRelations();
-  validate();
+  validate(); // Also sets length
 }
 
 //---------------------------------------------------------------------------
@@ -363,7 +363,7 @@ void ArcLinTrack::setClosed(bool clsd)
 
 //---------------------------------------------------------------------------
 
-void ArcLinTrack::setTrack(const Vec3 *ptLst, int ptSz, bool trackClosed,
+bool ArcLinTrack::setTrack(const Vec3 *ptLst, int ptSz, bool trackClosed,
                            double trackPipeDiameter)
 {
   clear();
@@ -374,10 +374,15 @@ void ArcLinTrack::setTrack(const Vec3 *ptLst, int ptSz, bool trackClosed,
   if (!ptLst) throw NullPointerException("ArcLinTrack::setTrack");
   if (ptSz < 0) throw IllegalArgumentException("ArcLinTrack::setTrack");
 
-  for (int i=0; i<ptSz; ++i) trk.add(new ArcLinTrackPt(ptLst[i]));
+  trk.clear();
+  trk.ensureCapacity(ptSz);
+
+  for (int i = 0; i < ptSz; ++i) trk.add(new ArcLinTrackPt(ptLst[i]));
 
   setRelations();
-  validate();
+  validate();  // Also sets length
+
+  return true;
 }
 
 //---------------------------------------------------------------------------
@@ -992,6 +997,19 @@ void* ArcLinTrackNew(bool trkClosed, double trackPipeDiameter) {
   return trk;
 }
 
+void ArcLinTrackClear(void* track) {
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->clear();
+}
+
+bool ArcLinTrackSetTrack(void* track, const Ino::Vec3* ptList, int ptSz, bool trackClosed, double trackPipeDiameter)
+{
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  return trk->setTrack(ptList, ptSz, trackClosed, trackPipeDiameter);
+}
+
 void ArcLinTrackSetCoTrack(void* track, void* coTrack, bool reverseDir, double maxSDiff)   {
   InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
   InoKin::ArcLinTrack* coTrk = (InoKin::ArcLinTrack*)coTrack;
@@ -1009,12 +1027,6 @@ double ArcLinTrackGetMaxS(void* track)   {
   InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
 
   return trk->getMaxS();
-}
-
-void ArcLinTrackClear(void* track) {
-  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
- 
-  trk->clear();
 }
 
 bool ArcLinTrackIsClosed(void* track)   {

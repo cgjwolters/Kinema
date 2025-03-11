@@ -9,17 +9,16 @@ namespace KinemaLibCs
     public bool LoadTrackData(string trackFile)
     {
       if (!File.Exists(trackFile)) {
+        return false;
       }
-
+ 
       return true;
     }
 
-    public void SetTrack(List<Vec3> ptList)
+    public bool SetTrack(ref readonly Vec3[] ptList,
+      int ptSz, bool trackClosed = true, double trackPipeDiameter = 0.0)
     {
-      Clear();
-
-      //void setTrack(const Ino::Vec3* ptLst, int ptSz, bool trackClosed = true,
-      //                                         double trackPipeDiameter = 0.0);
+      return ArcLinTrackSetTrack(track, in ptList, ptSz, trackClosed, trackPipeDiameter);
     }
 
     public void SetCoTrack(ref readonly ArcLinTrack coTrack, bool reverseDir, double maxSDiff)
@@ -143,6 +142,13 @@ namespace KinemaLibCs
     extern private static IntPtr ArcLinTrackNew(bool trkClosed = false, double trackPipeDiameter = 0.0);
 
     [DllImport("KinemaLib.dll")]
+    extern private static void ArcLinTrackClear(IntPtr track);
+
+    [DllImport("KinemaLib.dll")]
+    extern private unsafe static bool ArcLinTrackSetTrack(IntPtr track, ref readonly Vec3[] ptList,
+      int ptSz, bool trackClosed = true, double trackPipeDiameter = 0.0);
+
+    [DllImport("KinemaLib.dll")]
     extern private static IntPtr ArcLinTrackSetCoTrack(IntPtr track, IntPtr coTrack, bool trkClosed = false, double trackPipeDiameter = 0.0);
 
     [DllImport("KinemaLib.dll")]
@@ -150,9 +156,6 @@ namespace KinemaLibCs
 
     [DllImport("KinemaLib.dll")]
     extern private static double ArcLinTrackGetMaxS(IntPtr track);
-
-    [DllImport("KinemaLib.dll")]
-    extern private static void ArcLinTrackClear(IntPtr track);
 
     [DllImport("KinemaLib.dll")]
     extern private static bool ArcLinTrackIsClosed(IntPtr track);

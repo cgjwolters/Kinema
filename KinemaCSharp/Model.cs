@@ -83,24 +83,13 @@ namespace KinemaLibCs
       topoList.Clear();
     }
 
-    public Body GetBody(string name)
-    {
-      return bodyMap[name];
-    }
-    public Grip GetGrip(string name)
-    {
-      return gripMap[name];
-    }
+    public Body GetBody(string name) => bodyMap[name];
 
-    public AbstractJoint getJoint(string name)
-    {
-      return jointMap[name];
-    }
+    public Grip GetGrip(string name) => gripMap[name];
 
-    public Probe GetProbe(string name)
-    {
-      return probeMap[name];
-    }
+    public AbstractJoint GetJoint(string name) => jointMap[name];
+
+    public Probe GetProbe(string name) => probeMap[name];
 
     public static void Main()
     {
@@ -108,20 +97,29 @@ namespace KinemaLibCs
       var dllDirectory = @"C:\Users\Clemens\Documents\Projects\Kinema\lib\1.0";
       Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
 
-      ArcLinTrack leftTrk = new (true, 0.1413);
+      //ArcLinTrack leftTrk = new (true, 0.1413);
 
-      bool ok = leftTrk.LoadTrackData("3d_rail_left_a1");
+      //bool ok = leftTrk.LoadTrackData("3d_rail_left_a1");
 
-      if (!ok)  {
+      //if (!ok)  {
 
-      }
+      //}
 
-      ArcLinTrack rightTrk = new (true, 0.1413);
-      ok = rightTrk.LoadTrackData("3d_rail_right_a1");
+      //ArcLinTrack rightTrk = new (true, 0.1413);
+      //ok = rightTrk.LoadTrackData("3d_rail_right_a1");
 
-      if (!ok) {
+      //if (!ok) {
 
-      }
+      //}
+
+//      ArcLinTrack leftTrk = new (true, 0.1413);
+
+      ArcLinTrack leftTrk = new();
+      leftTrk.SetTrack(in ArcLinTrack.LeftTrackData, ArcLinTrack.LeftTrackData.Length, true, 0.1411);
+
+      ArcLinTrack rightTrk = new();
+      rightTrk.SetTrack(in ArcLinTrack.RightTrackData, ArcLinTrack.RightTrackData.Length, true, 0.1411);
+
 
       leftTrk.SetCoTrack(ref rightTrk, true, 3.0);
       rightTrk.SetCoTrack(ref leftTrk, true, 3.0);
