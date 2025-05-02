@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KinemaLib", "KinemaLib\KinemaLib.vcxproj", "{A2D03F35-6291-4AAD-A072-E2A02E607BF4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KinemaLibCs", "KinemaCSharp\KinemaLibCs.csproj", "{0D6263C2-7305-4E5A-A888-C23890F964CF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A2D03F35-6291-4AAD-A072-E2A02E607BF4} = {A2D03F35-6291-4AAD-A072-E2A02E607BF4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

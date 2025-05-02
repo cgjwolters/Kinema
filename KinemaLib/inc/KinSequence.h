@@ -60,6 +60,8 @@ extern "C" __declspec(dllexport) void* SequenceNew(void* cppTopo, const wchar_t*
 
 extern "C" __declspec(dllexport) void AddCurrentTopoStateSequence(InoKin::Sequence *seq);
 
+extern "C" __declspec(dllexport) void GetStateCountSequence(void *cppSequence, int& count);
+
 extern "C" __declspec(dllexport) InoKin::State* GetStateSequence(void* cppSequence, int index);
 
 // End Interface Section

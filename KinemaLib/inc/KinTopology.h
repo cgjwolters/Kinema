@@ -193,7 +193,7 @@ public:
 // Interface Section
 
 extern "C" __declspec(dllexport) InoKin::Topology* TopologyNew(InoKin::Model &mdl);
-extern "C" __declspec(dllexport) InoKin::Model* GetModelTopology(InoKin::Topology& topo);
+extern "C" __declspec(dllexport) InoKin::Model* GetModelTopology(void *topo);
 
 //---------------------------------------------------------------------------
 #endif

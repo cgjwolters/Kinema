@@ -3,20 +3,14 @@ using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
-  public class Sequence
+  public class Sequence(Topology topo, string name)
   {
-    private readonly IntPtr cppSequence;
-    private readonly string name;
-    public readonly Topology topology;
+    private readonly IntPtr cppSequence = SequenceNew(topo.cppTopology, name);
+    private readonly string name = name;
+    public readonly Topology topology = topo;
 
     private List<State> stateList = [];
 
-    public Sequence(Topology topo, string name)
-    {
-      topology = topo;
-      this.name = name;
-      cppSequence = SequenceNew(topo.cppTopology, name);
-    }
     public Topology GetTopology()
     {
       return topology;
@@ -39,7 +33,9 @@ namespace KinemaLibCs
 
     public int GetStateCount()
     {
-      return GetStateCountSequence(cppSequence);
+      int count = 0;
+      GetStateCountSequence(cppSequence,ref count);
+      return count;
     }
 
     public State GetState(int index)
@@ -53,7 +49,7 @@ namespace KinemaLibCs
       }
 
       if (stateList[index] == null) {
-        State state = new State(GetStateSequence(cppSequence, index));
+        State state = new (GetStateSequence(cppSequence, index));
 
         stateList[index] = state;
       }
@@ -70,7 +66,7 @@ namespace KinemaLibCs
     extern private static void AddCurrentTopoStateSequence(IntPtr cppSequence);
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-    extern private static int GetStateCountSequence(IntPtr cppSequence);
+    extern private static void GetStateCountSequence(IntPtr cppSequence, ref int count);
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static IntPtr GetStateSequence(IntPtr cppSeq, int index);

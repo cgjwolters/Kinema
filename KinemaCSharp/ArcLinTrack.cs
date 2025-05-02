@@ -15,7 +15,7 @@ namespace KinemaLibCs
       return true;
     }
 
-    public bool SetTrack(ref readonly Vec3[] ptList,
+    public bool SetTrack(ref readonly Vec33[] ptList,
       int ptSz, bool trackClosed = true, double trackPipeDiameter = 0.0)
     {
       return ArcLinTrackSetTrack(track, in ptList, ptSz, trackClosed, trackPipeDiameter);
@@ -145,7 +145,7 @@ namespace KinemaLibCs
     extern private static void ArcLinTrackClear(IntPtr track);
 
     [DllImport("KinemaLib.dll")]
-    extern private unsafe static bool ArcLinTrackSetTrack(IntPtr track, ref readonly Vec3[] ptList,
+    extern private unsafe static bool ArcLinTrackSetTrack(IntPtr track, ref readonly Vec33[] ptList,
       int ptSz, bool trackClosed = true, double trackPipeDiameter = 0.0);
 
     [DllImport("KinemaLib.dll")]

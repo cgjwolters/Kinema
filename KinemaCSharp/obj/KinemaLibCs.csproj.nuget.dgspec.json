@@ -31,11 +31,7 @@
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
-            "projectReferences": {
-              "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj": {
-                "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -71,22 +67,6 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
-      }
-    },
-    "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj": {
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj",
-        "projectName": "KinemaLib",
-        "projectPath": "C:\\Users\\Clemens\\Documents\\Projects\\Kinema\\KinemaLib\\KinemaLib.vcxproj",
-        "UsingMicrosoftNETSdk": false,
-        "frameworks": {
-          "native": {
-            "projectReferences": {}
-          }
-        }
-      },
-      "frameworks": {
-        "native": {}
       }
     }
   }

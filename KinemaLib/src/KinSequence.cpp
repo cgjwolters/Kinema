@@ -85,11 +85,11 @@ void AddCurrentTopoStateSequence(InoKin::Sequence *cppSeq)
   seq.addCurrentTopoState();
 }
 
-int GetStateCountSequence(void* cppSeq)
+void GetStateCountSequence(void* cppSequence, int& count)
 {
-  InoKin::Sequence& seq = *(InoKin::Sequence*)cppSeq;
+  InoKin::Sequence& seq = *(InoKin::Sequence*)cppSequence;
 
-  return seq.size();
+  count = seq.size();
 }
 
 InoKin::State* GetStateSequence(void* cppSeq, int index)

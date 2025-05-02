@@ -17,8 +17,4 @@
     <Optimize>False</Optimize>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\KinemaLib\KinemaLib.vcxproj" />
-  </ItemGroup>
-
 </Project>
