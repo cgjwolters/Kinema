@@ -79,9 +79,6 @@ class ArcLinTrack : public AbstractTrack
                               int& hghidx, double& relParm) const;
   int findUpper(double at_s) const;
 
-  void setRelations();
-  void validate();
-
   ArcLinTrack& operator=(const ArcLinTrack& src) = delete; // No assignment
 
 public:
@@ -96,10 +93,18 @@ public:
 
   bool setTrack(const Ino::Vec3 *ptLst, int ptSz, bool trackClosed = true,
                                                double trackPipeDiameter = 0.0);
+  bool setTrack(double* xPtLst, double* yPtList, double* zPtList, int ptSz,
+  bool trackClosed, double trackPipeDiameter);
+
   void setClosed(bool clsd);
+
+  void setRelations();
+  void validate();
 
   const Ino::Vec3& getPoint(int idx) const;
   const ArcLinTrackPt& getTrackPt(int idx) const;
+
+  int addPoint(const Ino::Vec3& pt);
 
   virtual Ino::Vec3 calcCentroid() const;
   virtual void translate(const Ino::Vec3& offset); 
@@ -139,6 +144,8 @@ extern "C" __declspec(dllexport) void* ArcLinTrackNew(bool trkClosed = false, do
 extern "C" __declspec(dllexport) bool ArcLinTrackSetTrack(void* track, const Ino::Vec3* ptList, int ptSz, bool trackClosed = true,
   double trackPipeDiameter = 0.0);
 
+extern "C" __declspec(dllexport) int ArcLinTrackAddTrackPoint(void *track, double x, double y, double z);
+
 extern "C" __declspec(dllexport) void ArcLinTrackSetCoTrack(void *track, void *coTrack, bool reverseDir, double maxSDiff);
 
 extern "C" __declspec(dllexport) int ArcLinTrackGetSize(void *track);
@@ -150,6 +157,10 @@ extern "C" __declspec(dllexport) void ArcLinTrackClear(void *track);
 extern "C" __declspec(dllexport) bool ArcLinTrackIsClosed(void *track);
 
 extern "C" __declspec(dllexport) void ArcLinTrackSetClosed(void *track, bool closed);
+
+extern "C" __declspec(dllexport) void ArcLinTrackSetRelations(void *track);
+
+extern "C" __declspec(dllexport) void ArcLinTrackValidate(void * track); // Also set Length
 
 extern "C" __declspec(dllexport) double ArcLinTrackGetPipeRadius(void *track);
 

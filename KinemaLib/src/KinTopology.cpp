@@ -438,6 +438,9 @@ void Topology::assignVarIndices(LoopList& loopLst)
   memset(lwbIdx,-1,varSz*sizeof(int));
   memset(upbIdx, 0,varSz*sizeof(int));
 
+  if (!lwbIdx) throw NullPointerException("lwbIdx");
+  if (!upbIdx) throw NullPointerException("upbIdx");
+
   for (int i=0; i<loopSz; ++i) {
     GripList *grpLst = loopLst[i];
     int gSz = grpLst->size();
@@ -588,6 +591,8 @@ bool Topology::composePosMatrixRow(const GripList& grpLst,
   if (varSz > MaxAllocaSz) idxLst = new int[varSz];
   else idxLst = (int *)_malloca(varSz*sizeof(int));
 
+  if (!idxLst) throw NullPointerException("idxlst");
+
   for (int i=0; i<varSz; ++i) idxLst[i] = -1;
 
   Trf3 curTrf;
@@ -633,6 +638,8 @@ bool Topology::composePosMatrixRow(const GripList& grpLst,
       rhs[varIdx] -= trf(0,3) * loopTrf(0,3);
       rhs[varIdx] -= trf(1,3) * loopTrf(1,3);
       rhs[varIdx] -= trf(2,3) * loopTrf(2,3);
+
+      if (!idxLst) throw NullPointerException("idxlst");
 
       idxLst[idxLstSz++] = varIdx;
     }
@@ -933,6 +940,8 @@ bool Topology::composeSpeedMatrixRow(const GripList& grpLst)
   if (varSz > MaxAllocaSz) idxLst = new int[varSz];
   else idxLst = (int *)_malloca(varSz*sizeof(int));
 
+  if (!idxLst) throw NullPointerException("idxlst");
+
   for (int i=0; i<varSz; ++i) idxLst[i] = -1;
 
   curTrf.init();
@@ -1005,6 +1014,8 @@ bool Topology::composeSpeedMatrixRow(const GripList& grpLst)
       //rhs[varIdx] -= trf(0,3) * spDiff[3];
       //rhs[varIdx] -= trf(1,3) * spDiff[4];
       //rhs[varIdx] -= trf(2,3) * spDiff[5];
+
+      if (!idxLst) throw NullPointerException("idxlst");
 
       idxLst[idxLstSz++] = varIdx;
     }
@@ -1260,7 +1271,11 @@ bool Topology::composeAccelMatrixRow(const GripList& grpLst)
   if (varSz > MaxAllocaSz) idxLst = new int[varSz];
   else idxLst = (int *)_malloca(varSz*sizeof(int));
 
+  if (!idxLst) throw NullPointerException("idxlst");
+
   for (int i=0; i<varSz; ++i) idxLst[i] = -1;
+
+  if (!idxLst) throw NullPointerException("idxlst");
 
   curTrf.init();
  
@@ -1335,6 +1350,8 @@ bool Topology::composeAccelMatrixRow(const GripList& grpLst)
       rhs[varIdx] -= trf(1,3) * accSum(1,3);
       rhs[varIdx] -= trf(2,3) * accSum(2,3);
     
+      if (!idxLst) throw NullPointerException("idxlst");
+
       idxLst[idxLstSz++] = varIdx;
     }
 
@@ -1578,6 +1595,8 @@ bool Topology::composeJerkMatrixRow(const GripList& grpLst)
   if (varSz > MaxAllocaSz) idxLst = new int[varSz];
   else idxLst = (int *)_malloca(varSz*sizeof(int));
 
+  if (!idxLst) throw NullPointerException("idxlst");
+
   for (int i=0; i<varSz; ++i) idxLst[i] = -1;
 
   curTrf.init();
@@ -1662,6 +1681,8 @@ bool Topology::composeJerkMatrixRow(const GripList& grpLst)
       rhs[varIdx] -= trf(1,3) * jerkSum(1,3);
       rhs[varIdx] -= trf(2,3) * jerkSum(2,3);
     
+      if (!idxLst) throw NullPointerException("idxlst");
+
       idxLst[idxLstSz++] = varIdx;
     }
 

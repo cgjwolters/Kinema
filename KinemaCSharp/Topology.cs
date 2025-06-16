@@ -13,7 +13,7 @@ namespace KinemaLibCs
       this.cppTopology = cppTopology;
 
       Model mdl = GetModel();
-      mdl.topoList.Add(this);
+      mdl.TopoList.Add(this);
     }
 
     public Model GetModel()

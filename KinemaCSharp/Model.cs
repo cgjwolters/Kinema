@@ -2,18 +2,23 @@
 
 namespace KinemaLibCs
 {
-  public class Model
+  public partial class Model
   {
     internal readonly IntPtr cppModel;
 
     // Maps to keep a ref to the various objects,
     // Prevents untimely destruction of these objects.
-    internal readonly Dictionary<string, Body> bodyMap = [];
-    internal readonly Dictionary<string, Grip> gripMap = [];
-    internal readonly Dictionary<string, AbstractJoint> jointMap = [];
-    internal readonly Dictionary<string, Probe> probeMap = [];
+    internal readonly Dictionary<string, Body> BodyMap = [];
+    internal readonly Dictionary<string, Grip> GripMap = [];
+    internal readonly Dictionary<string, AbstractJoint> JointMap = [];
+    internal readonly Dictionary<string, Probe> ProbeMap = [];
 
-    internal readonly List<Topology> topoList = [];
+    internal readonly List<Topology> TopoList = [];
+
+    public static string cat(string name, int seq)
+    {
+      return name + seq;
+    }
 
     public Model(string name)
     {
@@ -36,19 +41,13 @@ namespace KinemaLibCs
     }
     public List<Topology> GetTopologyList()
     {
-      return topoList;
+      return TopoList;
     }
 
     public void GetVersion(out char major, out char minor, out char release)
     {
       GetVersionModel(cppModel, out major, out minor, out release);
     }
-
-    bool DefineModel(in ArcLinTrack leftTrk, in ArcLinTrack rightTrk)
-    {
-      return false;
-    }
-
     public Vec3 GetOffset()
     {
       GetOffsetModel(cppModel, out Vec3 offset);
@@ -76,20 +75,20 @@ namespace KinemaLibCs
     }
     public void Clear()
     {
-      bodyMap.Clear();
-      gripMap.Clear();
-      jointMap.Clear();
-      probeMap.Clear();
-      topoList.Clear();
+      BodyMap.Clear();
+      GripMap.Clear();
+      JointMap.Clear();
+      ProbeMap.Clear();
+      TopoList.Clear();
     }
 
-    public Body GetBody(string name) => bodyMap[name];
+    public Body GetBody(string name) => BodyMap[name];
 
-    public Grip GetGrip(string name) => gripMap[name];
+    public Grip GetGrip(string name) => GripMap[name];
 
-    public AbstractJoint GetJoint(string name) => jointMap[name];
+    public AbstractJoint GetJoint(string name) => JointMap[name];
 
-    public Probe GetProbe(string name) => probeMap[name];
+    public Probe GetProbe(string name) => ProbeMap[name];
 
     public static void Main()
     {
@@ -97,32 +96,20 @@ namespace KinemaLibCs
       var dllDirectory = @"C:\Users\Clemens\Documents\Projects\Kinema\lib\1.0";
       Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
 
-      //ArcLinTrack leftTrk = new (true, 0.1413);
-
-      //bool ok = leftTrk.LoadTrackData("3d_rail_left_a1");
-
-      //if (!ok)  {
-
-      //}
-
-      //ArcLinTrack rightTrk = new (true, 0.1413);
-      //ok = rightTrk.LoadTrackData("3d_rail_right_a1");
-
-      //if (!ok) {
-
-      //}
-
-//      ArcLinTrack leftTrk = new (true, 0.1413);
-
       ArcLinTrack leftTrk = new();
-      leftTrk.SetTrack(in ArcLinTrack.LeftTrackData, ArcLinTrack.LeftTrackData.Length, true, 0.1411);
+      var ptList = ArcLinTrack.LeftTrackData;
+      for (int i = 0; i < ptList.Length; ++i) leftTrk.AddTrackPoint(ptList[i].x, ptList[i].y, ptList[i].y);
+      leftTrk.SetRelations();
+      leftTrk.Validate();
 
       ArcLinTrack rightTrk = new();
-      rightTrk.SetTrack(in ArcLinTrack.RightTrackData, ArcLinTrack.RightTrackData.Length, true, 0.1411);
+      ptList = ArcLinTrack.RightTrackData;
+      for (int i = 0; i < ptList.Length; ++i) rightTrk.AddTrackPoint(ptList[i].x, ptList[i].y, ptList[i].y);
+      rightTrk.SetRelations();
+      rightTrk.Validate();
 
-
-      leftTrk.SetCoTrack(ref rightTrk, true, 3.0);
-      rightTrk.SetCoTrack(ref leftTrk, true, 3.0);
+      leftTrk.SetCoTrack(ref rightTrk, false, 3.0);
+      rightTrk.SetCoTrack(ref leftTrk, false, 3.0);
 
       Model carrierModel = new ("Clemens");
 

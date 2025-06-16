@@ -10,8 +10,16 @@ namespace KinemaLibCs
     public Body(Model mdl, string name) {
       model = mdl;
       cppBody = BodyNew(model, name);
-      model.bodyMap.Add(name, this);
+      model.BodyMap.Add(name, this);
     }
+    public Body(Model mdl, string name, Trf3 pos)
+    {
+      model = mdl;
+      cppBody = BodyNew(model, name);
+      model.BodyMap.Add(name, this);
+      SetPos(pos);
+    }
+
 
     public Body GetParent()
     {

@@ -312,6 +312,11 @@ const Vec3& ArcLinTrack::getPoint(int idx) const
   return trk[idx]->getPoint();
 }
 
+int ArcLinTrack::addPoint(const Vec3& pt)
+{
+  return trk.add(new ArcLinTrackPt(pt));
+}
+
 //---------------------------------------------------------------------------
 
 const ArcLinTrackPt& ArcLinTrack::getTrackPt(int idx) const
@@ -378,6 +383,30 @@ bool ArcLinTrack::setTrack(const Vec3 *ptLst, int ptSz, bool trackClosed,
   trk.ensureCapacity(ptSz);
 
   for (int i = 0; i < ptSz; ++i) trk.add(new ArcLinTrackPt(ptLst[i]));
+
+  setRelations();
+  validate();  // Also sets length
+
+  return true;
+}
+
+//---------------------------------------------------------------------------
+
+bool ArcLinTrack::setTrack(double *xPtLst, double *yPtList, double *zPtList, int ptSz,
+                           bool trackClosed, double trackPipeDiameter)
+{
+  clear();
+
+  closed = trackClosed;
+  trackPipeRadius = trackPipeDiameter / 2.0;
+
+  if (!xPtLst || !yPtList || !zPtList) throw NullPointerException("ArcLinTrack::setTrack2");
+  if (ptSz < 0) throw IllegalArgumentException("ArcLinTrack::setTrack");
+
+  trk.clear();
+  trk.ensureCapacity(ptSz);
+
+  for (int i = 0; i < ptSz; ++i) trk.add(new ArcLinTrackPt(Vec3(xPtLst[i], yPtList[i], zPtList[i])));
 
   setRelations();
   validate();  // Also sets length
@@ -1003,11 +1032,20 @@ void ArcLinTrackClear(void* track) {
   trk->clear();
 }
 
-bool ArcLinTrackSetTrack(void* track, const Ino::Vec3* ptList, int ptSz, bool trackClosed, double trackPipeDiameter)
+bool ArcLinTrackSetTrack(void* track, const Ino::Vec3* ptList, int ptSz, bool trackClosed,
+  double trackPipeDiameter)
 {
   InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
 
-  return trk->setTrack(ptList, ptSz, trackClosed, trackPipeDiameter);
+  return false;
+}
+
+
+int ArcLinTrackAddTrackPoint(void* track, double x, double y, double z)
+{
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  return trk->addPoint(Vec3(x, y, z));
 }
 
 void ArcLinTrackSetCoTrack(void* track, void* coTrack, bool reverseDir, double maxSDiff)   {
@@ -1041,6 +1079,20 @@ void ArcLinTrackSetClosed(void* track, bool closed)   {
   trk->setClosed(closed);
 }
 
+void ArcLinTrackSetRelations(void* track)
+{
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->setRelations();
+}
+
+void ArcLinTrackValidate(void* track) // Also set Length
+{
+  InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
+
+  trk->validate();
+}
+
 double ArcLinTrackGetPipeRadius(void* track) {
   InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
 
@@ -1056,7 +1108,7 @@ void ArcLinTrackSetPipeRadius(void* track, double r) {
 void ArcLinTrackGetPoint(void* track, int idx, Vec3& v) {
   InoKin::ArcLinTrack* trk = (InoKin::ArcLinTrack*)track;
 
-  trk->getPoint(idx, v);
+  v = trk->getPoint(idx);
 }
 
 void ArcLinTrackCalcCentroid(void* track, Vec3& centroid) {

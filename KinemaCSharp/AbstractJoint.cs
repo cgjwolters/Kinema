@@ -8,7 +8,7 @@ namespace KinemaLibCs
 
     public AbstractJoint(Grip grp, string name)
     {
-      grp.model.jointMap.Add(name, this);
+      grp.model.JointMap.Add(name, this);
     }
     public void GetPos(out Trf3 pos) {
       GetPosAbstractJoint(cppJoint, out pos);
@@ -62,16 +62,15 @@ namespace KinemaLibCs
       return GetFixedAbstractJoint(cppJoint, locIdx);
     }
 
-    //public void SetFixed(int locIdx, bool isFixed)
-    //{
-    //  void SetFixedAbstractJoint(cppJoint, locIdx, isFixed);
+    public void SetFixed(int locIdx, bool isFixed)
+    {
+      SetFixedAbstractJoint(cppJoint, locIdx, isFixed);
+    }
 
-    //}
-
-    //public void SetFixedAll(bool isFixed)
-    //{
-    //  void SetFixedAllAbstractJoint(cppJoint, isFixed);
-    //}
+    public void SetFixedAll(bool isFixed)
+    {
+      SetFixedAllAbstractJoint(cppJoint, isFixed);
+    }
 
     public bool GetIsAngular(int locIdx)
     {

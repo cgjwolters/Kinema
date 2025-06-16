@@ -41,7 +41,7 @@
       isDerivative = false;
     }
 
-    public Trf3(ref readonly Vec3 org, ref readonly Vec3 zDir, ref readonly Vec3 xDir)
+    public Trf3(Vec3 org, Vec3 zDir, Vec3 xDir)
     {
       Vec3 lz = zDir;
       lz.UnitLen3();

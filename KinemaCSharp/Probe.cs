@@ -9,7 +9,7 @@ namespace KinemaLibCs
     public Probe(Body body, string name, Trf3 initPos)
     {
       cppProbe = ProbeNew(body, name, initPos);
-      body.model.probeMap.Add(name, this);
+      body.model.ProbeMap.Add(name, this);
     }
 
     public Vec3 GetAbsPos()

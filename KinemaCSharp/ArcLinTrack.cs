@@ -2,6 +2,15 @@
 
 namespace KinemaLibCs
 {
+  public struct TrackPoint(double xx, double yy, double zz)
+  {
+    public readonly double x = xx;
+    public readonly double y = yy;
+    public readonly double z = zz;
+    public bool isDerivative = false;
+
+  }
+
   public partial class ArcLinTrack(bool trkClosed = false, double trackPipeDiameter = 0.0)
   {
     internal readonly IntPtr track = (IntPtr)ArcLinTrackNew(trkClosed, trackPipeDiameter);
@@ -11,14 +20,18 @@ namespace KinemaLibCs
       if (!File.Exists(trackFile)) {
         return false;
       }
- 
+
       return true;
     }
 
-    public bool SetTrack(ref readonly Vec33[] ptList,
-      int ptSz, bool trackClosed = true, double trackPipeDiameter = 0.0)
+    public void SetRelations()
     {
-      return ArcLinTrackSetTrack(track, in ptList, ptSz, trackClosed, trackPipeDiameter);
+      ArcLinTrackSetRelations(track);
+    }
+
+    public void Validate()
+    {
+      ArcLinTrackValidate(track);
     }
 
     public void SetCoTrack(ref readonly ArcLinTrack coTrack, bool reverseDir, double maxSDiff)
@@ -52,6 +65,11 @@ namespace KinemaLibCs
     public void Clear()
     {
       ArcLinTrackClear(track);
+    }
+
+    public int AddTrackPoint(double x, double y, double z)
+    {
+      return ArcLinTrackAddTrackPoint(track, x, y, z);
     }
 
     public Vec3 GetPoint(int idx)
@@ -145,8 +163,7 @@ namespace KinemaLibCs
     extern private static void ArcLinTrackClear(IntPtr track);
 
     [DllImport("KinemaLib.dll")]
-    extern private unsafe static bool ArcLinTrackSetTrack(IntPtr track, ref readonly Vec33[] ptList,
-      int ptSz, bool trackClosed = true, double trackPipeDiameter = 0.0);
+    extern private static int ArcLinTrackAddTrackPoint(IntPtr track, double x, double y, double z);
 
     [DllImport("KinemaLib.dll")]
     extern private static IntPtr ArcLinTrackSetCoTrack(IntPtr track, IntPtr coTrack, bool trkClosed = false, double trackPipeDiameter = 0.0);
@@ -164,6 +181,12 @@ namespace KinemaLibCs
     extern private static bool ArcLinTrackSetClosed(IntPtr track, bool closed);
 
     [DllImport("KinemaLib.dll")]
+    extern private static void ArcLinTrackSetRelations(IntPtr track);
+
+    [DllImport("KinemaLib.dll")]
+    extern private static void ArcLinTrackValidate(IntPtr track); // Also set Length
+
+      [DllImport("KinemaLib.dll")]
     extern private static double ArcLinTrackGetPipeRadius(IntPtr track);
 
     [DllImport("KinemaLib.dll")]

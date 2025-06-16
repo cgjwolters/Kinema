@@ -13,7 +13,7 @@ namespace KinemaLibCs
     {
       model = mdl;
       cppGrip = GripNew(model, name, body1, pos1, body2, pos2);
-      model.gripMap.Add(name, this);
+      model.GripMap.Add(name, this);
     }
 
     public Body GetBody1()
