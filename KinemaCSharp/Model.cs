@@ -44,6 +44,11 @@ namespace KinemaLibCs
       return TopoList;
     }
 
+    public void SetFixedAll(bool fixd)
+    {
+      SetFixedAllModel(cppModel, fixd);
+    }
+
     public void GetVersion(out char major, out char minor, out char release)
     {
       GetVersionModel(cppModel, out major, out minor, out release);
@@ -123,6 +128,9 @@ namespace KinemaLibCs
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static void GetVersionModel(IntPtr cppModel, out char major, out char minor, out char release);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void SetFixedAllModel(IntPtr cppModel, bool fixd);
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static void GetNameModel(IntPtr cppModel, out string name);

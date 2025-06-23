@@ -5,8 +5,8 @@
     const int CoachSz = 7;
 
     static Body DefineBogiePair(Model model, int idx,
-                               ref readonly ArcLinTrack leftTrk, ref readonly ArcLinTrack rightTrk,
-                               bool frontMost)
+                                ref readonly ArcLinTrack leftTrk, ref readonly ArcLinTrack rightTrk,
+                                bool frontMost)
     {
       Body ground = model.BodyMap["Ground"];
 
@@ -130,83 +130,85 @@
     //---- Defines the complete kinematic model --------------------------------------------
     //--------------------------------------------------------------------------------------
 
-    bool defineModel(Model model, ref readonly ArcLinTrack leftTrk, ref readonly ArcLinTrack rightTrk)
-    {
-      Trf3 unitpos = new();
-      Trf3 pos;
+    //bool defineModel(ref readonly ArcLinTrack leftTrk, ref readonly ArcLinTrack rightTrk)
+    //{
+    //  Trf3 unitpos = new();
+    //  Trf3 pos;
 
-      Body ground = new Body(this, "Ground", unitpos);
+    //  Body ground = new Body(this, "Ground", unitpos);
 
-      for (int i = 0; i < CoachSz; ++i) {
-        Body coach = DefineBogiePair(model, i, leftTrk, rightTrk, i == CoachSz - 1);
-      }
+    //  for (int i = 0; i < CoachSz; ++i) {
+    //    Body coach = DefineBogiePair(this, i, leftTrk, rightTrk, i == CoachSz - 1);
+    //  }
 
-      for (int i = 1; i < CoachSz; ++i) {
-        Body prevCoach = BodyMap[cat("Coach", i - 1)];
-        Body coach = BodyMap[cat("Coach", i)];
+    //  for (int i = 1; i < CoachSz; ++i) {
+    //    Body prevCoach = BodyMap[cat("Coach", i - 1)];
+    //    Body coach = BodyMap[cat("Coach", i)];
 
-        Trf3 pos2;
+    //    Trf3 pos2;
 
-        if (i < CoachSz - 1) {
-          pos = new(new(0, 2.5 - 0.185, 0), new(0, 0, 1), new(1, 0, 0));
-          pos2 = new(new(0, -0.185, 0), new(0, 0, 1), new(1, 0, 0));
-          Grip gCoach = new(model, cat("GCoach", i - 1), prevCoach, pos, coach, pos2);
-          JointBall jCoach = new(gCoach, cat("JCoach", i - 1));
-        }
-        else {
-          pos = new(new(0, 2.13, 0), new(0, 1, 0), new(1, 0, 0));
-          pos2 = new(new(0, 0, 0), new(0, 1, 0), new(1, 0, 0));
-          Grip gCoach = new(model, cat("GCoach", i - 1), prevCoach, pos, coach, pos2);
-          JointRev jCoach = new(gCoach, cat("JCoach", i - 1));
-        }
-      }
+    //    if (i < CoachSz - 1) {
+    //      pos = new(new(0, 2.5 - 0.185, 0), new(0, 0, 1), new(1, 0, 0));
+    //      pos2 = new(new(0, -0.185, 0), new(0, 0, 1), new(1, 0, 0));
+    //      Grip gCoach = new(this, cat("GCoach", i - 1), prevCoach, pos, coach, pos2);
+    //      JointBall jCoach = new(gCoach, cat("JCoach", i - 1));
+    //    }
+    //    else {
+    //      pos = new(new(0, 2.13, 0), new(0, 1, 0), new(1, 0, 0));
+    //      pos2 = new(new(0, 0, 0), new(0, 1, 0), new(1, 0, 0));
+    //      Grip gCoach = new(this, cat("GCoach", i - 1), prevCoach, pos, coach, pos2);
+    //      JointRev jCoach = new(gCoach, cat("JCoach", i - 1));
+    //    }
+    //  }
 
-      // No sideways slide
+    //  // No sideways slide
 
-      model.SetFixedAll(false);
+    //  SetFixedAll(false);
 
-      for (int i = 0; i < CoachSz; ++i) {
-        AbstractJoint jnt = model.GripMap[cat("JntLeftR", i)];
-        if (!jnt) {
-          ads_printf(L"Pointer Error 3!");
-          return false;
-        }
-        jnt.SetFixed(3, true);
+    //  AbstractJoint jnt;
 
-        jnt = model.getGripList().getJoint(cat("JntLeftF", i));
-        if (!jnt) {
-          ads_printf(L"Pointer Error 4!");
-          return false;
-        }
-        jnt.SetFixed(3, true);
+    //  for (int i = 0; i < CoachSz; ++i) {
+    //    jnt = JointMap["JntLeftR" + i];
+    //    if (jnt == null) {
+    //      ads_printf("Pointer Error 3!");
+    //      return false;
+    //    }
+    //    jnt.SetFixed(3, true);
 
-        jnt = model.getGripList().getJoint(cat("JntRightR", i));
-        if (!jnt) {
-          ads_printf(L"Pointer Error 5!");
-          return false;
-        }
-        jnt.SetFixed(3, i < CoachSz - 1);
+    //    jnt = JointMap["JntLeftF" + i];
+    //    if (jnt == null) {
+    //      ads_printf("Pointer Error 4!");
+    //      return false;
+    //    }
+    //    jnt.SetFixed(3, true);
 
-        jnt = model.getGripList().getJoint(cat("JntRightF", i));
-        if (!jnt) {
-          ads_printf(L"Pointer Error 6!");
-          return false;
-        }
-        jnt.SetFixed(3, i < CoachSz - 1);
-      }
+    //    jnt = JointMap["JntRightR" + i];
+    //    if (jnt == null) {
+    //      ads_printf("Pointer Error 5!");
+    //      return false;
+    //    }
+    //    jnt.SetFixed(3, i < CoachSz - 1);
 
-      AbstractJoint jnt = model.getGripList().getJoint("JntLeftR0");
-      jnt.SetFixed(0, true); // Drive wheel
+    //    jnt = JointMap["JntRightF" + i];
+    //    if (jnt == null) {
+    //      ads_printf("Pointer Error 6!");
+    //      return false;
+    //    }
+    //    jnt.SetFixed(3, i < CoachSz - 1);
+    //  }
 
-      return true;
-    }
+    //  jnt = JointMap["JntLeftR0"];
+    //  jnt.SetFixed(0, true); // Drive wheel
+
+    //  return true;
+    //}
 
     bool DefineModel(in ArcLinTrack leftTrk, in ArcLinTrack rightTrk)
     {
       Trf3 unitpos = new();
       Trf3 pos;
 
-      Body ground = new Body(this, "Ground", unitpos);
+      Body ground = new (this, "Ground", unitpos);
 
       for (int i = 0; i < CoachSz; ++i) {
         Body coach = DefineBogiePair(this, i, in leftTrk, in rightTrk, i == CoachSz - 1);
@@ -222,52 +224,54 @@
           pos = new Trf3(new Vec3(0, 2.5 - 0.185, 0), new Vec3(0, 0, 1), new Vec3(1, 0, 0));
           pos2 = new Trf3(new Vec3(0, -0.185, 0), new Vec3(0, 0, 1), new Vec3(1, 0, 0));
           Grip gCoach = new Grip(this, cat("GCoach", i - 1), prevCoach, pos, coach, pos2);
-          JntBall jCoach = new(gCoach, cat("JCoach", i - 1));
+          JointBall jCoach = new(gCoach, cat("JCoach", i - 1));
         }
         else {
           pos = new Trf3(new Vec3(0, 2.13, 0), new Vec3(0, 1, 0), new Vec3(1, 0, 0));
           pos2 = new Trf3(new Vec3(0, 0, 0), new Vec3(0, 1, 0), new Vec3(1, 0, 0));
           Grip gCoach = new Grip(this, cat("GCoach", i - 1), prevCoach, pos, coach, pos2);
-          JntRev jCoach = new(gCoach, cat("JCoach", i - 1));
+          JointRev jCoach = new(gCoach, cat("JCoach", i - 1));
         }
       }
 
       // No sideways slide
 
-      GripMap.SetJointsFixedAll(false);
+      SetFixedAll(false);
+
+      AbstractJoint jnt;
 
       for (int i = 0; i < CoachSz; ++i) {
-        AbstractJoint jnt = Model.GripMap.GetJoint(cat("JntLeftR", i));
+        jnt = JointMap["JntLeftR" + i];
         if (jnt is null) {
-          ads_printf("Pointer Error 3!");
+          Logger.WriteMsg("Pointer Error 3!");
           return false;
         }
-        jnt.setFixed(3, true);
+        jnt.SetFixed(3, true);
 
-        jnt = model.getGripList().getJoint(cat("JntLeftF", i));
+        jnt = JointMap["JntLeftF" + i];
         if (jnt is null) {
-          ads_printf("Pointer Error 4!");
+          Logger.WriteMsg("Pointer Error 4!");
           return false;
         }
-        jnt.setFixed(3, true);
+        jnt.SetFixed(3, true);
 
-        jnt = model.getGripList().getJoint(cat("JntRightR", i));
+        jnt = JointMap["JntRightR" + i];
         if (jnt is null) {
-          ads_printf("Pointer Error 5!");
+          Logger.WriteMsg("Pointer Error 5!");
           return false;
         }
-        jnt->setFixed(3, i < coachSz - 1);
+        jnt.SetFixed(3, i < CoachSz - 1);
 
-        jnt = model.getGripList().getJoint(cat("JntRightF", i));
+        jnt = JointMap["JntRightF" + i];
         if (jnt is null) {
-          ads_printf("Pointer Error 6!");
+          Logger.WriteMsg("Pointer Error 6!");
           return false;
         }
-        jnt.SetFixed(3, i < coachSz - 1);
+        jnt.SetFixed(3, i < CoachSz - 1);
       }
 
-      AbstractJoint jnt = model.getGripList().getJoint("JntLeftR0");
-      jnt.setFixed(0, true); // Drive wheel
+      jnt = JointMap["JntLeftR0"];
+      jnt.SetFixed(0, true); // Drive wheel
 
       return true;
     }

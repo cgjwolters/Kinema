@@ -185,6 +185,21 @@ void Model::setName(const wchar_t *newName)
 
 //---------------------------------------------------------------------------
 
+void Model::setFixedAll(bool fixd)
+{
+  int sz = gripLst.size();
+
+  for (int i = 0; i < sz; ++i) {
+    AbstractJoint* jnt = gripLst[i]->getJoint();
+
+    int varSz = jnt->getVarCnt();
+
+    for (int j = 0; j < varSz; ++j) jnt->setFixed(j, fixd);
+  }
+}
+
+//---------------------------------------------------------------------------
+
 void Model::setTopoModified()
 {
   modified = true;
@@ -323,6 +338,14 @@ void GetVersionModel(void *cppModel, char *major, char *minor, char *release)
 
   mdl->version(*major, *minor, *release);
 }
+
+void SetFixedAllModel(void* cppModel, bool fixd)
+{
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+
+  mdl->setFixedAll(fixd);
+}
+
 
 void ClearModel(void* cppModel)
 {

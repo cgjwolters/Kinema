@@ -68,6 +68,8 @@ public:
   const wchar_t *getName() const { return mdlName; }
   void setName(const wchar_t *newName);
 
+  void setFixedAll(bool fixd);
+
   void setTopoModified();
   void setModified(bool mod = true);
 
@@ -99,6 +101,8 @@ public:
 extern "C" __declspec(dllexport) void* ModelNew(const wchar_t* name);
 
 extern "C" __declspec(dllexport) void GetVersionModel(void *cppModel, char *major, char *minor, char *release);
+
+extern "C" __declspec(dllexport) void SetFixedAllModel(void *cppModel, bool fixd);
 
 extern "C" __declspec(dllexport) void ClearModel(void* cppModel);
 
