@@ -8,11 +8,11 @@ namespace KinemaLibCs
     internal readonly IntPtr cppGrip;
 
     public Grip(Model mdl, string name,
-                Body body1, Trf3 pos1,
-                Body body2, Trf3 pos2)
+                Body body1, in Trf3 pos1,
+                Body body2, in Trf3 pos2)
     {
       model = mdl;
-      cppGrip = GripNew(model, name, body1, pos1, body2, pos2);
+      cppGrip = GripNew(model.cppModel, name, body1.cppBody, pos1, body2.cppBody, pos2);
       model.GripMap.Add(name, this);
     }
 
@@ -85,9 +85,9 @@ namespace KinemaLibCs
     // Import Section
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-    extern static private IntPtr GripNew(Model mdl, string name,
-                                         Body body1, Trf3 pos1,
-                                         Body body2, Trf3 pos2);
+    extern static private IntPtr GripNew(IntPtr cppModel, string name,
+                                         IntPtr body1, in Trf3 pos1,
+                                         IntPtr body2, in Trf3 pos2);
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern static private void GetBody1Grip(IntPtr cppGrip, out Body body);

@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
@@ -119,6 +120,20 @@ namespace KinemaLibCs
       Model carrierModel = new ("Clemens");
 
       if (!carrierModel.DefineModel(leftTrk, rightTrk)) return;
+
+      carrierModel.PutOnTrack(3.0, leftTrk, rightTrk);
+
+      if (!carrierModel.BuildTopology()) {
+        Logger.WriteMsg("Inconsistent model!!!");
+        return;
+      }
+
+      carrierModel.SetWheelVars(3.0);
+
+      // Dont forget!:
+      carrierModel.ResetFixedVars();
+
+
     }
 
     // Interface section

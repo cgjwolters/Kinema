@@ -116,7 +116,7 @@ class BodyList: public ObjList<Body>
 
 // Interface Section
 
-extern "C" __declspec(dllexport) void* BodyNew(InoKin::Model& model, const wchar_t* name);
+extern "C" __declspec(dllexport) void* BodyNew(void *cppModel, const wchar_t* name);
 
 extern "C" __declspec(dllexport) InoKin::Body* GetParentBody(void* cppBody);
 

@@ -5,17 +5,17 @@ namespace KinemaLibCs
   public class Body
   {
     internal readonly Model model;
-    private readonly IntPtr cppBody;
+    internal readonly IntPtr cppBody;
 
     public Body(Model mdl, string name) {
       model = mdl;
-      cppBody = BodyNew(model, name);
+      cppBody = BodyNew(model.cppModel, name);
       model.BodyMap.Add(name, this);
     }
     public Body(Model mdl, string name, Trf3 pos)
     {
       model = mdl;
-      cppBody = BodyNew(model, name);
+      cppBody = BodyNew(model.cppModel, name);
       model.BodyMap.Add(name, this);
       SetPos(pos);
     }
@@ -150,7 +150,7 @@ namespace KinemaLibCs
     // Interface Section
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-    extern static private IntPtr BodyNew(Model mdl, string name);
+    extern static private IntPtr BodyNew(IntPtr cppModel, string name);
 
     [DllImport("KinemaLib.dll")]
     extern private static IntPtr GetParentBody(IntPtr cppBody, out Body parent);

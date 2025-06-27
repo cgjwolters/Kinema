@@ -333,22 +333,26 @@ bool GripListCompare::operator()(const GripList *lst1, const GripList *lst2) con
 
 // Interface Section
 
-void* GripNew(InoKin::Model& mdl, const wchar_t* name,
-  InoKin::Body& body1, Trf3& pos1,
-  InoKin::Body& body2, Trf3& pos2) {
+void* GripNew(void* cppModel, const wchar_t* name,
+  void *cppBody1, const Ino::Trf3& cppPos1,
+  void *cppBody2, const Ino::Trf3& cppPos2) {
 
-  InoKin::Grip* grip = new InoKin::Grip(mdl, name, body1, pos1, body2, pos2);
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+  InoKin::Body* body1 = (InoKin::Body*)cppBody1;
+  InoKin::Body* body2 = (InoKin::Body*)cppBody2;
+
+  InoKin::Grip* grip = new InoKin::Grip(*mdl, name, *body1, cppPos1, *body2, cppPos2);
 
   return grip;
 }
 
-void setPos1Grip(void* cppGrip, Trf3& pos) {
+void SetPos1Grip(void* cppGrip, Trf3& pos) {
   InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
 
   grip->setPos1(pos);
 }
 
-void setPos2Grip(void* cppGrip, Trf3& pos) {
+void SetPos2Grip(void* cppGrip, Trf3& pos) {
   InoKin::Grip* grip = (InoKin::Grip*)cppGrip;
 
   grip->setPos2(pos);

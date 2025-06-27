@@ -107,7 +107,7 @@ namespace KinemaLibCs
       return GetValAbstractJoint(cppJoint, locIdx);
     }
 
-    public void GetVal(int locIdx, double newVal)
+    public void SetVal(int locIdx, double newVal)
     {
       SetValAbstractJoint(cppJoint, locIdx, newVal);
     }

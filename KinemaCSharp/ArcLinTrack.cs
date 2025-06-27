@@ -100,11 +100,9 @@ namespace KinemaLibCs
       get { return ArcLinTrackGetMaxS(track); }
     }
 
-    public Vec3 GetPoint(double at_s)
+    public void GetPoint(double at_s, out Vec3 pnt)
     {
-      ArcLinTrackGetPointAndDir(track, at_s, out Vec3 pnt, out Vec3 _);
-
-      return pnt;
+      ArcLinTrackGetPointAndDir(track, at_s, out pnt, out _);
     }
 
     public void GetPointAndDir(double at_s, out Vec3 pnt, out Vec3 dir)

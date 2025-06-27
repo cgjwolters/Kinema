@@ -322,8 +322,10 @@ void Body::getAbsGripPos(const wchar_t *name, Trf3& trf) const
 
 // Interface Section
 
-void* BodyNew(InoKin::Model& model, const wchar_t* name) {
-  InoKin::Body* body = new InoKin::Body(model, name);
+void* BodyNew(void* cppModel, const wchar_t* name)
+{
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+  InoKin::Body* body = new InoKin::Body(*mdl, name);
 
   return body;
 }
