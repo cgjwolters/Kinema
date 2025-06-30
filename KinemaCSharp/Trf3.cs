@@ -1,6 +1,8 @@
-﻿namespace KinemaLibCs
-{
+﻿using System.Runtime.InteropServices;
 
+namespace KinemaLibCs
+{
+  [StructLayout(LayoutKind.Sequential, Pack = 8)]
   public struct Trf3
   {
     internal double[,] m = new double[3, 4];

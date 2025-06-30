@@ -334,8 +334,8 @@ bool GripListCompare::operator()(const GripList *lst1, const GripList *lst2) con
 // Interface Section
 
 void* GripNew(void* cppModel, const wchar_t* name,
-  void *cppBody1, const Ino::Trf3& cppPos1,
-  void *cppBody2, const Ino::Trf3& cppPos2) {
+  void *cppBody1, Ino::Trf3& cppPos1,
+  void *cppBody2, Ino::Trf3& cppPos2) {
 
   InoKin::Model* mdl = (InoKin::Model*)cppModel;
   InoKin::Body* body1 = (InoKin::Body*)cppBody1;
