@@ -120,8 +120,6 @@ extern "C" __declspec(dllexport) void ApplyOffsetModel(void* cppModel);
 extern "C" __declspec(dllexport) void TransformModel(void* cppModel, const Ino::Trf3& trf);
 extern "C" __declspec(dllexport) bool BuildTopologyModel(void* cppModel);
 
-extern "C" __declspec(dllexport) void SetCppTrf(void *cppTrf, int i, int j, double val);
-
 // End Interface Section
 
 //---------------------------------------------------------------------------

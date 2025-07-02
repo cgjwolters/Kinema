@@ -183,6 +183,15 @@ namespace KinemaLibCs
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static bool BuildTopologyModel(IntPtr cppModel);
 
+    // Interface section
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void SetCppTrf(IntPtr cppTrf, int i, int j, double val);
+
+    [DllImport("KinemaLib.dll")]
+    extern private static IntPtr GetParentBody(IntPtr cppBody, out Body parent);
+
+
     // End Interface section
   }
 }

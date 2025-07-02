@@ -2,7 +2,6 @@
 
 namespace KinemaLibCs
 {
-  [StructLayout(LayoutKind.Sequential, Pack = 8)]
   public struct Trf3
   {
     internal double[,] m = new double[3, 4];
@@ -261,5 +260,11 @@ namespace KinemaLibCs
         return ref m[ix, iy];
       }
     }
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static IntPtr Trf3New();
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static void SetTrfElment(IntPtr cppTrf, int row, int col);
   }
 }

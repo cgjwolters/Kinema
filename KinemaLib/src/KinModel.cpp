@@ -424,12 +424,5 @@ bool BuildTopologyModel(void* cppModel)
   return mdl->buildTopology();
 }
 
-void SetCppTrf(void* cppTrf, int i, int j, double val)
-{
-  Ino::Trf3* trf = (Ino::Trf3*)cppTrf;
-
-  (*trf)(i,j) = val;
-}
-
 // End Interface Section
 //---------------------------------------------------------------------------
