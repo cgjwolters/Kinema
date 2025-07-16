@@ -150,21 +150,21 @@ namespace KinemaLibCs
       return v1.DistTo3(v2) > IdentDist;
     }
 
-    public void Transform3(Trf3 trf)
-    {
-      double nx = trf.m[0,0] * x + trf.m[0,1] * y + trf.m[0,2] * z;
-      double ny = trf.m[1,0] * x + trf.m[1,1] * y + trf.m[1,2] * z;
-      z = trf.m[2,0] * x + trf.m[2,1] * y + trf.m[2,2] * z;
+    //public void Transform3(Trf3 trf)
+    //{
+    //  double nx = trf.m[0,0] * x + trf.m[0,1] * y + trf.m[0,2] * z;
+    //  double ny = trf.m[1,0] * x + trf.m[1,1] * y + trf.m[1,2] * z;
+    //  z = trf.m[2,0] * x + trf.m[2,1] * y + trf.m[2,2] * z;
 
-      x = nx; y = ny;
+    //  x = nx; y = ny;
 
-      if (!isDerivative) {
-        x += trf.m[0,3];
-        y += trf.m[1,3];
-        z += trf.m[2,3];
+    //  if (!isDerivative) {
+    //    x += trf.m[0,3];
+    //    y += trf.m[1,3];
+    //    z += trf.m[2,3];
 
-        isDerivative = trf.isDerivative;
-      }
-    }
+    //    isDerivative = trf.isDerivative;
+    //  }
+    //}
   }
 }
