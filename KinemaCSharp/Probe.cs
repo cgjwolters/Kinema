@@ -8,7 +8,7 @@ namespace KinemaLibCs
 
     public Probe(Body body, string name, Trf3 initPos)
     {
-      cppProbe = ProbeNew(body, name, initPos);
+      cppProbe = ProbeNew(body.cppBody, name, initPos);
       body.model.ProbeMap.Add(name, this);
     }
 
@@ -57,7 +57,7 @@ namespace KinemaLibCs
     // Interface Section
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-    extern private static IntPtr ProbeNew(Body body, string name, Trf3 initPos);
+    extern private static IntPtr ProbeNew(IntPtr cppBody, string name, Trf3 initPos);
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static void GetAbsPosProbe(IntPtr cppPrb, out Vec3 apos);

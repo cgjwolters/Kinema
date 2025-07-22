@@ -132,9 +132,10 @@ void Probe::getAbsAccel(Vec3& absAccel) const
 
 // Interface section
 
-void* ProbeNew(InoKin::Body& body, const wchar_t* name, Ino::Trf3& initPos)
+void* ProbeNew(void *cppBody, const wchar_t* name, Ino::Trf3& initPos)
 {
-  InoKin::Probe* probe = new InoKin::Probe(body, name, initPos);
+  InoKin::Body* body = (InoKin::Body*)cppBody;
+  InoKin::Probe* probe = new InoKin::Probe(*body, name, initPos);
 
   return probe;
 }

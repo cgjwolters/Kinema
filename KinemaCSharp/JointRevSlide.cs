@@ -6,12 +6,12 @@ namespace KinemaLibCs
   {
     public JointRevSlide(Grip grp, string name) : base(grp, name)
     {
-      cppJoint = JointRevSlideNew(ref grp, name);
+      cppJoint = JointRevSlideNew(grp.cppGrip, name);
     }
 
     // Import Section
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
-    extern static private IntPtr JointRevSlideNew(ref Grip grp, string name);
+    extern static private IntPtr JointRevSlideNew(IntPtr cppGrp, string name);
   }
 }

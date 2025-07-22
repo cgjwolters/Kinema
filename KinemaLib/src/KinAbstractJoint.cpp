@@ -196,7 +196,7 @@ AbstractJoint::AbstractJoint(Grip& grp, const wchar_t *name, int nrVars)
   varAccel(new double[nrVars]), varJerk(new double[nrVars]),
   isAngular(new bool[nrVars]), varCnt(nrVars), grip(grp)
 {
-  delete grip.joint;
+//  delete grip.joint;
   grip.joint = this;
 
   for (int i=0; i<varCnt; i++) {

@@ -129,8 +129,8 @@ typedef Ino::Array<GripList *> LoopList;
 // Interface Section
 
 extern "C" __declspec(dllexport) void* GripNew(void *cppModel, const wchar_t* name,
-                                               void *cppBody1, Ino::Trf3& cppPos1,
-                                               void *cppBody2, Ino::Trf3& cppPos2);
+                                               void *cppBody1, void *cppPos1,
+                                               void *cppBody2, void *cppPos2);
 
 extern "C" __declspec(dllexport) void SetPos1Grip(void* cppGrip, Ino::Trf3& pos);
 extern "C" __declspec(dllexport) void SetPos2Grip(void* cppGrip, Ino::Trf3& pos);

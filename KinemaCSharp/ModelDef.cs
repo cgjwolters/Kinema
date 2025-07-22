@@ -31,13 +31,13 @@ namespace KinemaLibCs
       pos = new(new(-0.55, -0.2125 + axPos, 0.625), new(-1, 0, 0), new(0, 0, 1));
       Body wheelLeftR = new(model, cat("WheelLeftR", idx), pos);
 
-      Grip trkLeftR = new(model, "TrackLeftR", ground, unitpos, wheelLeftR, unitpos);
+      Grip trkLeftR = new(model, cat("TrackLeftR", idx), ground, unitpos, wheelLeftR, unitpos);
       JointTrack jntLeftR = new(trkLeftR, cat("JntLeftR", idx), leftTrk, wheelRad);
 
       pos = new(new(-0.55, 0.2125 + axPos, 0.625), new(-1, 0, 0), new(0, 0, 1));
       Body wheelLeftF = new(model, cat("WheelLeftF", idx), pos);
 
-      Grip trkLeftF = new(model, "TrackLeftF", ground, unitpos, wheelLeftF, unitpos);
+      Grip trkLeftF = new(model, cat("TrackLeftF", idx), ground, unitpos, wheelLeftF, unitpos);
       JointTrack jntLeftF = new(trkLeftF, cat("JntLeftF", idx), leftTrk, wheelRad);
 
       pos = new Trf3(new(-0.55, axPos, 0.1855), new(-1, 0, 0), new(0, 0, 1));
@@ -64,13 +64,13 @@ namespace KinemaLibCs
       pos = new Trf3(new(0.55, -0.2125 + axPos, 0.625), new(-1, 0, 0), new(0, 0, 1));
       Body wheelRightR = new(model, cat("WheelRightR", idx), pos);
 
-      Grip trkRightR = new(model, "TrackRightR", ground, unitpos, wheelRightR, unitpos);
+      Grip trkRightR = new(model, cat("TrackRightR", idx), ground, unitpos, wheelRightR, unitpos);
       JointTrack jntRightR = new(trkRightR, cat("JntRightR", idx), rightTrk, wheelRad);
 
       pos = new Trf3(new(0.55, 0.2125 + axPos, 0.625), new(-1, 0, 0), new(0, 0, 1));
       Body wheelRightF = new(model, cat("WheelRightF", idx), pos);
 
-      Grip trkRightF = new(model, "TrackRightF", ground, unitpos, wheelRightF, unitpos);
+      Grip trkRightF = new(model, cat("TrackRightF", idx), ground, unitpos, wheelRightF, unitpos);
       JointTrack jntRightF = new(trkRightF, cat("JntRightF", idx), rightTrk, wheelRad);
 
       pos = new Trf3(new(0.55, axPos, 0.1855), new(-1, 0, 0), new(0, 0, 1));
@@ -109,7 +109,7 @@ namespace KinemaLibCs
         // SteerBar
 
         pos = new Trf3(new(0.0, axPos + 0.185, 0), new(0, 0, 1), new(1, 0, 0));
-        Body steerBar = new(model, "SteerBar", pos);
+        Body steerBar = new(model, cat("SteerBar", idx), pos);
 
         pos = new Trf3(new(-0.040, 0.185, 0), new(0, 0, 1), new(1, 0, 0));
         pos2 = new Trf3(new(-0.55 - 0.040, 0, 0), new(0, 0, 1), new(1, 0, 0));
@@ -126,7 +126,7 @@ namespace KinemaLibCs
       }
 
 
-      new Probe(coach, "AxleMidPt", unitpos);
+      new Probe(coach, cat("AxleMidPt", idx), unitpos);
 
       return coach;
     }

@@ -5,7 +5,7 @@ namespace KinemaLibCs
 {
   public struct Trf3
   {
-    IntPtr cppTrf;
+    internal IntPtr cppTrf;
 
     public double[,] GetTrf()
     {
@@ -61,6 +61,8 @@ namespace KinemaLibCs
                 double m10, double m11, double m12, double m13,
                 double m20, double m21, double m22, double m23)
     {
+      cppTrf = Trf3New();
+
       SetElement(cppTrf, 0, 0, m00);
       SetElement(cppTrf, 0, 1, m01);
       SetElement(cppTrf, 0, 2, m02);
@@ -81,6 +83,8 @@ namespace KinemaLibCs
 
     public Trf3(in Vec3 org, in Vec3 zDir, in Vec3 xDir)
     {
+      cppTrf = Trf3New();
+
       Vec3 lz = zDir; 
       lz.UnitLen3();
 
@@ -92,10 +96,6 @@ namespace KinemaLibCs
       double m03 = -lx.x * org.x - lx.y * org.y - lx.z * org.z;
       double m13 = -ly.x * org.x - ly.y * org.y - ly.z * org.z;
       double m23 = -lz.x * org.x - lz.y * org.y - lz.z * org.z;
-
-      //m[0, 0] = lx.x; m[0, 1] = lx.y; m[0, 2] = lx.z;
-      //m[1, 0] = ly.x; m[1, 1] = ly.y; m[1, 2] = ly.z;
-      //m[2, 0] = lz.x; m[2, 1] = lz.y; m[2, 2] = lz.z;
 
       this = new Trf3(lx.x, lx.y, lx.z, m03, ly.x, ly.y, ly.z, m13, lz.x, lz.y, lz.z, m23);
     }
