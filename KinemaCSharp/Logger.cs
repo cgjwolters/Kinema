@@ -9,4 +9,9 @@ public static class Logger
 	{
 		wr.WriteLine(msg);
 	}
+  public static void Write(string msg)
+	{
+    wr.Write(msg);
+  }
+
 }

@@ -309,7 +309,7 @@ void Topology::loopScan(Array<GripList *>& loopLst, int idx)
 // Reduce the matrix bandwidth
 //
 // The loops are set up as vertices in a graph.
-// A breadth first search as in the Cuthill–McKee algorithm is
+// A breadth first search as in the Cuthillï¿½McKee algorithm is
 // used to order the loops.
 // Then variable indices are assigned
 // VERY effective!!, seriously reduces the bandwidth and

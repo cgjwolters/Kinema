@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Numerics;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
@@ -40,6 +41,7 @@ namespace KinemaLibCs
         return name;
       }
     }
+
     public List<Topology> GetTopologyList()
     {
       return TopoList;
@@ -96,6 +98,25 @@ namespace KinemaLibCs
 
     public Probe GetProbe(string name) => ProbeMap[name];
 
+    //--------------------------------------------------------------------------------------
+
+    void AdvanceJoint(string name, double delta)
+    {
+      AbstractJoint jnt = JointMap[name];
+
+      double val = jnt.GetVal(0);
+      jnt.SetVal(0, val + delta);
+    }
+    void AdvanceModel(double delta)
+    {
+      for (int i = 0; i < CoachSz; ++i) {
+        if (i > 0) AdvanceJoint("JntLeftR"+i, delta);
+        AdvanceJoint("JntLeftF" + i, delta);
+        AdvanceJoint("JntRightR" + i, delta);
+        AdvanceJoint("JntRightF" + i, delta);
+      }
+    }
+
     public static void Main()
     {
       // var dllDirectory = @"C:\Users\Clemens\Documents\Projects\KinemaLibCs\bin\x64";
@@ -133,7 +154,64 @@ namespace KinemaLibCs
       // Dont forget!:
       carrierModel.ResetFixedVars();
 
+      Topology topo = carrierModel.GetTopology(0);
 
+      int iter = 50;
+      double []posVec = new double [topo.GetVarSz()];
+
+      double[] varList = new double[1];
+
+      if (!topo.SolvePos(50, 1e-5, 1e-5, varList, ref iter)) return;
+
+      Sequence mdlSeq = topo.NewSequence("ModelSequence");
+
+      double startOffset = 1.4;
+      double deltapos = 0.1;
+      double trklen = leftTrk.Length;
+
+      int iters = 0;
+
+      double lpos = startOffset;
+//      int idx = 1;
+      var jntLeftR = carrierModel.GetJoint("JntLeftR0");
+
+      while (lpos > 0.2) {
+        jntLeftR.SetVal(0, lpos);
+
+        if (!topo.SolvePos(50, 1e-5, 1e-5, posVec, ref iters)) {
+//          Logger.WriteMsg($"Model convergeert niet (back)! (lpos={"0"}",lpos);
+
+          //          ads_printf(L"\nModel convergeert niet (back)! (lpos=%f)\n", lpos);
+          break;
+        }
+
+        Logger.Write("");
+        //        ads_printf(L"%d, Dist =  %.3f (iters:%3d)        \r", idx++, lpos, iters);
+
+        lpos -= deltapos;
+        carrierModel.AdvanceModel(-deltapos);
+      }
+
+      iters = 50;
+
+      while (lpos < trklen) {
+        jntLeftR.SetVal(0, lpos);
+
+        if (!topo.SolvePos(50, 1e-5, 1e-5, posVec, ref iters)) {
+          mdlSeq.AddCurrentTopoState();
+          Logger.WriteMsg("Inconsistent model!!!");
+
+          //          ads_printf(L"\nModel convergeert niet! (lpos=%f)\n", lpos);
+          break;
+        }
+
+        mdlSeq.AddCurrentTopoState();
+        Logger.WriteMsg("Inconsistent model!!!");
+        //        ads_printf(L"%d, Dist =  %.3f (iters:%3d)        \r", idx++, lpos, iters);
+
+        lpos += deltapos;
+        carrierModel.AdvanceModel(deltapos);
+      }
     }
 
     // Interface section
