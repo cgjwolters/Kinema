@@ -119,6 +119,8 @@ extern "C" __declspec(dllexport) void SetOffsetModel(void* cppModel, const Ino::
 extern "C" __declspec(dllexport) void ApplyOffsetModel(void* cppModel);
 extern "C" __declspec(dllexport) void TransformModel(void* cppModel, const Ino::Trf3& trf);
 extern "C" __declspec(dllexport) bool BuildTopologyModel(void* cppModel);
+extern "C" __declspec(dllexport) int  GetTopologySizeModel(void* cppModel);
+extern "C" __declspec(dllexport) void *GetTopologyModel(void* cppModel, int index);
 
 // End Interface Section
 

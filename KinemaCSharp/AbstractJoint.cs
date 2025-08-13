@@ -4,7 +4,7 @@ namespace KinemaLibCs
 {
   public abstract class AbstractJoint
   {
-    protected IntPtr cppJoint;
+    internal IntPtr cppJoint;
 
     public AbstractJoint(Grip grp, string name)
     {

@@ -1993,12 +1993,33 @@ void TopologyList::transform(const Ino::Trf3& trf) const
 
 // Interface Section
 
-static InoKin::Model* GetModelTopology(void* topo)
+static int GetVarSzTopo(void* cppTopology)
 {
-  InoKin::Topology* topology= (InoKin::Topology*)topo;
+  InoKin::Topology* topo = (InoKin::Topology*)cppTopology;
 
-  return topology->getModel();
+  return topo->getVarSz();
 }
+
+static bool SolvePosTopology(void* cppTopology, int maxIter, double rotTol, double posTol,
+  double* varPosVec, int& iter)
+{
+  InoKin::Topology* topo = (InoKin::Topology*)cppTopology;
+
+  int sz = topo->getVarSz();
+
+  Ino::Vector posVec(sz);
+
+  bool ok = topo->solvePos(maxIter, rotTol, posTol, posVec, iter);
+
+  if (!ok) return false;
+
+  for (int i = 0; i < sz; ++i) {
+    varPosVec[i] = posVec[i];
+  }
+
+  return ok;
+}
+
 
 // End Interface Section
 

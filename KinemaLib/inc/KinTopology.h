@@ -192,8 +192,9 @@ public:
 
 // Interface Section
 
-extern "C" __declspec(dllexport) InoKin::Topology* TopologyNew(InoKin::Model &mdl);
-extern "C" __declspec(dllexport) InoKin::Model* GetModelTopology(void *topo);
+extern "C" __declspec(dllexport) int GetVarSzTopo(void* cppTopology);
+extern "C" __declspec(dllexport) bool SolvePosTopology(void *cppTopology, int maxIter, double rotTol, double posTol,
+                                 double* varPosVec, int& iter);
 
 //---------------------------------------------------------------------------
 #endif

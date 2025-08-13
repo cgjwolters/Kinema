@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-using System.Reflection;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace KinemaLibCs
 {
@@ -79,8 +77,23 @@ namespace KinemaLibCs
 
     public bool BuildTopology()
     {
-      return BuildTopologyModel(cppModel);
+      TopoList.Clear();
+
+      bool rc = BuildTopologyModel(cppModel);
+
+      if (!rc) return false;
+
+      int sz = GetTopologySizeModel(cppModel);
+
+      for (int i=0; i< sz; ++i) {
+        IntPtr cppTopo = GetTopologyModel(cppModel, i);
+
+        TopoList.Add(new Topology(this, cppTopo));
+      }
+
+      return true;
     }
+
     public void Clear()
     {
       BodyMap.Clear();
@@ -117,6 +130,21 @@ namespace KinemaLibCs
       }
     }
 
+    private static void WriteSequence(Sequence mdlSeq, string filePath)
+    {
+      StreamWriter sw = new (filePath);
+
+      int sz = mdlSeq.GetStateCount();
+
+      for (int i = 0; i < sz; ++i) {
+        var st = mdlSeq.GetState(i);
+
+        st.Write(sw);
+      }
+
+      sw.Close();
+    }
+
     public static void Main()
     {
       // var dllDirectory = @"C:\Users\Clemens\Documents\Projects\KinemaLibCs\bin\x64";
@@ -145,7 +173,7 @@ namespace KinemaLibCs
       carrierModel.PutOnTrack(3.0, leftTrk, rightTrk);
 
       if (!carrierModel.BuildTopology()) {
-        Logger.WriteMsg("Inconsistent model!!!");
+        Logger.WriteMsg("Inconsistent model1!!!");
         return;
       }
 
@@ -154,14 +182,14 @@ namespace KinemaLibCs
       // Dont forget!:
       carrierModel.ResetFixedVars();
 
-      Topology topo = carrierModel.GetTopology(0);
+      Topology topo = carrierModel.TopoList[0];
 
       int iter = 50;
       double []posVec = new double [topo.GetVarSz()];
 
-      double[] varList = new double[1];
+      posVec[0] = 1; posVec[1] = 2;
 
-      if (!topo.SolvePos(50, 1e-5, 1e-5, varList, ref iter)) return;
+      if (!topo.SolvePos(50, 1e-5, 1e-5, posVec, ref iter)) return;
 
       Sequence mdlSeq = topo.NewSequence("ModelSequence");
 
@@ -172,7 +200,7 @@ namespace KinemaLibCs
       int iters = 0;
 
       double lpos = startOffset;
-//      int idx = 1;
+      int idx = 1;
       var jntLeftR = carrierModel.GetJoint("JntLeftR0");
 
       while (lpos > 0.2) {
@@ -186,7 +214,8 @@ namespace KinemaLibCs
         }
 
         Logger.Write("");
-        //        ads_printf(L"%d, Dist =  %.3f (iters:%3d)        \r", idx++, lpos, iters);
+//        Logger.Write("%d, Dist =  %.3f (iters:%3d)        \r", idx++, lpos, iters);
+        Logger.Write("%d, Dist =  %.3f (iters:%3d)        \r");
 
         lpos -= deltapos;
         carrierModel.AdvanceModel(-deltapos);
@@ -199,19 +228,25 @@ namespace KinemaLibCs
 
         if (!topo.SolvePos(50, 1e-5, 1e-5, posVec, ref iters)) {
           mdlSeq.AddCurrentTopoState();
-          Logger.WriteMsg("Inconsistent model!!!");
+          Logger.WriteMsg("Inconsistent model2!!!");
 
           //          ads_printf(L"\nModel convergeert niet! (lpos=%f)\n", lpos);
           break;
         }
 
         mdlSeq.AddCurrentTopoState();
-        Logger.WriteMsg("Inconsistent model!!!");
-        //        ads_printf(L"%d, Dist =  %.3f (iters:%3d)        \r", idx++, lpos, iters);
+//        Logger.Write("Inconsistent model3!!!");
+        //        Logger.Write("%d, Dist =  %.3f (iters:%3d)        \r", idx++, lpos, iters);
 
+        idx++;
         lpos += deltapos;
         carrierModel.AdvanceModel(deltapos);
       }
+
+      int cnt = mdlSeq.GetStateCount();
+
+      WriteSequence(mdlSeq, @"C:\Users\Clemens\Documents\temp\table.csv");
+      Logger.WriteMsg("Done . . . {cnt}");
     }
 
     // Interface section
@@ -260,6 +295,12 @@ namespace KinemaLibCs
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static bool BuildTopologyModel(IntPtr cppModel);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static int GetTopologySizeModel(IntPtr cppModel);
+
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static IntPtr GetTopologyModel(IntPtr cppModel, int index);
 
     // Interface section
 

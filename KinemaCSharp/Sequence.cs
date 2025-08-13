@@ -42,16 +42,16 @@ namespace KinemaLibCs
     {
       int cppCount = GetStateCount();
 
-      if (stateList.Count != cppCount) stateList = new(cppCount);
+      if (stateList.Count != cppCount) {
+        stateList = new(cppCount);
+
+        for (int i=0; i<cppCount; ++i) {
+          stateList.Add(new State(GetStateSequence(cppSequence, index),this));
+        }
+      }
 
       if (index < 0 || index >= cppCount) {
         throw new IndexOutOfRangeException("State count");
-      }
-
-      if (stateList[index] == null) {
-        State state = new (GetStateSequence(cppSequence, index));
-
-        stateList[index] = state;
       }
 
       return stateList[index];

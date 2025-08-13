@@ -314,6 +314,8 @@ void Model::transform(const Ino::Trf3& trf)
 
 bool Model::buildTopology()
 {
+  topoLst.clear();
+
   return topoLst.prepareAll();
 }
 
@@ -423,6 +425,23 @@ bool BuildTopologyModel(void* cppModel)
 
   return mdl->buildTopology();
 }
+
+int  GetTopologySizeModel(void* cppModel)
+{
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+
+  return mdl->getTopologyList().size();
+}
+
+void* GetTopologyModel(void* cppModel, int index)
+{
+  InoKin::Model* mdl = (InoKin::Model*)cppModel;
+
+  if (index < 0 || index >= mdl->getTopologyList().size()) return nullptr;
+
+  return mdl->getTopologyList()[index];
+}
+
 
 // End Interface Section
 //---------------------------------------------------------------------------

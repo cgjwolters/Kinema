@@ -76,7 +76,7 @@ extern "C" __declspec(dllexport) int GetIdxState(void *cppState);
 
 extern "C" __declspec(dllexport) __int64 GetTmState(void *cppState);
 
-extern "C" __declspec(dllexport) bool GetPosState(void *cppState, InoKin::AbstractJoint& jnt, int varIdx, double& posVal);
+extern "C" __declspec(dllexport) bool GetPosState(void *cppState, void *cppJnt, int varIdx, double& posVal);
 extern "C" __declspec(dllexport) bool GetSpeedState(void* cppState, InoKin::AbstractJoint& jnt, int varIdx, double& speedVal);
 extern "C" __declspec(dllexport) bool GetAccelState(void* cppState, InoKin::AbstractJoint& jnt, int varIdx, double& accVal);
 extern "C" __declspec(dllexport) bool GetJerkState(void* cppState, InoKin::AbstractJoint& jnt, int varIdx, double& jerkVal);
