@@ -68,6 +68,11 @@ static bool getValue(const Vector& values,
   return true;
 }
 
+double State::getVarPos(int idx) const
+{
+  return varPos[idx];
+}
+
 //---------------------------------------------------------------------------
 
 bool State::getPos(const AbstractJoint& jnt, int varIdx, double& posVal) const

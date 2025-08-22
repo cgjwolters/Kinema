@@ -47,6 +47,8 @@ public:
 
   void addCurrentTopoState();
 
+  void writeSequence();
+
   friend class Topology;
 };
 
@@ -63,6 +65,10 @@ extern "C" __declspec(dllexport) void AddCurrentTopoStateSequence(InoKin::Sequen
 extern "C" __declspec(dllexport) void GetStateCountSequence(void *cppSequence, int& count);
 
 extern "C" __declspec(dllexport) InoKin::State* GetStateSequence(void* cppSequence, int index);
+
+//extern "C" __declspec(dllexport) void WriteStateSequence(void* cppSequence);
+
+extern "C" __declspec(dllexport) void WriteSeqSequence(void* cppSeq);
 
 // End Interface Section
 

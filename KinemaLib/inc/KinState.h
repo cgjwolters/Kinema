@@ -55,6 +55,9 @@ public:
 
   __int64 getTm() const { return seqTm; }
 
+  int getVarPosSize() const { return varPos.size(); }
+  double getVarPos(int idx) const;
+
   bool getPos(const AbstractJoint& jnt, int varIdx, double& posVal) const;
   bool getSpeed(const AbstractJoint& jnt, int varIdx, double& speedVal) const;
   bool getAccel(const AbstractJoint& jnt, int varIdx, double& accVal) const;

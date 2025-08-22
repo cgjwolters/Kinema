@@ -80,9 +80,10 @@ namespace KinemaLibCs
           double val;
           if (!GetPos(jnt, j, out val)) return false;
 
+          String s = val.ToString("G9", CultureInfo.InvariantCulture);
           sw.Write(val.ToString("G9",CultureInfo.InvariantCulture));
-          fst = false;
           if (!fst) sw.Write(";");
+          fst = false;
         }
       }
 

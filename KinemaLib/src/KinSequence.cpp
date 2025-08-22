@@ -16,6 +16,7 @@
 #include "KinGrip.h"
 #include "KinAbstractJoint.h"
 #include "KinTopology.h"
+#include "KinState.h"
 
 #include "Vec.h"
 
@@ -67,6 +68,33 @@ void Sequence::addCurrentTopoState()
   add(new State(*this, size(), 0L, topology));
 }
 
+bool writeState(FILE* fd, const InoKin::State* st)
+{
+  int sz = st->getVarPosSize();
+
+  for (int i = 0; i < sz; ++i) {
+    double v = st->getVarPos(i);
+    fprintf(fd, "%.7f;", v);
+  }
+
+  fprintf(fd, "\n");
+
+  return true;
+}
+
+void Sequence::writeSequence()
+{
+  FILE* fd = fopen("C:\\Users\\Clemens\\Documents\\temp\\StateList.csv","w");
+
+  int sz = size();
+
+  for (int i = 0; i < sz; ++i) {
+    writeState(fd, get(i));
+  }
+
+  fclose(fd);
+}
+
 } // namespace
 
 // Interface Section
@@ -97,6 +125,19 @@ InoKin::State* GetStateSequence(void* cppSeq, int index)
   InoKin::Sequence* seq = (InoKin::Sequence*)cppSeq;
 
   return seq->get(index);
+}
+
+//void WriteStateSequence(void* cppSequence)
+//{
+//  InoKin::Sequence* seq = (InoKin::Sequence*)cppSequence;
+//
+//  seq->writeSequence();
+//}
+
+void WriteSeqSequence(void* cppSeq) {
+  InoKin::Sequence* seq = (InoKin::Sequence*)cppSeq;
+
+  seq->writeSequence();
 }
 
 // End Interface Section

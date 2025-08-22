@@ -5,7 +5,7 @@ namespace KinemaLibCs
 {
   public class Sequence(Topology topo, string name)
   {
-    private readonly IntPtr cppSequence = SequenceNew(topo.cppTopology, name);
+    internal readonly IntPtr cppSequence = SequenceNew(topo.cppTopology, name);
     private readonly string name = name;
     public readonly Topology topology = topo;
 
@@ -57,6 +57,11 @@ namespace KinemaLibCs
       return stateList[index];
     }
 
+    public void WriteSequence()
+    {
+      WriteSeqSequence(cppSequence);
+    }
+
     // Interface Section
 
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
@@ -71,6 +76,9 @@ namespace KinemaLibCs
     [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
     extern private static IntPtr GetStateSequence(IntPtr cppSeq, int index);
 
+    [DllImport("KinemaLib.dll", CharSet = CharSet.Unicode)]
+    extern private static bool WriteSeqSequence(IntPtr cppSeq);
+
     // End Interface Section
-  }
+}
 }

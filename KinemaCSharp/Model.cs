@@ -243,10 +243,13 @@ namespace KinemaLibCs
         carrierModel.AdvanceModel(deltapos);
       }
 
-      int cnt = mdlSeq.GetStateCount();
+      mdlSeq.WriteSequence();
 
-      WriteSequence(mdlSeq, @"C:\Users\Clemens\Documents\temp\table.csv");
-      Logger.WriteMsg("Done . . . {cnt}");
+      //int cnt = mdlSeq.GetStateCount();
+
+      //WriteSequence(mdlSeq, @"C:\Users\Clemens\Documents\temp\table.csv");
+      //Logger.WriteMsg("Done . . . {cnt}");
+
     }
 
     // Interface section
@@ -309,7 +312,6 @@ namespace KinemaLibCs
 
     [DllImport("KinemaLib.dll")]
     extern private static IntPtr GetParentBody(IntPtr cppBody, out Body parent);
-
 
     // End Interface section
   }
