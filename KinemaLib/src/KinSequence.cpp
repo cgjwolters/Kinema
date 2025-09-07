@@ -86,11 +86,48 @@ void Sequence::writeSequence()
 {
   FILE* fd = fopen("C:\\Users\\Clemens\\Documents\\temp\\StateList.csv","w");
 
-  int sz = size();
+  const GripList& lst = getModel()->getGripList();
 
-  for (int i = 0; i < sz; ++i) {
-    writeState(fd, get(i));
+  int jntSz = lst.size();
+
+  for (int i = 0; i < jntSz; ++i) {
+    auto jnt = lst[i]->getJoint();
+    int varCnt = jnt->getVarCnt();
+
+    for (int j = 0; j < varCnt; ++j) {
+      if (jnt->getFixed(j)) continue;
+      fwprintf(fd, L"%ls-%d;", jnt->getName(), j);
+    }
   }
+
+  fwprintf(fd, L"\n");
+
+  for (int ii = 0; ii < size(); ++ii) {
+    State *st = get(ii);
+
+    for (int i = 0; i < jntSz; ++i) {
+      auto jnt = lst[i]->getJoint();
+      int varCnt = jnt->getVarCnt();
+
+      for (int j = 0; j < varCnt; ++j) {
+        if (jnt->getFixed(j)) continue;
+
+        double posVal;
+        st->getPos(*jnt, j, posVal);
+
+        if (jnt->getIsAngular(j)) posVal *= 180.0/Vec2::Pi;
+
+        fwprintf(fd, L"%.7f;", posVal);
+      }
+    }
+
+    fwprintf(fd, L"\n");
+  }
+
+
+  //for (int i = 0; i < sz; ++i) {
+  //  writeState(fd, get(i));
+  //}
 
   fclose(fd);
 }
@@ -106,9 +143,9 @@ void* SequenceNew(void *cppTopo, const wchar_t *name)
   return new InoKin::Sequence(topo, name);
 }
 
-void AddCurrentTopoStateSequence(InoKin::Sequence *cppSeq)
+void AddCurrentTopoStateSequence(void *cppSequence)
 {
-  InoKin::Sequence& seq = *(InoKin::Sequence*)cppSeq;
+  InoKin::Sequence& seq = *(InoKin::Sequence*)cppSequence;
 
   seq.addCurrentTopoState();
 }

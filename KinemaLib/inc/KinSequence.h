@@ -60,7 +60,7 @@ typedef Ino::Array<Sequence *> SequenceList;
 
 extern "C" __declspec(dllexport) void* SequenceNew(void* cppTopo, const wchar_t* name);
 
-extern "C" __declspec(dllexport) void AddCurrentTopoStateSequence(InoKin::Sequence *seq);
+extern "C" __declspec(dllexport) void AddCurrentTopoStateSequence(void *cppSequence);
 
 extern "C" __declspec(dllexport) void GetStateCountSequence(void *cppSequence, int& count);
 
